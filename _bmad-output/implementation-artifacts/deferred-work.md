@@ -46,6 +46,9 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-liens-linkedin-recommandations.md`
   summary: Indiquer la langue source et signaler clairement les traductions des témoignages professionnels.
   evidence: Les citations ne sont pas toutes dans la langue de la page et aucun repère ne distingue les versions traduites ; cette clarification est hors périmètre des liens LinkedIn.
+- source_spec: `_bmad-output/implementation-artifacts/spec-images-organisations.md`
+  summary: Auditer les détails bilingues du parcours sportif, notamment les postes, distinctions, arbitrage, encadrement Bloomdays et pratiques sportives.
+  evidence: La revue relève plusieurs précisions absentes des textes sportifs actuels ; ces contenus préexistants n’ont pas été changés par l’ajout et la mise en page des images.
 - source_spec: `_bmad-output/implementation-artifacts/spec-reconnaissances-formation.md`
   summary: Afficher une confirmation avant le basculement vers le client mail quand aucun endpoint de formulaire n’est configuré.
   evidence: Avec `VITE_FORM_ENDPOINT` absent, `onSubmit` redirige immédiatement vers `mailto:` sans mettre à jour le statut visible du formulaire.

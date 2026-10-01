@@ -13,6 +13,26 @@ function SkillItem({ name }: { name: string }) {
   )
 }
 
+function EmphasizedText({ text, phrases }: { text: string; phrases: readonly string[] }) {
+  const expression = new RegExp(`(${phrases.map(phrase => phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g')
+  return text.split(expression).map((part, index) => phrases.includes(part) ? <strong key={index} style={{ color: '#00ff87' }}>{part}</strong> : part)
+}
+
+function InstitutionLogos({ images }: { images: readonly string[] }) {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginTop: 8 }}>
+      {images.map(image => {
+        const isCasablanca = image.includes('centrale%20casa')
+        const isShenzhen = image.includes('shenzhen')
+        const isAudencia = image.includes('audencia')
+        const width = isCasablanca || isShenzhen ? 96 : isAudencia ? 132 : 120
+        const height = isCasablanca || isShenzhen ? 96 : 64
+        return <img key={image} src={image} alt="" aria-hidden="true" loading="lazy" decoding="async" width={width} height={height} style={{ display: 'block', width, height, objectFit: 'contain', background: '#000', borderRadius: 4, flexShrink: 0 }} />
+      })}
+    </div>
+  )
+}
+
 function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
   return (
     <div id={project.anchorId} className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
@@ -216,6 +236,9 @@ export default function App() {
   const [navOpen, setNavOpen] = useState(false)
   const [showKstartsStudy, setShowKstartsStudy] = useState(false)
   const tx = t[lang]
+  const experienceEmphasis = lang === 'fr'
+    ? ['Airbus Skywise', 'Palantir Foundry', '5 jeux de données opérationnels', '5 pipelines de données', '2 088 évaluations d’athlètes, 266 variables', '555 674 points de données', '1 491 vs 589 patients', 'scores K-STARTS']
+    : ['Airbus Skywise', 'Palantir Foundry', '5 operational datasets', '5 data pipelines', '2,088 athlete assessments, 266 variables', '555,674 data points', '1,491 vs 589 patients', 'K-STARTS scores']
   const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.credentials, tx.nav.contact]
 
   useEffect(() => {
@@ -292,7 +315,7 @@ export default function App() {
                 <span style={{ color: '#00ff87' }} className="glow">{tx.hero.line2}</span>
               </h1>
               <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.75, marginBottom: 32 }}>
-                {tx.hero.intro} <strong style={{ color: '#f0f0f8' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
+                {tx.hero.intro} <strong style={{ color: '#00d4ff' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
                 <br />{tx.hero.pitch} <strong style={{ color: '#00ff87' }}>{tx.hero.pitchHighlight}</strong>{tx.hero.pitchEnd}
               </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 48 }}>
@@ -619,17 +642,22 @@ export default function App() {
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#ffd93d', overflowWrap: 'anywhere' }}>
                             {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
                           </div>
+                          {'images' in item && <InstitutionLogos images={item.images} />}
                         </div> : <>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
-                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: group.title === tx.experience.professionalTitle ? '#ffd93d' : '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>
-                            {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
+                          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                            {'image' in item && <img src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" width={item.image.includes('capgemini') ? 176 : 160} height={item.image.includes('capgemini') ? 64 : 56} style={{ display: 'block', width: item.image.includes('capgemini') ? 176 : 160, height: item.image.includes('capgemini') ? 64 : 56, objectFit: 'contain', background: '#000', borderRadius: 4, flexShrink: 0 }} />}
+                            <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: group.title === tx.experience.professionalTitle ? '#ffd93d' : '#00ff87', overflowWrap: 'anywhere' }}>
+                              {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
+                            </div>
+                            {'images' in item && <InstitutionLogos images={item.images} />}
                           </div>
                         </>}
-                        {'intro' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}>{item.intro}</div>}
+                        {'intro' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}><EmphasizedText text={item.intro} phrases={experienceEmphasis} /></div>}
                         {'points' in item && <ul style={{ listStyleType: 'disc', paddingLeft: 18, margin: '8px 0 0', fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6 }}>
-                          {item.points.map(point => <li key={point} style={{ marginBottom: 6 }}>{point}</li>)}
+                          {item.points.map(point => <li key={point} style={{ marginBottom: 6 }}><EmphasizedText text={point} phrases={experienceEmphasis} /></li>)}
                         </ul>}
-                        {'closing' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}>{item.closing}</div>}
+                        {'closing' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}><em>{item.closing}</em></div>}
                         {'detail' in item && item.detail && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6 }}>{item.detail}</div>}
                         {'qualification' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
                         {'recognitions' in item && <div style={{ marginTop: 14 }}>
@@ -671,34 +699,28 @@ export default function App() {
       <section id="sports" style={{ padding: 'clamp(56px, 10vw, 100px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.sports.sectionLabel}</div>
-          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>
-            {tx.sports.h1}<br /><span style={{ color: '#00ff87' }}>{tx.sports.h2}</span>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2rem, 8vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8', whiteSpace: 'nowrap' }}>
+            {tx.sports.h1} <span style={{ color: '#00ff87' }}>{tx.sports.h2}</span>
           </h2>
-          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.durationTitle}</div>
-          <p style={{ color: '#a0a0c0', fontSize: '0.9rem', maxWidth: 600, lineHeight: 1.75, marginBottom: 52 }}>{tx.sports.intro}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 40 }}>
-            {tx.sports.items.map(s => (
-              <div key={s.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{s.icon}</div>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{s.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, whiteSpace: 'pre-line' }}>{s.detail}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.beyondFootballTitle}</div>
-          <p style={{ color: '#a0a0c0', fontSize: '0.9rem', lineHeight: 1.75, maxWidth: 760, margin: '0 0 28px', fontStyle: 'italic' }}>{tx.sports.beyondFootballSummary}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 20 }}>
-            {tx.sports.beyondFootballItems.map(item => (
-              <div key={item.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{item.icon}</div>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{item.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65 }}>
-                  {item.detail}
-                  {'highlight' in item && <><br /><strong style={{ color: '#c0c0d8' }}>{item.highlight}</strong></>}
-                  {'extra' in item && <><br />{item.extra}</>}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '36px 56px', alignItems: 'start' }}>
+            <div>
+              <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', lineHeight: 1.2, marginBottom: 12 }}>{tx.sports.durationTitle}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, textAlign: 'left' }}>
+                <img src={tx.sports.image} alt="" aria-hidden="true" loading="lazy" decoding="async" width={120} height={120} style={{ display: 'block', width: 120, height: 120, objectFit: 'contain', background: '#000', borderRadius: 4, flexShrink: 0 }} />
+                <div style={{ minWidth: 0, fontSize: '0.9rem', lineHeight: 1.65 }}>
+                  <p style={{ color: '#ffd93d', margin: 0 }}>{tx.sports.intro}</p>
+                  <p style={{ color: '#a0a0c0', margin: 0 }}>{tx.sports.clubDetail}</p>
+                  <p style={{ color: '#a0a0c0', margin: 0 }}>{tx.sports.refereeRole}</p>
+                  <p style={{ color: '#a0a0c0', margin: 0 }}>{tx.sports.coachRole} <span style={{ color: '#ffd93d' }}>{tx.sports.coachOrganization}</span></p>
                 </div>
               </div>
-            ))}
+            </div>
+            <div>
+              <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8, textAlign: 'left' }}>{tx.sports.otherSportsTitle}</div>
+              <ul style={{ color: '#a0a0c0', fontSize: '0.9rem', lineHeight: 1.75, margin: 0, paddingLeft: 0, textAlign: 'left' }}>
+                {tx.sports.otherSportsLines.map(line => <li key={line}>{line}</li>)}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
