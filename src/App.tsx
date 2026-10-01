@@ -13,9 +13,9 @@ function SkillItem({ name }: { name: string }) {
   )
 }
 
-function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
+function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
   return (
-    <div className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
+    <div id={project.anchorId} className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
         <span className="tag" style={{ color: project.color, borderColor: `${project.color}33`, background: `${project.color}12` }}>{typeLabel}</span>
         <div style={{ textAlign: 'right' }}>
@@ -70,7 +70,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
 
 function StrategyProjectCard({ strategy }: { strategy: (typeof t)['fr']['strategy'] | (typeof t)['en']['strategy'] }) {
   return (
-    <div className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
+    <div id="savefolio-project" className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
         <span className="tag" style={{ color: '#ffd93d', borderColor: '#ffd93d33', background: '#ffd93d12' }}>{strategy.typeLabel}</span>
         <div style={{ textAlign: 'right' }}>
@@ -230,6 +230,10 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    if (showKstartsStudy) document.getElementById('kstarts-case-study')?.scrollIntoView({ behavior: 'smooth' })
+  }, [showKstartsStudy])
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setNavOpen(false)
@@ -332,8 +336,8 @@ export default function App() {
       {/* ─── ABOUT ─── */}
       <section id="about" style={{ padding: 'clamp(56px, 10vw, 100px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }} className="about-grid">
-            <div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }} className="about-grid">
+            <div className="about-intro">
               <div className="section-label" style={{ marginBottom: 16 }}>{tx.about.sectionLabel}</div>
               <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 24, color: '#f0f0f8' }}>
                 {tx.about.h1}<br /><span style={{ color: '#00ff87' }}>{tx.about.h2}</span>
@@ -353,9 +357,21 @@ export default function App() {
               {tx.about.cards.map(card => (
                 <div key={card.title} className="card-hover" style={{ padding: '20px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                   <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{card.icon}</span>
-                  <div>
-                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4 }}>{card.title}</div>
-                    <div style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.5 }}>{card.desc}</div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 6 }}>{card.title}</div>
+                    <div style={{ fontSize: '0.85rem', color: card.details.length ? '#c0c0e0' : '#7070a0', fontWeight: card.details.length ? 600 : 400, lineHeight: 1.5 }}>{card.desc}</div>
+                    {card.details.length > 0 && (
+                      <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>
+                        {card.details.map(detail => (
+                          <div key={detail.label || detail.text} style={{ fontSize: '0.82rem', color: '#a0a0c0', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
+                            {detail.label && <strong style={{ color: '#00ff87', whiteSpace: 'pre-line' }}>{detail.label}{'separator' in detail ? detail.separator : ': '}</strong>}
+                            {'role' in detail && <strong style={{ display: 'block', color: '#f0f0f8', marginTop: 5 }}>{detail.role}</strong>}
+                            <span style={{ whiteSpace: 'pre-line' }}>{detail.text}</span>
+                            {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -368,13 +384,14 @@ export default function App() {
       <section id="skills" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.skills.sectionLabel}</div>
-          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 60, color: '#f0f0f8' }}>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
             {tx.skills.h1} <span style={{ color: '#00ff87' }}>{tx.skills.h2}</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 40 }}>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 28 }}>{tx.skills.stackLabel}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 36 }}>
             {tx.skills.groups.map(group => (
               <div key={group.category}>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 24, paddingBottom: 12, borderBottom: '1px solid rgba(0,255,135,0.1)' }}>
+                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.04em', minHeight: 42, marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid rgba(0,255,135,0.1)' }}>
                   {group.category.toUpperCase()}
                 </div>
                 {group.items.map(skill => (
@@ -383,12 +400,18 @@ export default function App() {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 60, padding: '32px 40px', borderRadius: 12, border: '1px solid rgba(0,255,135,0.1)', background: 'rgba(0,255,135,0.02)' }}>
-            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 20 }}>{tx.skills.softLabel}</div>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              {tx.skills.softList.map(s => (
-                <div key={s} style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)', fontSize: '0.85rem', color: '#c0c0e0' }}>{s}</div>
-              ))}
+          <div style={{ marginTop: 36, padding: '24px 28px', border: '1px solid rgba(0,255,135,0.1)', borderRadius: 8, background: 'rgba(0,255,135,0.02)', textAlign: 'center' }}>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 10 }}>{tx.skills.toolsLabel}</div>
+            <div style={{ color: '#c0c0e0', fontSize: '0.9rem' }}>{tx.skills.tools.join(' · ')}</div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginTop: 16 }}>
+            <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.sportLabel}</div>
+              {tx.skills.sportItems.map(item => <div key={item} style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{item}</div>)}
+            </div>
+            <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.certificationsLabel}</div>
+              <div style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{tx.skills.certifications}</div>
             </div>
           </div>
         </div>
@@ -476,7 +499,12 @@ export default function App() {
       {/* ─── KSTARTS CASE STUDY ─── */}
       <div id="kstarts-case-study" style={{ display: showKstartsStudy ? 'block' : 'none' }}>
         <div className="case-study-shell" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div className="section-label" style={{ marginBottom: 16 }}>{tx.caseStudy.sectionLabel}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 16 }}>
+            <div className="section-label">{tx.caseStudy.sectionLabel}</div>
+            <button type="button" aria-label={tx.caseStudy.closeLabel} title={tx.caseStudy.closeLabel} onClick={() => setShowKstartsStudy(false)} style={{ padding: '4px 8px', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 4, background: 'transparent', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', cursor: 'pointer' }}>
+              {tx.caseStudy.closeLabel} ×
+            </button>
+          </div>
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>{tx.caseStudy.title}</h2>
           <p style={{ color: '#a0a0c0', fontSize: '0.95rem', maxWidth: 760, lineHeight: 1.75, marginBottom: 48 }}>{tx.caseStudy.intro}</p>
           <p style={{ color: '#7070a0', fontSize: '0.78rem', maxWidth: 900, lineHeight: 1.65, marginTop: -32, marginBottom: 48 }}>{tx.caseStudy.scopeNote}</p>
@@ -556,47 +584,37 @@ export default function App() {
       {/* ─── EXPERIENCE ─── */}
       <section id="experience" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }} className="exp-grid">
-            <div>
-              <div className="section-label" style={{ marginBottom: 16 }}>{tx.experience.sectionLabel}</div>
-              <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 48, color: '#f0f0f8' }}>
-                {tx.experience.h1}<br /><span style={{ color: '#00ff87' }}>{tx.experience.h2}</span>
-              </h2>
-              <div style={{ position: 'relative' }}>
-                <div style={{ position: 'absolute', left: 11, top: 0, bottom: 0, width: 1, background: 'rgba(0,255,135,0.1)' }} />
-                {tx.experience.items.map((exp, i) => (
-                  <div key={i} style={{ display: 'flex', gap: 24, marginBottom: 40, position: 'relative' }}>
-                    <div style={{ width: 22, height: 22, borderRadius: '50%', background: exp.type === 'formation' ? '#00ff87' : '#00d4ff', flexShrink: 0, marginTop: 4, border: '3px solid #0a0a14', position: 'relative', zIndex: 1 }} />
-                    <div>
-                      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 4 }}>{exp.period}</div>
-                      <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2 }}>{exp.role}</div>
-                      <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: exp.type === 'formation' ? '#00ff87' : '#00d4ff', marginBottom: 8 }}>{exp.org}</div>
-                      <div style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6 }}>{exp.detail}</div>
+          <div className="section-label" style={{ marginBottom: 32 }}>{tx.experience.sectionLabel}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 48 }}>
+            {[
+              { title: tx.experience.professionalTitle, items: tx.experience.professionalItems },
+              { title: tx.experience.educationTitle, items: tx.experience.educationItems },
+              { title: tx.experience.internationalTitle, intro: tx.experience.internationalIntro, items: tx.experience.internationalItems },
+            ].map(group => (
+              <div key={group.title} style={{ minWidth: 0 }}>
+                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere' }}>
+                  {group.title}
+                </h2>
+                {'intro' in group && <p style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
+                <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'absolute', left: 11, top: 0, bottom: 0, width: 1, background: 'rgba(0,255,135,0.1)' }} />
+                  {group.items.map((item, index) => (
+                    <div key={`${item.period}-${index}`} style={{ display: 'flex', gap: 24, marginBottom: 40, position: 'relative' }}>
+                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#00d4ff', flexShrink: 0, marginTop: 4, border: '3px solid #0a0a14', position: 'relative', zIndex: 1 }} />
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 4 }}>{item.period}</div>
+                        <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
+                        <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>{item.org}</div>
+                        <div style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6 }}>{item.detail}</div>
+                        {'highlights' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#c0c0d8', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
+                        {'qualification' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
+                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div>
-              <div className="section-label" style={{ marginBottom: 16 }}>{tx.experience.lookingLabel}</div>
-              <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 32, color: '#f0f0f8' }}>
-                {tx.experience.lookingH1}<br /><span style={{ color: '#00ff87' }}>{tx.experience.lookingH2}</span>
-              </h2>
-              <div style={{ padding: '24px', borderRadius: 10, background: 'rgba(0,255,135,0.04)', border: '1px solid rgba(0,255,135,0.12)', marginBottom: 20 }}>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#00ff87', marginBottom: 10 }}>{tx.experience.durationLabel}</div>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#f0f0f8' }}>{tx.experience.duration}</div>
-                <div style={{ fontSize: '0.85rem', color: '#7070a0', marginTop: 6 }}>{tx.experience.location}</div>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {tx.experience.details.map(item => (
-                  <div key={item.label} style={{ padding: '16px 20px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
-                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: item.color, marginBottom: 6 }}>{item.label.toUpperCase()}</div>
-                    <div style={{ fontSize: '0.875rem', color: '#c0c0d8', lineHeight: 1.6 }}>{item.value}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -605,27 +623,17 @@ export default function App() {
       <section id="sports" style={{ padding: 'clamp(56px, 10vw, 100px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.sports.sectionLabel}</div>
-          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>
             {tx.sports.h1}<br /><span style={{ color: '#00ff87' }}>{tx.sports.h2}</span>
           </h2>
+          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.durationTitle}</div>
           <p style={{ color: '#7070a0', fontSize: '0.9rem', maxWidth: 600, lineHeight: 1.75, marginBottom: 52 }}>{tx.sports.intro}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 40 }}>
             {tx.sports.items.map(s => (
               <div key={s.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{s.icon}</div>
                 <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{s.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#7070a0', lineHeight: 1.65 }}>{s.detail}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ padding: '32px 36px', borderRadius: 12, background: 'linear-gradient(135deg, rgba(0,255,135,0.05), rgba(0,212,255,0.03))', border: '1px solid rgba(0,255,135,0.1)', display: 'flex', gap: 40, flexWrap: 'wrap', alignItems: 'center' }}>
-            <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, color: '#00ff87', flexBasis: '100%' }}>{tx.sports.statsLabel}</div>
-            {tx.sports.stats.map(s => (
-              <div key={s.l}>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: '#f0f0f8', lineHeight: 1 }}>
-                  {s.v}<span style={{ color: '#00ff87', fontSize: '1rem' }}> {s.u}</span>
-                </div>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', marginTop: 4 }}>{s.l}</div>
+                <div style={{ fontSize: '0.875rem', color: '#7070a0', lineHeight: 1.65, whiteSpace: 'pre-line' }}>{s.detail}</div>
               </div>
             ))}
           </div>
@@ -677,7 +685,7 @@ export default function App() {
               <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 24, color: '#f0f0f8' }}>
                 {tx.contact.h1}<br /><span style={{ color: '#00ff87' }}>{tx.contact.h2}</span>
               </h2>
-              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 36 }}>{tx.contact.pitch}</p>
+              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 36, whiteSpace: 'pre-line' }}>{tx.contact.pitch}</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {tx.contact.links.map(item => (
                   <a key={item.label} href={item.href}
@@ -757,9 +765,11 @@ export default function App() {
         .strategy-preview-card > span:first-of-type { margin-top: 6px; }
         .strategy-preview-card strong { color: #f0f0f8; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; line-height: 1.05; }
         .strategy-preview-card span:last-child { color: #8080a0; font-size: 0.75rem; line-height: 1.45; }
+        .about-intro { padding-top: 21px; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .about-intro { padding-top: 0; }
           .exp-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .contact-card { padding: 24px 20px !important; }
