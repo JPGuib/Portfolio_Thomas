@@ -107,11 +107,23 @@ h1, h2, h3, h4, h5 {
 }
 
 .nav-link {
+  display: flex;
+  min-width: 72px;
+  min-height: 42px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   color: #6060a0;
   transition: color 0.2s;
+}
+.nav-link-prefix {
+  color: #6060a0;
+  font-size: 0.7rem;
+  line-height: 1;
 }
 .nav-link:hover {
   color: #00ff87;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { t, type Lang } from './i18n'
 const portraitUrl = '/Photo thomas.png'
 
-const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'contact']
+const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'credentials', 'contact']
 
 function SkillItem({ name }: { name: string }) {
   return (
@@ -13,7 +13,7 @@ function SkillItem({ name }: { name: string }) {
   )
 }
 
-function ProjectCard({ project, typeLabel }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string }; typeLabel: string }) {
+function ProjectCard({ project, typeLabel }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string }) {
   return (
     <div className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -29,6 +29,41 @@ function ProjectCard({ project, typeLabel }: { project: { type: string; title: s
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {project.tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
       </div>
+      {project.details && (
+        <>
+        <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
+          <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.details.expandLabel}</summary>
+          <div style={{ marginTop: 20 }}>
+            <figure style={{ margin: 0 }}>
+              <figcaption style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 12 }}>{project.details.figureTitle}</figcaption>
+              <table aria-label={project.details.figureTitle} style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                <tbody>
+                  {project.details.correlations.map(item => (
+                    <tr key={item.label}>
+                      <th scope="row" style={{ width: '38%', padding: '7px 8px 7px 0', textAlign: 'left', fontSize: '0.75rem', fontWeight: 400, color: '#c0c0d8', overflowWrap: 'anywhere' }}>{item.label}</th>
+                      <td style={{ padding: '7px 8px' }}>
+                        <div aria-hidden="true" style={{ height: 7, background: 'rgba(255,255,255,0.08)', borderRadius: 4, overflow: 'hidden' }}>
+                          <div style={{ width: `${item.value * 100}%`, height: '100%', background: 'linear-gradient(90deg, #00d4ff, #00ff87)', borderRadius: 4 }} />
+                        </div>
+                      </td>
+                      <td style={{ width: '18%', padding: '7px 0 7px 8px', textAlign: 'right', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', color: '#a0a0c0' }}>{item.value.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.55, margin: '10px 0 24px' }}>{project.details.caveat}</p>
+            </figure>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#00ff87', marginBottom: 6 }}>{project.details.methodLabel}</div>
+            <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.6, margin: '0 0 18px' }}>{project.details.method}</p>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#00ff87', marginBottom: 8 }}>{project.details.toolsLabel}</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {project.details.tools.map(tool => <span key={tool} className="tag">{tool}</span>)}
+            </div>
+            <a href="#kstarts-case-study" style={{ display: 'inline-block', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', textDecoration: 'none' }}>{project.details.caseStudyLink} →</a>
+          </div>
+        </details>
+        </>
+      )}
     </div>
   )
 }
@@ -139,7 +174,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero')
   const [navOpen, setNavOpen] = useState(false)
   const tx = t[lang]
-  const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.contact]
+  const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.credentials, tx.nav.contact]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -167,16 +202,17 @@ export default function App() {
           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.2rem', fontWeight: 800, letterSpacing: '0.05em', color: '#f0f0f8' }}>
             <span style={{ color: '#00ff87' }}>DATA</span>_PORTFOLIO
           </div>
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 20 }}>
+          <div className="hidden xl:flex" style={{ alignItems: 'center', gap: 20 }}>
             {NAV_IDS.map((id, i) => (
               <button key={id} onClick={() => scrollTo(id)}
                 className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: activeSection === id ? '#00ff87' : '#6060a0' }}>
-                {navLabels[i]}
+                <span className="nav-link-prefix">//</span>
+                <span>{navLabels[i].slice(3)}</span>
               </button>
             ))}
             <LangToggle lang={lang} onChange={setLang} />
           </div>
-          <div style={{ alignItems: 'center', gap: 12 }} className="flex md:hidden">
+          <div style={{ alignItems: 'center', gap: 12 }} className="flex xl:hidden">
             <LangToggle lang={lang} onChange={setLang} />
             <button onClick={() => setNavOpen(!navOpen)} style={{ background: 'none', border: 'none', color: '#00ff87', cursor: 'pointer', fontSize: '1.2rem' }}>
               {navOpen ? '✕' : '☰'}
@@ -334,6 +370,84 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── KSTARTS CASE STUDY ─── */}
+      <section id="kstarts-case-study" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div className="case-study-shell" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div className="section-label" style={{ marginBottom: 16 }}>{tx.caseStudy.sectionLabel}</div>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>{tx.caseStudy.title}</h2>
+          <p style={{ color: '#a0a0c0', fontSize: '0.95rem', maxWidth: 760, lineHeight: 1.75, marginBottom: 48 }}>{tx.caseStudy.intro}</p>
+          <p style={{ color: '#7070a0', fontSize: '0.78rem', maxWidth: 900, lineHeight: 1.65, marginTop: -32, marginBottom: 48 }}>{tx.caseStudy.scopeNote}</p>
+
+          <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 16 }}>{tx.caseStudy.findingsTitle}</h3>
+          <div style={{ marginBottom: 56 }}>
+            <div className="case-study-finding-grid case-study-finding-header">
+              {tx.caseStudy.columns.map(column => <div key={column}>{column}</div>)}
+            </div>
+            {tx.caseStudy.findings.map(row => (
+              <article key={row.label} className="case-study-finding-grid case-study-finding-row">
+                <h4>{row.label}</h4>
+                <div>
+                  <span className="case-study-mobile-label">{tx.caseStudy.columns[1]}</span>
+                  <p className="case-study-finding-result">{row.result}</p>
+                </div>
+                <div>
+                  <span className="case-study-mobile-label">{tx.caseStudy.columns[2]}</span>
+                  <p className="case-study-finding-note">{row.note}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <details style={{ marginBottom: 24, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
+            <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem' }}>{tx.caseStudy.figuresExpand}</summary>
+            <div style={{ marginTop: 24 }}>
+              <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 8 }}>{tx.caseStudy.figuresTitle}</h3>
+              <p style={{ color: '#7070a0', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: 28 }}>{tx.caseStudy.figuresNote}</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 28, marginBottom: 60 }}>
+                {tx.caseStudy.figures.map(figure => (
+                  <figure key={figure.src} style={{ margin: 0, paddingBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                    <a href={figure.src} target="_blank" rel="noopener noreferrer" aria-label={`${figure.title} — ${tx.caseStudy.openFigure}`} style={{ display: 'block', background: '#f4f4f4' }}>
+                      <img src={figure.src} alt={figure.alt} loading="lazy" decoding="async" style={{ display: 'block', width: '100%', height: 240, objectFit: 'contain' }} />
+                    </a>
+                    <figcaption style={{ paddingTop: 12 }}>
+                      <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4 }}>{figure.title}</div>
+                      <div style={{ color: '#9090b0', fontSize: '0.82rem', lineHeight: 1.6 }}>{figure.caption}</div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 20 }}>{tx.caseStudy.pipelineTitle}</h3>
+              <ol style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))', gap: 16 }}>
+                {tx.caseStudy.pipeline.map((step, index) => (
+                  <li key={step} style={{ borderLeft: '2px solid rgba(0,255,135,0.45)', padding: '4px 12px 8px 16px' }}>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00ff87', fontSize: '0.65rem', marginBottom: 6 }}>{String(index + 1).padStart(2, '0')}</div>
+                    <div style={{ color: '#c0c0d8', fontSize: '0.85rem', lineHeight: 1.55 }}>{step}</div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </details>
+
+          <details style={{ marginBottom: 24, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
+            <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem' }}>{tx.caseStudy.codeExpand}</summary>
+            <div style={{ marginTop: 24 }}>
+              <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 8 }}>{tx.caseStudy.codeTitle}</h3>
+              <p style={{ color: '#9090b0', fontSize: '0.82rem', lineHeight: 1.6, marginBottom: 16 }}>{tx.caseStudy.codeNote}</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 20 }}>
+                {tx.caseStudy.codeSamples.map(sample => (
+                  <figure key={sample.title} style={{ margin: 0 }}>
+                    <figcaption style={{ color: '#c0c0d8', fontSize: '0.82rem', marginBottom: 8 }}>{sample.title}</figcaption>
+                    <pre style={{ overflowX: 'auto', margin: 0, padding: '16px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, background: '#0f0f1a', color: '#b8f7d8', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', lineHeight: 1.75 }}><code>{sample.code}</code></pre>
+                  </figure>
+                ))}
+              </div>
+              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.6, marginTop: 24 }}>{tx.caseStudy.sourceNote}</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
       {/* ─── EXPERIENCE ─── */}
       <section id="experience" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -413,6 +527,42 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── REFERENCES & CV ─── */}
+      <section id="credentials" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div className="section-label" style={{ marginBottom: 16 }}>{tx.credentials.sectionLabel}</div>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 40, color: '#f0f0f8' }}>{tx.credentials.title}</h2>
+          <section id="references" aria-labelledby="references-title">
+            <h3 id="references-title" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', color: '#00ff87', marginBottom: 20 }}>{tx.credentials.referencesTitle}</h3>
+            <p style={{ color: '#8080a0', fontSize: '0.8rem', lineHeight: 1.55, margin: '-8px 0 20px' }}>{tx.credentials.referencesNote} <a href="#cv" style={{ color: '#00ff87', textDecoration: 'none' }}>{tx.credentials.cvQuickLink} →</a></p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginBottom: 48 }}>
+              {tx.credentials.references.map(reference => (
+                <figure key={reference.author} style={{ margin: 0, padding: '20px 22px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, background: '#0f0f1a' }}>
+                  <blockquote style={{ margin: '0 0 18px', color: '#d0d0e0', fontSize: '0.95rem', lineHeight: 1.7 }}>“{reference.quote}”</blockquote>
+                  <figcaption>
+                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, color: '#f0f0f8' }}>{reference.author}</div>
+                    <div style={{ color: '#8080a0', fontSize: '0.76rem', lineHeight: 1.5 }}>{reference.role}</div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+          <section id="cv" aria-labelledby="cv-title" style={{ borderTop: '1px solid rgba(0,255,135,0.18)', paddingTop: 28 }}>
+            <div className="cv-row" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 24 }}>
+              <div style={{ maxWidth: 620 }}>
+                <div className="section-label" style={{ marginBottom: 10 }}>{tx.credentials.cvLabel}</div>
+                <h3 id="cv-title" style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.8rem', color: '#f0f0f8', margin: '0 0 8px' }}>{tx.credentials.cvTitle}</h3>
+                <p style={{ color: '#9090b0', fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>{tx.credentials.cvDescription}</p>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                <a href={tx.credentials.cvHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '10px 18px', borderRadius: 6, background: '#00ff87', color: '#080810', fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>{tx.credentials.openCv}</a>
+                <a href={tx.credentials.cvHref} download style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '10px 18px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.16)', color: '#f0f0f8', fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>{tx.credentials.downloadCv}</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
       {/* ─── CONTACT ─── */}
       <section id="contact" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -451,12 +601,67 @@ export default function App() {
       </footer>
 
       <style>{`
+        .case-study-shell {
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: clamp(36px, 4vw, 64px) !important;
+          border-left: 2px solid rgba(0,255,135,0.32);
+        }
+        .case-study-finding-grid {
+          display: grid;
+          grid-template-columns: minmax(150px, 0.75fr) minmax(230px, 1.15fr) minmax(300px, 1.6fr);
+          gap: 16px;
+        }
+        .case-study-finding-header {
+          padding: 10px 8px;
+          border-bottom: 1px solid rgba(0,255,135,0.25);
+          color: #00ff87;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.65rem;
+        }
+        .case-study-finding-row {
+          padding: 14px 8px;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .case-study-finding-row h4 {
+          margin: 0;
+          color: #f0f0f8;
+          font-size: 0.82rem;
+          overflow-wrap: anywhere;
+        }
+        .case-study-finding-result, .case-study-finding-note {
+          margin: 0;
+          font-size: 0.8rem;
+          line-height: 1.55;
+          overflow-wrap: anywhere;
+        }
+        .case-study-finding-result { color: #00d4ff; }
+        .case-study-finding-note { color: #a0a0c0; }
+        .case-study-mobile-label { display: none; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .exp-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .contact-card { padding: 24px 20px !important; }
+        }
+        @media (max-width: 640px) {
+          .case-study-shell {
+            padding-left: 12px !important;
+            padding-right: 16px !important;
+            margin-left: 8px !important;
+          }
+          .case-study-finding-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+          .case-study-finding-header { display: none; }
+          .case-study-finding-row { padding: 16px 12px; }
+          .case-study-mobile-label {
+            display: block;
+            margin-bottom: 4px;
+            color: #00ff87;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+          }
         }
       `}</style>
     </div>
