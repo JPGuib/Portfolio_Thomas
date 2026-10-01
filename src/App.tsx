@@ -211,7 +211,7 @@ export default function App() {
               </h1>
               <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.75, marginBottom: 32 }}>
                 {tx.hero.intro} <strong style={{ color: '#f0f0f8' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
-                {tx.hero.pitch} <strong style={{ color: '#00ff87' }}>{tx.hero.pitchHighlight}</strong>{tx.hero.pitchEnd}
+                <br />{tx.hero.pitch} <strong style={{ color: '#00ff87' }}>{tx.hero.pitchHighlight}</strong>{tx.hero.pitchEnd}
               </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 48 }}>
                 <button onClick={() => scrollTo('contact')}
