@@ -38,7 +38,7 @@ export const t = {
       p1: 'Étudiant en dernière année du',
       p1b: 'BBA Data, IA & Management',
       p1c: 'à Centrale Nantes et Audencia, avec des expériences en data engineering, gouvernance des données et analyse de la performance sportive.',
-      p2: "Chez Kinesport, j’ai analysé des données de performance liées à la reprise après reconstruction du ligament croisé antérieur. Chez Capgemini, je contribue à la qualité, la gouvernance et la validation de données et de pipelines dans l’équipe Data Exchange de Skywise.",
+      p2: "Chez KINESPORT / MEDINETIC LEARNING, j’ai analysé plus de 2 000 évaluations d’athlètes afin d’identifier les facteurs influençant le retour au sport après une reconstruction du LCA. Chez CAPGEMINI, j’ai travaillé sur la qualité et la gouvernance des données pour Airbus Skywise, en structurant 5 jeux de données et en auditant 5 pipelines.",
       tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         { icon: '🎓', title: 'BBA Data, IA & Management', desc: 'Formation suivie à Centrale Nantes et Audencia, de 2023 à 2027.' },
@@ -205,7 +205,7 @@ export const t = {
       p1: 'Final-year student in the',
       p1b: 'BBA Data, AI & Management',
       p1c: 'at Centrale Nantes and Audencia, with experience in data engineering, data governance and sports performance analysis.',
-      p2: 'At Kinesport, I analysed performance data related to return to sport after ACL reconstruction. At Capgemini, I contribute to data quality, governance, metadata and pipeline validation within the Skywise Data Exchange team.',
+      p2: 'At KINESPORT / MEDINETIC LEARNING, I analysed more than 2,000 athlete assessments to identify the factors influencing return to sport after ACL reconstruction. At CAPGEMINI, I worked on data quality and governance for Airbus Skywise, structuring 5 datasets and auditing 5 pipelines.',
       tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         { icon: '🎓', title: 'BBA Data, AI & Management', desc: 'Studying at Centrale Nantes and Audencia, from 2023 to 2027.' },
