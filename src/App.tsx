@@ -13,7 +13,7 @@ function SkillItem({ name }: { name: string }) {
   )
 }
 
-function ProjectCard({ project, typeLabel }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string }) {
+function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
   return (
     <div className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -59,11 +59,52 @@ function ProjectCard({ project, typeLabel }: { project: { type: string; title: s
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {project.details.tools.map(tool => <span key={tool} className="tag">{tool}</span>)}
             </div>
-            <a href="#kstarts-case-study" style={{ display: 'inline-block', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', textDecoration: 'none' }}>{project.details.caseStudyLink} →</a>
+            {onOpenCaseStudy ? <a href="#kstarts-case-study" onClick={onOpenCaseStudy} style={{ display: 'inline-block', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', textDecoration: 'none' }}>{project.details.caseStudyLink} →</a> : <div style={{ display: 'inline-block', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.details.caseStudyLink}</div>}
           </div>
         </details>
         </>
       )}
+    </div>
+  )
+}
+
+function StrategyProjectCard({ strategy }: { strategy: (typeof t)['fr']['strategy'] | (typeof t)['en']['strategy'] }) {
+  return (
+    <div className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
+        <span className="tag" style={{ color: '#ffd93d', borderColor: '#ffd93d33', background: '#ffd93d12' }}>{strategy.typeLabel}</span>
+        <div style={{ textAlign: 'right' }}>
+          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: '#ffd93d', lineHeight: 1 }}>7</div>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{strategy.previewLabel.toLowerCase()}</div>
+        </div>
+      </div>
+      <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2 }}>{strategy.title} <span style={{ color: '#00ff87' }}>{strategy.titleAccent}</span></h3>
+      <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 12, letterSpacing: '0.04em' }}>{strategy.subtitle}</p>
+      <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, marginBottom: 16 }}>{strategy.context}</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        {strategy.deliverables.slice(0, 4).map(item => <span key={item} className="tag">{item}</span>)}
+      </div>
+      <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
+        <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{strategy.previewLabel}</summary>
+        <div style={{ marginTop: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
+            {strategy.previewItems.map(item => (
+              <a key={item.number} href={item.image} target="_blank" rel="noopener noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.08)', background: '#0a0a14' }}>
+                <img src={item.image} alt={item.alt} loading="lazy" decoding="async" style={{ display: 'block', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', background: '#f4f4f4' }} />
+                <div style={{ padding: '10px 12px' }}>
+                  <div style={{ color: item.accent, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', marginBottom: 5 }}>{item.number} · {item.title}</div>
+                  <div style={{ color: '#9090b0', fontSize: '0.75rem', lineHeight: 1.4 }}>{item.detail}</div>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div style={{ marginTop: 20, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#00ff87', marginBottom: 8 }}>{strategy.approachLabel}</div>
+          <ol style={{ margin: 0, paddingLeft: 20, color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65 }}>
+            {strategy.approach.map(step => <li key={step.number}><strong style={{ color: '#f0f0f8' }}>{step.title}</strong> — {step.text}</li>)}
+          </ol>
+          <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.55, margin: '18px 0 0' }}>{strategy.contributionLabel} : {strategy.contribution}. {strategy.note}</p>
+        </div>
+      </details>
     </div>
   )
 }
@@ -173,6 +214,7 @@ export default function App() {
   const [lang, setLang] = useState<Lang>('fr')
   const [activeSection, setActiveSection] = useState('hero')
   const [navOpen, setNavOpen] = useState(false)
+  const [showKstartsStudy, setShowKstartsStudy] = useState(false)
   const tx = t[lang]
   const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.credentials, tx.nav.contact]
 
@@ -364,14 +406,75 @@ export default function App() {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}>
             {tx.projects.items.map(p => (
-              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel']} />
+              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
             ))}
+            <StrategyProjectCard strategy={tx.strategy} />
           </div>
+        </div>
+
+      {/* ─── DIGITAL STRATEGY & MARKET ANALYSIS ─── */}
+      <section id="strategy" style={{ display: 'none' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div className="section-label" style={{ marginBottom: 16 }}>{tx.strategy.sectionLabel}</div>
+          <span className="tag" style={{ display: 'inline-block', marginBottom: 20 }}>{tx.strategy.typeLabel}</span>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 0.95, marginBottom: 16, color: '#f0f0f8' }}>
+            {tx.strategy.title}<br /><span style={{ color: '#00ff87' }}>{tx.strategy.titleAccent}</span>
+          </h2>
+          <p style={{ color: '#6060a0', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', lineHeight: 1.6, marginBottom: 48 }}>{tx.strategy.subtitle}</p>
+
+          <div className="strategy-intro-grid">
+            <div style={{ borderLeft: '2px solid #00ff87', padding: '4px 0 4px 24px' }}>
+              <div className="strategy-kicker">{tx.strategy.contextLabel}</div>
+              <p style={{ color: '#c0c0d8', fontSize: '1rem', lineHeight: 1.75, margin: 0 }}>{tx.strategy.context}</p>
+            </div>
+            <div style={{ padding: 24, border: '1px solid rgba(0,255,135,0.12)', background: 'rgba(0,255,135,0.03)' }}>
+              <div className="strategy-kicker">{tx.strategy.contributionLabel}</div>
+              <p style={{ color: '#00ff87', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.35rem', lineHeight: 1.2, margin: 0 }}>{tx.strategy.contribution}</p>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 64 }}>
+            <div className="strategy-kicker" style={{ marginBottom: 20 }}>{tx.strategy.approachLabel}</div>
+            <div className="strategy-approach-grid">
+              {tx.strategy.approach.map(step => (
+                <article key={step.number} className="strategy-step">
+                  <div style={{ color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', marginBottom: 16 }}>{step.number}</div>
+                  <h3 style={{ color: '#f0f0f8', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.45rem', margin: '0 0 8px' }}>{step.title}</h3>
+                  <p style={{ color: '#9090b0', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="strategy-lower-grid" style={{ marginTop: 64 }}>
+            <div>
+              <div className="strategy-kicker" style={{ marginBottom: 20 }}>{tx.strategy.deliverablesLabel}</div>
+              <ul className="strategy-deliverables">
+                {tx.strategy.deliverables.map(item => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+            <div>
+              <div className="strategy-kicker" style={{ marginBottom: 20 }}>{tx.strategy.previewLabel}</div>
+              <p style={{ color: '#9090b0', fontSize: '0.85rem', lineHeight: 1.6, margin: '0 0 20px' }}>{tx.strategy.previewIntro}</p>
+              <div className="strategy-preview-grid">
+                {tx.strategy.previewItems.map(item => (
+                  <a key={item.number} href={item.image} target="_blank" rel="noopener noreferrer" className="strategy-preview-card" style={{ borderTopColor: item.accent }}>
+                    <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+                    <span style={{ color: item.accent, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem' }}>{item.number}</span>
+                    <strong>{item.title}</strong>
+                    <span>{item.detail}</span>
+                  </a>
+                ))}
+              </div>
+              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.6, margin: '20px 0 0' }}>{tx.strategy.kpiNote}</p>
+            </div>
+          </div>
+          <p style={{ color: '#6060a0', fontSize: '0.75rem', lineHeight: 1.6, margin: '48px 0 0', maxWidth: 800 }}>{tx.strategy.note}</p>
         </div>
       </section>
 
       {/* ─── KSTARTS CASE STUDY ─── */}
-      <section id="kstarts-case-study" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div id="kstarts-case-study" style={{ display: showKstartsStudy ? 'block' : 'none' }}>
         <div className="case-study-shell" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.caseStudy.sectionLabel}</div>
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>{tx.caseStudy.title}</h2>
@@ -446,6 +549,8 @@ export default function App() {
             </div>
           </details>
         </div>
+      </div>
+
       </section>
 
       {/* ─── EXPERIENCE ─── */}
@@ -638,14 +743,33 @@ export default function App() {
         .case-study-finding-result { color: #00d4ff; }
         .case-study-finding-note { color: #a0a0c0; }
         .case-study-mobile-label { display: none; }
+        .strategy-intro-grid, .strategy-lower-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: start; }
+        .strategy-approach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .strategy-step { min-height: 190px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); border-top: 2px solid rgba(0,255,135,0.45); background: #0f0f1a; }
+        .strategy-kicker { color: #00ff87; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+        .strategy-deliverables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; padding: 0; margin: 0; list-style: none; }
+        .strategy-deliverables li { color: #c0c0d8; font-size: 0.85rem; line-height: 1.45; padding-left: 18px; position: relative; }
+        .strategy-deliverables li::before { content: '↗'; position: absolute; left: 0; color: #00ff87; }
+        .strategy-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .strategy-preview-card { min-height: 142px; padding: 0 0 16px; border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid; background: #0f0f1a; display: flex; flex-direction: column; gap: 10px; text-decoration: none; overflow: hidden; }
+        .strategy-preview-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #f4f4f4; }
+        .strategy-preview-card > span, .strategy-preview-card > strong { margin-left: 16px; margin-right: 16px; }
+        .strategy-preview-card > span:first-of-type { margin-top: 6px; }
+        .strategy-preview-card strong { color: #f0f0f8; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; line-height: 1.05; }
+        .strategy-preview-card span:last-child { color: #8080a0; font-size: 0.75rem; line-height: 1.45; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .exp-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .contact-card { padding: 24px 20px !important; }
+          .strategy-intro-grid, .strategy-lower-grid { grid-template-columns: 1fr; gap: 32px; }
+          .strategy-approach-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 640px) {
+          .strategy-approach-grid, .strategy-preview-grid { grid-template-columns: 1fr; }
+          .strategy-deliverables { grid-template-columns: 1fr; }
+          .strategy-step { min-height: 0; }
           .case-study-shell {
             padding-left: 12px !important;
             padding-right: 16px !important;
