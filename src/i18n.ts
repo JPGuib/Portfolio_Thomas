@@ -39,7 +39,6 @@ export const t = {
         { v: '266', u: '', l: 'Variables analysées' },
         { v: '10', u: 'ans', l: 'Football en compétition' },
       ],
-      photoLabel: '// PORTRAIT',
     },
     about: {
       sectionLabel: '// 01 — profil',
@@ -121,6 +120,50 @@ export const t = {
           metricLabel: 'jeux structurés · pipelines audités',
           color: '#00d4ff',
           anchorId: 'data-engineering-project',
+          presentation: {
+            expandLabel: 'Voir une présentation du projet',
+            intro: 'Lors de mon stage chez Capgemini, j’ai intégré l’équipe Data Exchange de l’écosystème Airbus Skywise en tant que stagiaire Data Management & Governance. Ma mission principale était de contribuer à l’industrialisation d’un Data Product de métadonnées et à son passage du niveau Iron au niveau Bronze, avec un travail centré sur la modélisation des données, leur qualité et leur gouvernance.',
+            sections: [
+              {
+                title: '01 — Comprendre et modéliser le Data Product',
+                paragraphs: [
+                  'Le Data Product reposait sur cinq jeux de données de métadonnées, contenant notamment des informations relatives aux flux d’ingestion, aux processus d’export, aux sources de données, aux projets et aux groupes associés.',
+                  'J’ai analysé la structure, le lineage et les dépendances des datasets, puis modélisé leurs relations avec Draw.io. Ce travail a notamment permis de clarifier une relation complexe de type plusieurs-à-plusieurs.',
+                ],
+                visual: { src: '/airbus-skywise/modele-logique.png', alt: 'Modèle logique des cinq datasets de métadonnées et de leurs relations.', caption: 'Modèle logique des cinq datasets et de leurs relations.' },
+              },
+              {
+                title: '02 — Identifier un problème de qualité des données',
+                paragraphs: [
+                  'Certains flux étaient signalés à tort comme inactifs alors qu’ils continuaient à fonctionner. J’ai étudié les données et les indicateurs permettant de déterminer leur statut réel.',
+                  'La logique fonctionnelle a été formalisée dans un arbre de décision combinant notamment le statut Walter, l’état du dataset dans Foundry et la fraîcheur du dernier build, avant son implémentation dans le pipeline PySpark.',
+                ],
+                visual: { src: '/airbus-skywise/arbre-statut-activite.png', alt: 'Arbre de décision combinant le statut Walter, l’état du dataset et la fraîcheur du dernier build pour déterminer si un flux est actif.', caption: 'Arbre de décision permettant de déterminer le statut d’activité d’un flux.' },
+              },
+              {
+                title: '03 — Implémenter la logique avec PySpark',
+                paragraphs: ['La logique définie a été intégrée au pipeline de traitement existant. La correction a ensuite été déployée en production et utilisée dans les dashboards de l’équipe pour corriger les faux signaux d’inactivité qui perturbaient le suivi opérationnel.'],
+                subsections: [
+                  { title: 'Sélectionner la dernière exécution', text: 'L’historique pouvant contenir plusieurs enregistrements pour un même flux, un classement par date d’exécution permet de sélectionner les exécutions les plus récentes avant la jointure aux informations de planification. Le document ne précise pas comment une égalité de date est départagée.', visual: { src: '/airbus-skywise/derniere-execution.png', alt: 'Extrait PySpark classant les exécutions par date avant la jointure aux informations de planification.', caption: 'Sélection de l’exécution la plus récente avant sa jointure aux informations de planification.' } },
+                  { title: 'Dédupliquer les enregistrements', text: 'La règle de classement utilise la date de fin d’exécution puis l’identifiant du dataset. La source ne précise pas de critère supplémentaire si ces deux valeurs sont identiques.', visual: { src: '/airbus-skywise/deduplication.png', alt: 'Extrait PySpark classant les doublons selon la date de fin d’exécution et l’identifiant du dataset.', caption: 'Règle de classement appliquée à la déduplication des données.' } },
+                  { title: 'Calculer l’indicateur is_active', text: 'Le calcul combine le statut Walter, l’état du dataset dans Foundry, la fraîcheur du dernier build et, selon les cas, les informations de synchronisation ou de planification.', visual: { src: '/airbus-skywise/calcul-is-active.png', alt: 'Extrait PySpark calculant is_active à partir du statut Walter, de l’état du dataset, de la fraîcheur du build et des informations de planification.', caption: 'Implémentation PySpark de la logique de calcul du statut d’activité.' } },
+                ],
+              },
+              {
+                title: '04 — Industrialiser la qualité avec EDQ',
+                paragraphs: [
+                  'Pour contribuer au passage du niveau Iron au niveau Bronze, j’ai configuré 15 règles EDQ : trois contrôles de gouvernance appliqués aux cinq datasets.',
+                  'Les contrôles portent sur la fraîcheur et la disponibilité (mise à jour dans le délai défini), la conformité (valeurs appartenant aux domaines attendus) et la cohérence (conventions des champs de date et d’heure, dont le format Timestamp et l’UTC). Ils formalisent la Quality of Service du Data Product et fournissent des critères mesurables de validation.',
+                ],
+                visual: { src: '/airbus-skywise/regle-qualite-edq.png', alt: 'Exemple de règle EDQ de contrôle de la fraîcheur et de la disponibilité des données.', caption: 'Exemple d’une règle automatisée de contrôle de la qualité des données dans EDQ.' },
+              },
+            ],
+            contributionLabel: 'MA CONTRIBUTION AU PROJET',
+            contribution: ['Analyse du lineage, des structures et des dépendances', 'Modélisation et documentation des relations entre les datasets', 'Formalisation et implémentation de règles de traitement PySpark', 'Configuration de contrôles automatisés de qualité dans EDQ'],
+            closing: 'Une contribution aux différentes étapes du cycle Data Management & Data Governance : comprendre, modéliser, diagnostiquer, implémenter, contrôler et gouverner.',
+            environmentLabel: 'ENVIRONNEMENT TECHNIQUE',
+            environment: ['Palantir Foundry', 'Ontology', 'PySpark / Apache Spark', 'EDQ', 'Draw.io', 'Confluence', 'Data Governance'],
+          },
         },
         {
           type: 'professionnel',
@@ -160,6 +203,17 @@ export const t = {
           metric: '18/20',
           metricLabel: 'note obtenue',
           color: '#00d4ff',
+          oral: {
+            year: 'Grand Oral · 2023',
+            questionLabel: 'QUESTION',
+            question: 'En quoi les mathématiques appliquées à la Big Data révolutionnent-elles le football ?',
+            concepts: [
+              { title: 'BIG DATA', text: 'Collecte & traitement' },
+              { title: 'PROBABILITÉS', text: 'Loi binomiale appliquée à la performance' },
+            ],
+            keywords: ['Big Data', 'Statistiques', 'Football Analytics'],
+            conclusion: "Un premier travail à l’intersection de la Data, des mathématiques et du football.",
+          },
         },
       ],
     },
@@ -430,7 +484,6 @@ export const t = {
         { v: '266', u: '', l: 'Variables analysed' },
         { v: '10', u: 'years', l: 'Football played competitively' },
       ],
-      photoLabel: '// PORTRAIT',
     },
     about: {
       sectionLabel: '// 01 — about',
@@ -512,6 +565,50 @@ export const t = {
           metricLabel: 'datasets structured · pipelines audited',
           color: '#00d4ff',
           anchorId: 'data-engineering-project',
+          presentation: {
+            expandLabel: 'View a presentation of the project',
+            intro: 'During my internship at Capgemini, I joined the Data Exchange team in the Airbus Skywise ecosystem as a Data Management & Governance intern. My main assignment was to help industrialise a metadata Data Product and move it from Iron to Bronze level, focusing on data modelling, quality and governance.',
+            sections: [
+              {
+                title: '01 — Understand and model the Data Product',
+                paragraphs: [
+                  'The Data Product relied on five metadata datasets containing information about ingestion flows, export processes, data sources, projects and associated groups.',
+                  'I analysed the datasets’ structure, lineage and dependencies, then modelled their relationships in Draw.io. This work helped clarify a complex many-to-many relationship.',
+                ],
+                visual: { src: '/airbus-skywise/modele-logique.png', alt: 'Logical model of the five metadata datasets and their relationships.', caption: 'Logical model of the five datasets and their relationships.' },
+              },
+              {
+                title: '02 — Identify a data quality issue',
+                paragraphs: [
+                  'Some data flows were incorrectly flagged as inactive even though they were still running. I investigated the underlying data and the indicators needed to determine their actual status.',
+                  'I formalised the business logic in a decision tree combining the Walter status, the dataset state in Foundry and the freshness of the latest build, before implementing it in the PySpark pipeline.',
+                ],
+                visual: { src: '/airbus-skywise/arbre-statut-activite.png', alt: 'Decision tree combining Walter status, dataset state and latest build freshness to determine whether a flow is active.', caption: 'Decision tree for determining a flow’s activity status.' },
+              },
+              {
+                title: '03 — Implement the logic with PySpark',
+                paragraphs: ['The defined logic was integrated into the existing processing pipeline. The fix was then deployed to production and used in the team dashboards to correct false inactivity signals that disrupted operational monitoring.'],
+                subsections: [
+                  { title: 'Select the latest execution', text: 'Because the history could contain several records for one flow, executions are ranked by date before joining to scheduling information. The source does not specify how ties on the execution date are resolved.', visual: { src: '/airbus-skywise/derniere-execution.png', alt: 'PySpark excerpt ranking executions by date before joining scheduling information.', caption: 'Selecting the latest execution before joining scheduling information.' } },
+                  { title: 'Deduplicate records', text: 'The ranking rule uses the execution finish time followed by the dataset identifier. The source does not show an additional tie-breaker if both values are identical.', visual: { src: '/airbus-skywise/deduplication.png', alt: 'PySpark excerpt ranking duplicate records by execution finish time and dataset identifier.', caption: 'Ranking rule used to deduplicate records.' } },
+                  { title: 'Calculate the is_active indicator', text: 'The calculation combines the Walter status, dataset state in Foundry, latest build freshness and, where relevant, synchronisation or scheduling information.', visual: { src: '/airbus-skywise/calcul-is-active.png', alt: 'PySpark excerpt calculating is_active from Walter status, dataset state, build freshness and scheduling information.', caption: 'PySpark implementation of the activity-status calculation.' } },
+                ],
+              },
+              {
+                title: '04 — Industrialise data quality with EDQ',
+                paragraphs: [
+                  'To support the move from Iron to Bronze level, I configured 15 EDQ rules: three governance checks applied to each of the five datasets.',
+                  'The checks cover freshness and availability (updates within the defined timeframe), conformity (values within expected domains) and consistency (date and time conventions, including Timestamp format and UTC). They formalise the Data Product’s Quality of Service and provide measurable validation criteria.',
+                ],
+                visual: { src: '/airbus-skywise/regle-qualite-edq.png', alt: 'Example of an EDQ rule checking data freshness and availability.', caption: 'Example of an automated data quality rule configured in EDQ.' },
+              },
+            ],
+            contributionLabel: 'MY CONTRIBUTION',
+            contribution: ['Analysed lineage, dataset structures and dependencies', 'Modelled and documented relationships between datasets', 'Defined and implemented PySpark processing rules', 'Configured automated quality checks in EDQ'],
+            closing: 'A contribution across the Data Management & Data Governance cycle: understand, model, diagnose, implement, check and govern.',
+            environmentLabel: 'TECHNICAL ENVIRONMENT',
+            environment: ['Palantir Foundry', 'Ontology', 'PySpark / Apache Spark', 'EDQ', 'Draw.io', 'Confluence', 'Data Governance'],
+          },
         },
         {
           type: 'professionnel',
@@ -551,6 +648,17 @@ export const t = {
           metric: '18/20',
           metricLabel: 'grade awarded',
           color: '#00d4ff',
+          oral: {
+            year: 'Oral exam · 2023',
+            questionLabel: 'QUESTION',
+            question: 'How is mathematics applied to Big Data revolutionising football?',
+            concepts: [
+              { title: 'BIG DATA', text: 'Collection & processing' },
+              { title: 'PROBABILITY', text: 'Binomial distribution applied to performance' },
+            ],
+            keywords: ['Big Data', 'Statistics', 'Football Analytics'],
+            conclusion: 'An early project at the intersection of data, mathematics and football.',
+          },
         },
       ],
     },

@@ -52,3 +52,15 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-reconnaissances-formation.md`
   summary: Afficher une confirmation avant le basculement vers le client mail quand aucun endpoint de formulaire n’est configuré.
   evidence: Avec `VITE_FORM_ENDPOINT` absent, `onSubmit` redirige immédiatement vers `mailto:` sans mettre à jour le statut visible du formulaire.
+- source_spec: `_bmad-output/implementation-artifacts/spec-data-engineering-airbus-skywise-case-study.md`
+  summary: Préciser le périmètre, les critères et les résultats de l’audit des cinq pipelines ainsi que les critères de passage Iron/Bronze.
+  evidence: Le document source mentionne l’audit dans la carte et le passage de niveau dans l’étude, sans détailler ces critères ni les résultats associés.
+- source_spec: `_bmad-output/implementation-artifacts/spec-data-engineering-airbus-skywise-case-study.md`
+  summary: Définir le statut Walter et documenter les règles métier qui déterminent l’activité d’un flux.
+  evidence: Le document et ses captures emploient « Walter » sans définir ce système ni détailler toutes les conditions de l’arbre de décision.
+- source_spec: `_bmad-output/implementation-artifacts/spec-data-engineering-airbus-skywise-case-study.md`
+  summary: Confirmer ou corriger les libellés génériques et répétés du modèle logique des datasets.
+  evidence: Le visuel fourni contient des noms génériques et deux entités libellées dataset_3 ; les noms corrects ne figurent pas dans le document texte.
+- source_spec: `_bmad-output/implementation-artifacts/spec-data-engineering-airbus-skywise-case-study.md`
+  summary: Expliquer la cible et le résultat affichés dans la capture de règle EDQ.
+  evidence: La capture indique une valeur attendue de 90 et un résultat de 100,0 sans définir le calcul ni son interprétation.

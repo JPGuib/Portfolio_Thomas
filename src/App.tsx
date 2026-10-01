@@ -18,6 +18,17 @@ function EmphasizedText({ text, phrases }: { text: string; phrases: readonly str
   return text.split(expression).map((part, index) => phrases.includes(part) ? <strong key={index} style={{ color: '#00ff87' }}>{part}</strong> : part)
 }
 
+function PresentationFigure({ visual }: { visual: { src: string; alt: string; caption: string } }) {
+  return (
+    <figure style={{ margin: '16px 0 20px', border: '1px solid rgba(255,255,255,0.08)', background: '#0a0a14' }}>
+      <a href={visual.src} target="_blank" rel="noopener noreferrer" style={{ display: 'block', background: '#f4f4f4' }}>
+        <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" style={{ display: 'block', width: '100%', maxHeight: 420, objectFit: 'contain' }} />
+      </a>
+      <figcaption style={{ padding: '8px 10px', color: '#9090b0', fontSize: '0.72rem', lineHeight: 1.5 }}>{visual.caption}</figcaption>
+    </figure>
+  )
+}
+
 function InstitutionLogos({ images }: { images: readonly string[] }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginTop: 8 }}>
@@ -33,7 +44,37 @@ function InstitutionLogos({ images }: { images: readonly string[] }) {
   )
 }
 
-function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
+function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; oral?: { year: string; questionLabel: string; question: string; concepts: readonly { title: string; text: string }[]; keywords: readonly string[]; conclusion: string }; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string }; presentation?: { expandLabel: string; intro: string; sections: readonly { title: string; paragraphs: readonly string[]; visual?: { src: string; alt: string; caption: string }; subsections?: readonly { title: string; text: string; visual: { src: string; alt: string; caption: string } }[] }[]; contributionLabel: string; contribution: readonly string[]; closing: string; environmentLabel: string; environment: readonly string[] } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
+  if (project.oral) {
+    return (
+      <article className="oral-card card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 16 }}>
+          <span className="tag" style={{ color: project.color, borderColor: `${project.color}33`, background: `${project.color}12` }}>{typeLabel}</span>
+          <div style={{ textAlign: 'right', flexShrink: 0 }}>
+            <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: project.color, lineHeight: 1 }}>{project.metric}</div>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
+          </div>
+        </div>
+        <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', margin: '0 0 4px', lineHeight: 1.2 }}>{project.title}</h3>
+        <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', margin: '0 0 18px', letterSpacing: '0.04em' }}>{project.oral.year}</p>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', margin: '0 0 18px' }} />
+        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: project.color, marginBottom: 8 }}>{project.oral.questionLabel}</div>
+        <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', lineHeight: 1.65, color: '#a0a0c0', margin: '0 0 28px', overflowWrap: 'anywhere' }}>{project.oral.question}</p>
+        <div className="oral-concepts">
+          {project.oral.concepts.map(concept => (
+            <div key={concept.title} style={{ border: '1px solid rgba(240,240,248,0.5)', padding: '12px', minWidth: 0, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', lineHeight: 1.65, overflowWrap: 'anywhere' }}>
+              <div style={{ color: project.color, marginBottom: 4 }}>{concept.title}</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', color: '#a0a0c0' }}>{concept.text}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '28px 0 18px' }}>
+          {project.oral.keywords.map(keyword => <span key={keyword} className="tag">{keyword}</span>)}
+        </div>
+        <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', lineHeight: 1.65, color: '#ffd93d', margin: 0, overflowWrap: 'anywhere' }}><span aria-hidden="true">→ </span>{project.oral.conclusion}</p>
+      </article>
+    )
+  }
   return (
     <div id={project.anchorId} className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -49,6 +90,39 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {project.tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
       </div>
+      {project.presentation && (
+        <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
+          <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.presentation.expandLabel}</summary>
+          <div style={{ marginTop: 20 }}>
+            <p style={{ color: '#a0a0c0', fontSize: '0.85rem', lineHeight: 1.7, margin: '0 0 24px' }}>{project.presentation.intro}</p>
+            {project.presentation.sections.map(section => (
+              <section key={section.title} style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 18, marginTop: 18 }}>
+                <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{section.title}</h4>
+                {section.paragraphs.map(paragraph => <p key={paragraph} style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65, margin: '0 0 10px' }}>{paragraph}</p>)}
+                {section.visual && <PresentationFigure visual={section.visual} />}
+                {section.subsections?.map(subsection => (
+                  <div key={subsection.title} style={{ marginTop: 18 }}>
+                    <div style={{ color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', marginBottom: 8 }}>{subsection.title}</div>
+                    <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65, margin: '0 0 10px' }}>{subsection.text}</p>
+                    <PresentationFigure visual={subsection.visual} />
+                  </div>
+                ))}
+              </section>
+            ))}
+            <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 18, marginTop: 18 }}>
+              <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{project.presentation.contributionLabel}</h4>
+              <ul style={{ margin: '0 0 16px', paddingLeft: 20, color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.7 }}>
+                {project.presentation.contribution.map(item => <li key={item}>{item}</li>)}
+              </ul>
+              <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65, margin: '0 0 18px' }}>{project.presentation.closing}</p>
+              <div style={{ color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', marginBottom: 8 }}>{project.presentation.environmentLabel}</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {project.presentation.environment.map(item => <span key={item} className="tag">{item}</span>)}
+              </div>
+            </section>
+          </div>
+        </details>
+      )}
       {project.details && (
         <>
         <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
@@ -344,13 +418,8 @@ export default function App() {
               </div>
             </div>
             {/* Photo card */}
-            <div style={{ width: 260, height: 340, borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0 }} className="hidden lg:block">
+            <div style={{ width: 340, height: 445, borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0 }} className="hidden lg:block">
               <img src={portraitUrl} alt="Thomas Guibert" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,8,16,0.92) 0%, rgba(8,8,16,0.25) 55%, transparent 100%)' }} />
-              <div style={{ position: 'absolute', bottom: 16, left: 16, right: 16 }}>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#00ff87', marginBottom: 4 }}>{tx.hero.photoLabel}</div>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.3rem', fontWeight: 700, color: '#f0f0f8' }}>{tx.hero.line1}<br />{tx.hero.line2}</div>
-              </div>
             </div>
           </div>
         </div>
