@@ -48,8 +48,6 @@ export const t = {
           desc: '',
           details: [
             { label: 'Accréditations & reconnaissances', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: 'Centrale Nantes', text: 'Top 250 mondial en Mechanical, Aeronautical & Manufacturing — QS 2026' },
-            { label: 'Audencia', text: 'Triple accréditation EQUIS · AACSB · AMBA, détenue par seulement 1 % des institutions dans le monde' },
             { label: '', text: 'Cursus 100 % dispensé en anglais' },
           ],
         },
@@ -58,8 +56,8 @@ export const t = {
           title: 'EXPÉRIENCES PROFESSIONNELLES',
           desc: '',
           details: [
-            { label: 'CAPGEMINI\nTECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'Voir le projet Data Engineering', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT /\nMEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'Voir l’étude KINESPORT', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'Voir le projet Data Engineering', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'Voir l’étude KINESPORT', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
             { label: 'SAVEFOLIO', separator: '', role: 'Junior Digital Strategy Analyst — Projet étudiant', text: '', ctaLabel: 'Voir l’étude SAVEFOLIO', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
           ],
         },
@@ -418,8 +416,6 @@ export const t = {
           desc: '',
           details: [
             { label: 'Accreditations & recognition', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: 'Centrale Nantes', text: 'Top 250 worldwide in Mechanical, Aeronautical & Manufacturing — QS 2026' },
-            { label: 'Audencia', text: 'Triple accreditation: EQUIS · AACSB · AMBA, held by only 1% of institutions worldwide' },
             { label: '', text: 'Programme taught 100% in English' },
           ],
         },
@@ -428,8 +424,8 @@ export const t = {
           title: 'PROFESSIONAL EXPERIENCE',
           desc: '',
           details: [
-            { label: 'CAPGEMINI\nTECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'View Data Engineering project', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT /\nMEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'View KINESPORT study', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'View Data Engineering project', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'View KINESPORT study', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
             { label: 'SAVEFOLIO', separator: '', role: 'Junior Digital Strategy Analyst — Student project', text: '', ctaLabel: 'View SAVEFOLIO study', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
           ],
         },
