@@ -1,32 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { t, type Lang } from './i18n'
+import portraitUrl from './Photos identités Thomas V5.jpg'
 
 const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'contact']
 
-function useIntersection(ref: React.RefObject<HTMLElement | null>, threshold = 0.1) {
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) setVisible(true)
-    }, { threshold })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [ref, threshold])
-  return visible
-}
-
-function SkillBar({ name, level, delay = 0, triggered }: { name: string; level: number; delay?: number; triggered: boolean }) {
+function SkillItem({ name }: { name: string }) {
   return (
-    <div style={{ marginBottom: 18 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', color: '#c0c0e0' }}>{name}</span>
-        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87' }}>{level}%</span>
-      </div>
-      <div className="skill-bar">
-        <div className="skill-bar-fill" style={{ width: triggered ? `${level}%` : '0%', transitionDelay: `${delay}ms` }} />
-      </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00ff87', flexShrink: 0 }} />
+      <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', color: '#c0c0e0' }}>{name}</span>
     </div>
   )
 }
@@ -156,9 +138,6 @@ export default function App() {
   const [lang, setLang] = useState<Lang>('fr')
   const [activeSection, setActiveSection] = useState('hero')
   const [navOpen, setNavOpen] = useState(false)
-  const skillsRef = useRef<HTMLElement>(null)
-  const skillsTriggered = useIntersection(skillsRef)
-
   const tx = t[lang]
   const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.contact]
 
@@ -228,8 +207,7 @@ export default function App() {
               <div className="section-label" style={{ marginBottom: 24 }}>{tx.hero.available}</div>
               <h1 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(3.5rem, 10vw, 8rem)', fontWeight: 900, lineHeight: 0.92, marginBottom: 24, letterSpacing: '-0.01em' }}>
                 <span style={{ color: '#f0f0f8' }}>{tx.hero.line1}<br /></span>
-                <span style={{ color: '#00ff87' }} className="glow">{tx.hero.line2}<br /></span>
-                <span style={{ color: '#f0f0f8', opacity: 0.3, fontSize: '60%' }}>{tx.hero.line3}</span>
+                <span style={{ color: '#00ff87' }} className="glow">{tx.hero.line2}</span>
               </h1>
               <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.75, marginBottom: 32 }}>
                 {tx.hero.intro} <strong style={{ color: '#f0f0f8' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
@@ -262,11 +240,11 @@ export default function App() {
             </div>
             {/* Photo card */}
             <div style={{ width: 260, height: 340, borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0 }} className="hidden lg:block">
-              <div style={{ position: 'absolute', inset: 0, background: 'url(https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=520&h=680&fit=crop&auto=format) center/cover' }} />
+              <img src={portraitUrl} alt="Thomas Guibert" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,8,16,0.92) 0%, rgba(8,8,16,0.25) 55%, transparent 100%)' }} />
               <div style={{ position: 'absolute', bottom: 16, left: 16, right: 16 }}>
                 <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#00ff87', marginBottom: 4 }}>{tx.hero.photoLabel}</div>
-                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.3rem', fontWeight: 700, color: '#f0f0f8' }}>Votre Prénom<br />Nom</div>
+                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.3rem', fontWeight: 700, color: '#f0f0f8' }}>{tx.hero.line1}<br />{tx.hero.line2}</div>
               </div>
               <div style={{ position: 'absolute', top: 12, right: 12, background: 'rgba(0,255,135,0.15)', border: '1px solid rgba(0,255,135,0.3)', borderRadius: 4, padding: '3px 8px' }}>
                 <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#00ff87' }}>{tx.hero.dispo}</span>
@@ -291,7 +269,7 @@ export default function App() {
               </p>
               <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 32 }}>{tx.about.p2}</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                {['Data Science', 'Sport Analytics', 'Machine Learning', 'Python', 'Power BI', 'SQL'].map(tag => (
+                {tx.about.tags.map(tag => (
                   <span key={tag} className="tag">{tag}</span>
                 ))}
               </div>
@@ -312,20 +290,20 @@ export default function App() {
       </section>
 
       {/* ─── SKILLS ─── */}
-      <section id="skills" ref={skillsRef as React.RefObject<HTMLElement>} style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <section id="skills" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.skills.sectionLabel}</div>
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 60, color: '#f0f0f8' }}>
             {tx.skills.h1} <span style={{ color: '#00ff87' }}>{tx.skills.h2}</span>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 40 }}>
-            {tx.skills.groups.map((group, gi) => (
+            {tx.skills.groups.map(group => (
               <div key={group.category}>
                 <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 24, paddingBottom: 12, borderBottom: '1px solid rgba(0,255,135,0.1)' }}>
                   {group.category.toUpperCase()}
                 </div>
-                {group.items.map((skill, si) => (
-                  <SkillBar key={skill.name} name={skill.name} level={skill.level} delay={gi * 100 + si * 60} triggered={skillsTriggered} />
+                {group.items.map(skill => (
+                  <SkillItem key={skill} name={skill} />
                 ))}
               </div>
             ))}
