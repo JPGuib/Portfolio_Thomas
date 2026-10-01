@@ -346,7 +346,7 @@ export default function App() {
               <p style={{ color: '#a0a0c0', lineHeight: 1.8, marginBottom: 20, fontSize: '0.95rem' }}>
                 {tx.about.p1} <strong style={{ color: '#f0f0f8' }}>{tx.about.p1b}</strong> {tx.about.p1c}
               </p>
-              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 32 }}>{tx.about.p2}</p>
+              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 32, whiteSpace: 'pre-line' }}>{tx.about.p2}</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {tx.about.tags.map(tag => (
                   <span key={tag} className="tag">{tag}</span>
