@@ -34,3 +34,15 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-experiences-formation-international-sportif.md`
   summary: Préciser le lieu de résidence dans le bloc Contact et distinguer la mobilité proposée.
   evidence: Le texte de contact indique une base entre Nantes et Toulouse sans préciser le lieu de résidence; cette information personnelle doit être confirmée.
+- source_spec: `_bmad-output/implementation-artifacts/spec-liens-linkedin-recommandations.md`
+  summary: Étayer ou calibrer la formulation Football Analytics sur les données événementielles, le tracking et les KPI.
+  evidence: Le texte d’expertise évoque ces capacités, mais les projets présentés ne donnent pas d’exemple d’analyse événementielle ou tracking ; ce point est indépendant des liens LinkedIn.
+- source_spec: `_bmad-output/implementation-artifacts/spec-liens-linkedin-recommandations.md`
+  summary: Rendre plus idiomatiques les formulations anglaises de Football Analytics et Data to Decision.
+  evidence: « tailored to football questions » et « decision-making profiles » sont peu naturels en anglais ; cette amélioration de contenu est hors périmètre des liens LinkedIn.
+- source_spec: `_bmad-output/implementation-artifacts/spec-liens-linkedin-recommandations.md`
+  summary: Réduire les répétitions de sports entre le parcours sportif et l’expertise sportive.
+  evidence: Rugby et tennis figurent dans les deux sections ; cette harmonisation est hors périmètre des liens LinkedIn.
+- source_spec: `_bmad-output/implementation-artifacts/spec-liens-linkedin-recommandations.md`
+  summary: Indiquer la langue source et signaler clairement les traductions des témoignages professionnels.
+  evidence: Les citations ne sont pas toutes dans la langue de la page et aucun repère ne distingue les versions traduites ; cette clarification est hors périmètre des liens LinkedIn.

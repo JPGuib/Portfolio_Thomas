@@ -5,7 +5,7 @@ export const t = {
     nav: {
       home: '// accueil',
       about: '// profil',
-      skills: '// compétences & certifications',
+      skills: '// expertise',
       projects: '// réalisations',
       experience: '// formation, expériences & international',
       sports: '// sport & hobbies',
@@ -106,9 +106,17 @@ export const t = {
       ],
     },
     skills: {
-      sectionLabel: '// 02 — compétences & certifications',
-      h1: 'COMPÉTENCES',
-      h2: '& CERTIFICATIONS',
+      sectionLabel: '// 02 — expertise',
+      h1: 'EXPERTISE',
+      h2: '',
+      contributionLabel: 'CE QUE JE PEUX APPORTER',
+      contributionItems: [
+        { title: 'PERFORMANCE DATA', text: 'Analyser et structurer des données de performance pour identifier des tendances, facteurs clés et indicateurs utiles au suivi des joueurs.' },
+        { title: 'FOOTBALL ANALYTICS', text: 'Exploiter des données événementielles et de tracking pour construire des KPI, analyser la performance et produire des visualisations adaptées aux problématiques football.' },
+        { title: 'DATA ENGINEERING & DATA QUALITY', text: 'Nettoyer, structurer et fiabiliser les données, avec une attention portée à la qualité, aux métadonnées, à la gouvernance et à la validation des pipelines.' },
+        { title: 'SPORT SCIENCE & RETURN TO PLAY', text: 'Mobiliser les statistiques et l’analyse de données pour étudier les facteurs associés à la performance, à la récupération et au retour au sport.' },
+        { title: 'DATA → DECISION', text: 'Transformer des données complexes en analyses claires et structurées pour faciliter leur interprétation et leur utilisation par des profils sportifs, techniques ou décisionnels.' },
+      ],
       stackLabel: 'STACK TECHNIQUE',
       groups: [
         { category: 'Data Engineering & Data Management', items: ['Qualité des données', 'Data Engineering', 'ETL', 'Gouvernance des données', 'Gestion des métadonnées', 'Pipelines'] },
@@ -274,6 +282,8 @@ export const t = {
     },
     experience: {
       sectionLabel: '// 04 — formation, expériences & international',
+      h1: 'FORMATION,',
+      h2: 'EXPÉRIENCES & INTERNATIONAL',
       professionalTitle: 'EXPÉRIENCES PROFESSIONNELLES',
       professionalItems: [
         {
@@ -337,6 +347,14 @@ export const t = {
         { name: 'Encadrement', icon: '👦', detail: 'Football Supervisor chez BLOOMDAYS · Toulouse\nActivités et jeux pour des enfants de 6 à 10 ans' },
         { name: 'Arbitrage', icon: '🟧', detail: 'Arbitre bénévole, en complément de la pratique et de l’encadrement du football.' },
       ],
+      beyondFootballTitle: 'AU-DELÀ DU FOOTBALL',
+      beyondFootballItems: [
+        { name: 'Tennis', icon: '🎾', detail: 'Pratique en club · compétition' },
+        { name: 'Rugby', icon: '🏉', detail: 'Pratique en club' },
+        { name: 'Ski alpin', icon: '🎿', detail: 'Pratique compétitive' },
+        { name: 'Autres pratiques', icon: '🏃', detail: 'Volleyball · Musculation · Athlétisme', highlight: 'Option Sport au Baccalauréat', extra: 'Running' },
+      ],
+      beyondFootballSummary: 'Une pratique multisport qui nourrit mon intérêt pour la performance, la compétition et l’analyse sportive.',
     },
     contact: {
       sectionLabel: '// 07 — contact',
@@ -360,12 +378,14 @@ export const t = {
       sectionLabel: '// 06 — références',
       title: 'RECOMMANDATIONS & CV',
       referencesTitle: 'TÉMOIGNAGES PROFESSIONNELS',
-      referencesNote: 'Extraits des recommandations publiées dans le portfolio précédent.',
+      referencesNote: 'Témoignages de professionnels ayant travaillé avec Thomas ou accompagné son parcours.',
+      linkedinProfileLabel: 'Voir le profil LinkedIn',
       cvQuickLink: 'Accéder au CV',
       references: [
-        { quote: 'Thomas a fait preuve de professionnalisme, de rigueur et de proactivité.', author: 'David Laplaud, PhD', role: 'Responsable R&D · Medinetic Learning · Traduction du témoignage original en anglais' },
-        { quote: 'Un étudiant sérieux et agréable, doté de solides capacités analytiques.', author: 'Pierre Guiheneuc', role: 'Professeur de physiologie · Traduction du témoignage original en anglais' },
-        { quote: 'Travailleur, attentif, toujours en progression.', author: 'Christophe Molina', role: 'Préparateur physique · Traduction du témoignage original en anglais' },
+        { quote: 'Thomas s’est distingué par son sérieux, sa rigueur et son implication. Son écoute, la qualité de ses livrables et sa capacité à présenter clairement son travail ont été particulièrement appréciées au sein de l’équipe.', author: 'Henri Mersch', role: 'Architecte Solutions GenAI / Cloud · Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
+        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D · VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
+        { quote: 'Je recommande fortement la candidature de Thomas Guibert. Son cursus à Centrale Nantes et Audencia, ainsi que son expérience en analyse de données en physiologie du sport, sont particulièrement cohérents avec son projet. C’est un étudiant sérieux, ouvert et très agréable dans les relations.', author: 'Pierre Guiheneuc', role: 'Professeur de physiologie et médecine du sport · Faculté de Médecine de Nantes', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
+        { quote: 'Thomas est toujours respectueux, ponctuel et à l’écoute des recommandations, avec un esprit ouvert et une réelle volonté de progresser. Au-delà de ses qualités footballistiques, il possède également une analyse juste de ses performances et de celles de ses adversaires.', author: 'Christophe Molina', role: 'Encadrement sportif · Football', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
       ],
       cvLabel: '// curriculum vitae',
       cvTitle: 'MON CV',
@@ -381,7 +401,7 @@ export const t = {
     nav: {
       home: '// home',
       about: '// about',
-      skills: '// skills & certifications',
+      skills: '// expertise',
       projects: '// projects',
       experience: '// education, experience & international',
       sports: '// sport & hobbies',
@@ -482,9 +502,17 @@ export const t = {
       ],
     },
     skills: {
-      sectionLabel: '// 02 — skills & certifications',
-      h1: 'SKILLS',
-      h2: '& CERTIFICATIONS',
+      sectionLabel: '// 02 — expertise',
+      h1: 'EXPERTISE',
+      h2: '',
+      contributionLabel: 'WHAT I CAN BRING',
+      contributionItems: [
+        { title: 'PERFORMANCE DATA', text: 'Analyse and structure performance data to identify trends, key factors, and useful indicators for monitoring players.' },
+        { title: 'FOOTBALL ANALYTICS', text: 'Use event and tracking data to build KPIs, analyse performance, and create visualisations tailored to football questions.' },
+        { title: 'DATA ENGINEERING & DATA QUALITY', text: 'Clean, structure, and improve the reliability of data, with a focus on quality, metadata, governance, and pipeline validation.' },
+        { title: 'SPORT SCIENCE & RETURN TO PLAY', text: 'Apply statistics and data analysis to study factors associated with performance, recovery, and return to sport.' },
+        { title: 'DATA → DECISION', text: 'Turn complex data into clear, structured analyses that support interpretation and use by sporting, technical, and decision-making profiles.' },
+      ],
       stackLabel: 'TECHNICAL STACK',
       groups: [
         { category: 'Data Engineering & Data Management', items: ['Data quality', 'Data engineering', 'ETL', 'Data governance', 'Metadata management', 'Pipelines'] },
@@ -650,6 +678,8 @@ export const t = {
     },
     experience: {
       sectionLabel: '// 04 — education, experience & international',
+      h1: 'EDUCATION,',
+      h2: 'EXPERIENCE & INTERNATIONAL STUDIES',
       professionalTitle: 'PROFESSIONAL EXPERIENCE',
       professionalItems: [
         {
@@ -713,6 +743,14 @@ export const t = {
         { name: 'Supervision', icon: '👦', detail: 'Football Supervisor at BLOOMDAYS · Toulouse\nActivities and games for children aged 6 to 10' },
         { name: 'Refereeing', icon: '🟧', detail: 'Volunteer referee, alongside playing and coaching football.' },
       ],
+      beyondFootballTitle: 'BEYOND FOOTBALL',
+      beyondFootballItems: [
+        { name: 'Tennis', icon: '🎾', detail: 'Club practice · competition' },
+        { name: 'Rugby', icon: '🏉', detail: 'Club practice' },
+        { name: 'Alpine skiing', icon: '🎿', detail: 'Competitive practice' },
+        { name: 'Other sports', icon: '🏃', detail: 'Volleyball · Strength training · Athletics', highlight: 'High school sports option', extra: 'Running' },
+      ],
+      beyondFootballSummary: 'A multisport background that fuels my interest in performance, competition and sports analysis.',
     },
     contact: {
       sectionLabel: '// 07 — contact',
@@ -736,12 +774,14 @@ export const t = {
       sectionLabel: '// 06 — references',
       title: 'REFERENCES & CV',
       referencesTitle: 'PROFESSIONAL TESTIMONIALS',
-      referencesNote: 'Excerpts from the recommendations published in the previous portfolio.',
+      referencesNote: 'Testimonials from professionals who worked with Thomas or supported his development.',
+      linkedinProfileLabel: 'View LinkedIn profile',
       cvQuickLink: 'Go to CV',
       references: [
-        { quote: 'Thomas demonstrated professionalism, rigor and proactivity.', author: 'David Laplaud, PhD', role: 'R&D Manager · Medinetic Learning' },
-        { quote: 'A serious, pleasant student with strong analytical abilities.', author: 'Pierre Guiheneuc', role: 'Physiology Professor' },
-        { quote: 'Hard-working, attentive, always progressing.', author: 'Christophe Molina', role: 'Strength Coach' },
+        { quote: 'Thomas stood out for his professionalism, rigor and commitment. His attentiveness, the quality of his deliverables and his ability to present his work clearly were particularly appreciated by the team.', author: 'Henri Mersch', role: 'GenAI / Cloud Solutions Architect · Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
+        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D · VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
+        { quote: 'I strongly recommend Thomas Guibert. His studies at Centrale Nantes and Audencia, together with his experience analysing data in sports physiology, are particularly well aligned with his career plans. He is a serious, open-minded student who is a real pleasure to work with.', author: 'Pierre Guiheneuc', role: 'Professor of Sports Physiology and Sports Medicine · Nantes Faculty of Medicine', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
+        { quote: 'Thomas is always respectful, punctual and attentive to recommendations, with an open mind and a genuine desire to improve. Beyond his footballing ability, he also has a sound understanding of his own performances and those of his opponents.', author: 'Christophe Molina', role: 'Sports Coaching · Football', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
       ],
       cvLabel: '// curriculum vitae',
       cvTitle: 'MY CV',

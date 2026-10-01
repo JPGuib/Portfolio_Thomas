@@ -387,6 +387,15 @@ export default function App() {
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
             {tx.skills.h1} <span style={{ color: '#00ff87' }}>{tx.skills.h2}</span>
           </h2>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 18 }}>{tx.skills.contributionLabel}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '22px 36px', marginBottom: 44 }}>
+            {tx.skills.contributionItems.map(item => (
+              <article key={item.title} style={{ borderTop: '1px solid rgba(0,255,135,0.18)', paddingTop: 14 }}>
+                <h3 style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', color: '#f0f0f8', letterSpacing: '0.04em', margin: '0 0 8px' }}>{item.title}</h3>
+                <p style={{ color: '#a0a0c0', fontSize: '0.875rem', lineHeight: 1.65, margin: 0 }}>{item.text}</p>
+              </article>
+            ))}
+          </div>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 28 }}>{tx.skills.stackLabel}</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 36 }}>
             {tx.skills.groups.map(group => (
@@ -582,9 +591,12 @@ export default function App() {
       </section>
 
       {/* ─── EXPERIENCE ─── */}
-      <section id="experience" style={{ padding: 'clamp(56px, 10vw, 100px) 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <section id="experience" style={{ padding: 'clamp(56px, 10vw, 100px) 0', scrollMarginTop: 72, background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div className="section-label" style={{ marginBottom: 32 }}>{tx.experience.sectionLabel}</div>
+          <div className="section-label" style={{ marginBottom: 16 }}>{tx.experience.sectionLabel}</div>
+          <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
+            {tx.experience.h1} <span style={{ color: '#00ff87' }}>{tx.experience.h2}</span>
+          </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 48 }}>
             {[
               { title: tx.experience.professionalTitle, items: tx.experience.professionalItems },
@@ -592,7 +604,7 @@ export default function App() {
               { title: tx.experience.internationalTitle, intro: tx.experience.internationalIntro, items: tx.experience.internationalItems },
             ].map(group => (
               <div key={group.title} style={{ minWidth: 0 }}>
-                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere' }}>
+                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'clamp(1.5rem, 1.9vw, 1.75rem)' : 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere', whiteSpace: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'nowrap' : undefined }}>
                   {group.title}
                 </h2>
                 {'intro' in group && <p style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
@@ -637,6 +649,21 @@ export default function App() {
               </div>
             ))}
           </div>
+          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.beyondFootballTitle}</div>
+          <p style={{ color: '#7070a0', fontSize: '0.9rem', lineHeight: 1.75, maxWidth: 760, margin: '0 0 28px', fontStyle: 'italic' }}>{tx.sports.beyondFootballSummary}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 20 }}>
+            {tx.sports.beyondFootballItems.map(item => (
+              <div key={item.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{item.icon}</div>
+                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{item.name}</div>
+                <div style={{ fontSize: '0.875rem', color: '#7070a0', lineHeight: 1.65 }}>
+                  {item.detail}
+                  {'highlight' in item && <><br /><strong style={{ color: '#c0c0d8' }}>{item.highlight}</strong></>}
+                  {'extra' in item && <><br />{item.extra}</>}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -655,6 +682,7 @@ export default function App() {
                   <figcaption>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, color: '#f0f0f8' }}>{reference.author}</div>
                     <div style={{ color: '#8080a0', fontSize: '0.76rem', lineHeight: 1.5 }}>{reference.role}</div>
+                    <a href={reference.linkedinHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', textDecoration: 'none' }}>{tx.credentials.linkedinProfileLabel} →</a>
                   </figcaption>
                 </figure>
               ))}
