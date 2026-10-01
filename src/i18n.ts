@@ -71,7 +71,7 @@ export const t = {
         },
         {
           icon: '🌍',
-          title: 'Parcours international',
+          title: 'PARCOURS INTERNATIONAL',
           desc: 'Deux semestres académiques au Maroc puis en Chine.',
           details: [],
         },
@@ -87,7 +87,6 @@ export const t = {
         { title: 'FOOTBALL ANALYTICS', text: 'Exploiter des données événementielles et de tracking pour construire des KPI, analyser la performance et produire des visualisations adaptées aux problématiques football.' },
         { title: 'DATA ENGINEERING & DATA QUALITY', text: 'Nettoyer, structurer et fiabiliser les données, avec une attention portée à la qualité, aux métadonnées, à la gouvernance et à la validation des pipelines.' },
         { title: 'SPORT SCIENCE & RETURN TO PLAY', text: 'Mobiliser les statistiques et l’analyse de données pour étudier les facteurs associés à la performance, à la récupération et au retour au sport.' },
-        { title: 'DATA → DECISION', text: 'Transformer des données complexes en analyses claires et structurées pour faciliter leur interprétation et leur utilisation par des profils sportifs, techniques ou décisionnels.' },
       ],
       stackLabel: 'STACK TECHNIQUE',
       groups: [
@@ -96,7 +95,10 @@ export const t = {
         { category: 'Football & Sport Analytics', items: ['Performance sportive', 'Football Analytics', 'KPIs', 'Reprise après LCA', '...'] },
       ],
       toolsLabel: 'OUTILS & TECHNOLOGIES',
-      tools: ['Python', 'SQL', 'Excel', 'RapidMiner'],
+      tools: [
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
+        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Palantir Foundry'] },
+      ],
       sportLabel: 'EXPERTISE SPORTIVE',
       sportItems: ['Football compétitif · R1', 'Arbitrage · Encadrement', 'Rugby · Tennis · ...'],
       certificationsLabel: 'CERTIFICATIONS',
@@ -439,7 +441,7 @@ export const t = {
         },
         {
           icon: '🌍',
-          title: 'International studies',
+          title: 'INTERNATIONAL STUDIES',
           desc: 'Two academic semesters in Morocco and then in China.',
           details: [],
         },
@@ -455,7 +457,6 @@ export const t = {
         { title: 'FOOTBALL ANALYTICS', text: 'Use event and tracking data to build KPIs, analyse performance, and create visualisations tailored to football questions.' },
         { title: 'DATA ENGINEERING & DATA QUALITY', text: 'Clean, structure, and improve the reliability of data, with a focus on quality, metadata, governance, and pipeline validation.' },
         { title: 'SPORT SCIENCE & RETURN TO PLAY', text: 'Apply statistics and data analysis to study factors associated with performance, recovery, and return to sport.' },
-        { title: 'DATA → DECISION', text: 'Turn complex data into clear, structured analyses that support interpretation and use by sporting, technical, and decision-making profiles.' },
       ],
       stackLabel: 'TECHNICAL STACK',
       groups: [
@@ -464,7 +465,10 @@ export const t = {
         { category: 'Football & Sports Analytics', items: ['Sports performance', 'Football analytics', 'KPIs', 'Return to sport after ACL reconstruction', '...'] },
       ],
       toolsLabel: 'TOOLS & TECHNOLOGIES',
-      tools: ['Python', 'SQL', 'Excel', 'RapidMiner'],
+      tools: [
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
+        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Palantir Foundry'] },
+      ],
       sportLabel: 'SPORTS EXPERTISE',
       sportItems: ['Competitive football · R1', 'Refereeing · Coaching', 'Rugby · Tennis · ...'],
       certificationsLabel: 'CERTIFICATIONS',

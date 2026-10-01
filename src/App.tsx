@@ -390,20 +390,20 @@ export default function App() {
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
             {tx.skills.h1} <span style={{ color: '#00ff87' }}>{tx.skills.h2}</span>
           </h2>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 18 }}>{tx.skills.contributionLabel}</div>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 18 }}>{tx.skills.contributionLabel}</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '22px 36px', marginBottom: 44 }}>
             {tx.skills.contributionItems.map(item => (
-              <article key={item.title} style={{ borderTop: '1px solid rgba(0,255,135,0.18)', paddingTop: 14 }}>
-                <h3 style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', color: '#f0f0f8', letterSpacing: '0.04em', margin: '0 0 8px' }}>{item.title}</h3>
-                <p style={{ color: '#a0a0c0', fontSize: '0.875rem', lineHeight: 1.65, margin: 0 }}>{item.text}</p>
+              <article key={item.title} className="card-hover" style={{ padding: '20px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
+                <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, color: '#f0f0f8', overflowWrap: 'anywhere', margin: '0 0 8px' }}>{item.title}</h3>
+                <p style={{ color: '#a0a0c0', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>{item.text}</p>
               </article>
             ))}
           </div>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 28 }}>{tx.skills.stackLabel}</div>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 18 }}>{tx.skills.stackLabel}</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 36 }}>
             {tx.skills.groups.map(group => (
               <div key={group.category}>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.04em', minHeight: 42, marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid rgba(0,255,135,0.1)' }}>
+                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, color: '#f0f0f8', minHeight: 42, marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid rgba(0,255,135,0.1)' }}>
                   {group.category.toUpperCase()}
                 </div>
                 {group.items.map(skill => (
@@ -414,7 +414,14 @@ export default function App() {
           </div>
           <div style={{ marginTop: 36, padding: '24px 28px', border: '1px solid rgba(0,255,135,0.1)', borderRadius: 8, background: 'rgba(0,255,135,0.02)', textAlign: 'center' }}>
             <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 10 }}>{tx.skills.toolsLabel}</div>
-            <div style={{ color: '#c0c0e0', fontSize: '0.9rem' }}>{tx.skills.tools.join(' · ')}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: 20 }}>
+              {tx.skills.tools.map(group => (
+                <div key={group.category}>
+                  <div style={{ color: '#00ff87', fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', fontWeight: 600, marginBottom: 6 }}>{group.category}</div>
+                  <div style={{ color: '#c0c0e0', fontFamily: 'Outfit, sans-serif', fontSize: '0.9rem', lineHeight: 1.6 }}>{group.items.join(' · ')}</div>
+                </div>
+              ))}
+            </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginTop: 16 }}>
             <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
