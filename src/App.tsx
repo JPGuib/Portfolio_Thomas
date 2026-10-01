@@ -422,16 +422,6 @@ export default function App() {
               ))}
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginTop: 16 }}>
-            <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.sportLabel}</div>
-              {tx.skills.sportItems.map(item => <div key={item} style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{item}</div>)}
-            </div>
-            <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.certificationsLabel}</div>
-              <div style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{tx.skills.certifications}</div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -606,29 +596,57 @@ export default function App() {
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
             {tx.experience.h1} <span style={{ color: '#00ff87' }}>{tx.experience.h2}</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 48 }}>
+          <div className="exp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 48 }}>
             {[
-              { title: tx.experience.professionalTitle, items: tx.experience.professionalItems },
               { title: tx.experience.educationTitle, items: tx.experience.educationItems },
               { title: tx.experience.internationalTitle, intro: tx.experience.internationalIntro, items: tx.experience.internationalItems },
+              { title: tx.experience.professionalTitle, items: tx.experience.professionalItems },
             ].map(group => (
-              <div key={group.title} style={{ minWidth: 0 }}>
+              <div key={group.title} className={group.title === tx.experience.professionalTitle ? 'exp-professional' : undefined} style={{ minWidth: 0 }}>
                 <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'clamp(1.5rem, 1.9vw, 1.75rem)' : 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere', whiteSpace: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'nowrap' : undefined }}>
                   {group.title}
                 </h2>
-                {'intro' in group && <p style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
+                {'intro' in group && <p style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
                 <div style={{ position: 'relative' }}>
                   <div style={{ position: 'absolute', left: 11, top: 0, bottom: 0, width: 1, background: 'rgba(0,255,135,0.1)' }} />
                   {group.items.map((item, index) => (
                     <div key={`${item.period}-${index}`} style={{ display: 'flex', gap: 24, marginBottom: 40, position: 'relative' }}>
                       <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#00d4ff', flexShrink: 0, marginTop: 4, border: '3px solid #0a0a14', position: 'relative', zIndex: 1 }} />
                       <div style={{ minWidth: 0 }}>
-                        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 4 }}>{item.period}</div>
-                        <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
-                        <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>{item.org}</div>
-                        <div style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6 }}>{item.detail}</div>
+                        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff', marginBottom: 6 }}>{item.period}</div>
+                        {'qualification' in item ? <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 8px', marginBottom: 8 }}>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', overflowWrap: 'anywhere' }}>{item.role}</div>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', overflowWrap: 'anywhere' }}>{item.org}</div>
+                        </div> : <>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>{item.org}</div>
+                        </>}
+                        {'detail' in item && item.detail && <div style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6 }}>{item.detail}</div>}
                         {'highlights' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#c0c0d8', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
-                        {'qualification' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
+                        {'qualification' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
+                        {'recognitions' in item && <div style={{ marginTop: 14 }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 8, marginBottom: 5 }}>
+                            <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f0f0f8', lineHeight: 1.6 }}>{item.recognitionTitle}</span>
+                            <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#7070a0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{item.accreditations}</span>
+                          </div>
+                          {item.recognitions.map(recognition => (
+                            <div key={recognition.institution} style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, marginTop: 5, overflowWrap: 'anywhere' }}>
+                              <strong style={{ color: '#f0f0f8' }}>{recognition.institution}:</strong> {recognition.beforeEmphasis}{recognition.emphasisStyle === 'italic' ? <em>{recognition.emphasis}</em> : <strong>{recognition.emphasis}</strong>}{recognition.afterEmphasis}
+                            </div>
+                          ))}
+                          {'competencyGroups' in item && <>
+                            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 14 }}>{item.competencyContentTitle}</div>
+                            {item.competencyGroups.map(group => (
+                              <div key={group.title} style={{ marginTop: 8 }}>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: 7, fontSize: '0.95rem', fontWeight: 700, color: '#f0f0f8', lineHeight: 1.6 }}>
+                                  <span aria-hidden="true">•</span>
+                                  <span>{group.title}</span>
+                                </div>
+                                <div style={{ marginLeft: 14, fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{group.items}</div>
+                              </div>
+                            ))}
+                          </>}
+                        </div>}
                         {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#9090b0', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
                       </div>
                     </div>
@@ -804,6 +822,7 @@ export default function App() {
         .strategy-preview-card span:last-child { color: #8080a0; font-size: 0.75rem; line-height: 1.45; }
         .about-intro { align-self: center; }
         .about-cards { align-self: end; }
+        .exp-professional { grid-column: 1 / -1; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
