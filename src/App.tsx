@@ -51,7 +51,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
                   ))}
                 </tbody>
               </table>
-              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.55, margin: '10px 0 24px' }}>{project.details.caveat}</p>
+              <p style={{ color: '#a0a0c0', fontSize: '0.75rem', lineHeight: 1.55, margin: '10px 0 24px' }}>{project.details.caveat}</p>
             </figure>
             <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#00ff87', marginBottom: 6 }}>{project.details.methodLabel}</div>
             <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.6, margin: '0 0 18px' }}>{project.details.method}</p>
@@ -102,7 +102,7 @@ function StrategyProjectCard({ strategy }: { strategy: (typeof t)['fr']['strateg
           <ol style={{ margin: 0, paddingLeft: 20, color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65 }}>
             {strategy.approach.map(step => <li key={step.number}><strong style={{ color: '#f0f0f8' }}>{step.title}</strong> — {step.text}</li>)}
           </ol>
-          <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.55, margin: '18px 0 0' }}>{strategy.contributionLabel} : {strategy.contribution}. {strategy.note}</p>
+          <p style={{ color: '#a0a0c0', fontSize: '0.75rem', lineHeight: 1.55, margin: '18px 0 0' }}>{strategy.contributionLabel} : {strategy.contribution}. {strategy.note}</p>
         </div>
       </details>
     </div>
@@ -497,7 +497,7 @@ export default function App() {
                   </a>
                 ))}
               </div>
-              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.6, margin: '20px 0 0' }}>{tx.strategy.kpiNote}</p>
+              <p style={{ color: '#a0a0c0', fontSize: '0.75rem', lineHeight: 1.6, margin: '20px 0 0' }}>{tx.strategy.kpiNote}</p>
             </div>
           </div>
           <p style={{ color: '#6060a0', fontSize: '0.75rem', lineHeight: 1.6, margin: '48px 0 0', maxWidth: 800 }}>{tx.strategy.note}</p>
@@ -515,7 +515,7 @@ export default function App() {
           </div>
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 16, color: '#f0f0f8' }}>{tx.caseStudy.title}</h2>
           <p style={{ color: '#a0a0c0', fontSize: '0.95rem', maxWidth: 760, lineHeight: 1.75, marginBottom: 48 }}>{tx.caseStudy.intro}</p>
-          <p style={{ color: '#7070a0', fontSize: '0.78rem', maxWidth: 900, lineHeight: 1.65, marginTop: -32, marginBottom: 48 }}>{tx.caseStudy.scopeNote}</p>
+          <p style={{ color: '#a0a0c0', fontSize: '0.78rem', maxWidth: 900, lineHeight: 1.65, marginTop: -32, marginBottom: 48 }}>{tx.caseStudy.scopeNote}</p>
 
           <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 16 }}>{tx.caseStudy.findingsTitle}</h3>
           <div style={{ marginBottom: 56 }}>
@@ -541,7 +541,7 @@ export default function App() {
             <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem' }}>{tx.caseStudy.figuresExpand}</summary>
             <div style={{ marginTop: 24 }}>
               <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 8 }}>{tx.caseStudy.figuresTitle}</h3>
-              <p style={{ color: '#7070a0', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: 28 }}>{tx.caseStudy.figuresNote}</p>
+              <p style={{ color: '#a0a0c0', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: 28 }}>{tx.caseStudy.figuresNote}</p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 28, marginBottom: 60 }}>
                 {tx.caseStudy.figures.map(figure => (
                   <figure key={figure.src} style={{ margin: 0, paddingBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
@@ -581,7 +581,7 @@ export default function App() {
                   </figure>
                 ))}
               </div>
-              <p style={{ color: '#7070a0', fontSize: '0.75rem', lineHeight: 1.6, marginTop: 24 }}>{tx.caseStudy.sourceNote}</p>
+              <p style={{ color: '#a0a0c0', fontSize: '0.75rem', lineHeight: 1.6, marginTop: 24 }}>{tx.caseStudy.sourceNote}</p>
             </div>
           </details>
         </div>
@@ -606,7 +606,7 @@ export default function App() {
                 <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'clamp(1.5rem, 1.9vw, 1.75rem)' : 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere', whiteSpace: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'nowrap' : undefined }}>
                   {group.title}
                 </h2>
-                {'intro' in group && <p style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
+                {'intro' in group && <p style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
                 <div style={{ position: 'relative' }}>
                   <div style={{ position: 'absolute', left: 11, top: 0, bottom: 0, width: 1, background: 'rgba(0,255,135,0.1)' }} />
                   {group.items.map((item, index) => (
@@ -621,16 +621,16 @@ export default function App() {
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>{item.org}</div>
                         </>}
-                        {'detail' in item && item.detail && <div style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6 }}>{item.detail}</div>}
-                        {'highlights' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#c0c0d8', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
+                        {'detail' in item && item.detail && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6 }}>{item.detail}</div>}
+                        {'highlights' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
                         {'qualification' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
                         {'recognitions' in item && <div style={{ marginTop: 14 }}>
                           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 8, marginBottom: 5 }}>
                             <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f0f0f8', lineHeight: 1.6 }}>{item.recognitionTitle}</span>
-                            <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#7070a0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{item.accreditations}</span>
+                            <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#a0a0c0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{item.accreditations}</span>
                           </div>
                           {item.recognitions.map(recognition => (
-                            <div key={recognition.institution} style={{ fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, marginTop: 5, overflowWrap: 'anywhere' }}>
+                            <div key={recognition.institution} style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 5, overflowWrap: 'anywhere' }}>
                               <strong style={{ color: '#f0f0f8' }}>{recognition.institution}:</strong> {recognition.beforeEmphasis}{recognition.emphasisStyle === 'italic' ? <em>{recognition.emphasis}</em> : <strong>{recognition.emphasis}</strong>}{recognition.afterEmphasis}
                             </div>
                           ))}
@@ -642,12 +642,13 @@ export default function App() {
                                   <span aria-hidden="true">•</span>
                                   <span>{group.title}</span>
                                 </div>
-                                <div style={{ marginLeft: 14, fontSize: '0.95rem', color: '#7070a0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{group.items}</div>
+                                <div style={{ marginLeft: 14, fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, overflowWrap: 'anywhere' }}>{group.items}</div>
                               </div>
                             ))}
+                            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.languageNote}</div>
                           </>}
                         </div>}
-                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#9090b0', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
+                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#a0a0c0', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', lineHeight: 1.6, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
                       </div>
                     </div>
                   ))}
@@ -666,24 +667,24 @@ export default function App() {
             {tx.sports.h1}<br /><span style={{ color: '#00ff87' }}>{tx.sports.h2}</span>
           </h2>
           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.durationTitle}</div>
-          <p style={{ color: '#7070a0', fontSize: '0.9rem', maxWidth: 600, lineHeight: 1.75, marginBottom: 52 }}>{tx.sports.intro}</p>
+          <p style={{ color: '#a0a0c0', fontSize: '0.9rem', maxWidth: 600, lineHeight: 1.75, marginBottom: 52 }}>{tx.sports.intro}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 40 }}>
             {tx.sports.items.map(s => (
               <div key={s.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{s.icon}</div>
                 <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{s.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#7070a0', lineHeight: 1.65, whiteSpace: 'pre-line' }}>{s.detail}</div>
+                <div style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, whiteSpace: 'pre-line' }}>{s.detail}</div>
               </div>
             ))}
           </div>
           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.7rem', fontWeight: 800, color: '#00d4ff', marginBottom: 8 }}>{tx.sports.beyondFootballTitle}</div>
-          <p style={{ color: '#7070a0', fontSize: '0.9rem', lineHeight: 1.75, maxWidth: 760, margin: '0 0 28px', fontStyle: 'italic' }}>{tx.sports.beyondFootballSummary}</p>
+          <p style={{ color: '#a0a0c0', fontSize: '0.9rem', lineHeight: 1.75, maxWidth: 760, margin: '0 0 28px', fontStyle: 'italic' }}>{tx.sports.beyondFootballSummary}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20, marginBottom: 20 }}>
             {tx.sports.beyondFootballItems.map(item => (
               <div key={item.name} className="card-hover" style={{ padding: '28px 24px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>{item.icon}</div>
                 <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 10 }}>{item.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#7070a0', lineHeight: 1.65 }}>
+                <div style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65 }}>
                   {item.detail}
                   {'highlight' in item && <><br /><strong style={{ color: '#c0c0d8' }}>{item.highlight}</strong></>}
                   {'extra' in item && <><br />{item.extra}</>}

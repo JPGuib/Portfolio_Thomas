@@ -295,6 +295,7 @@ export const t = {
             { institution: 'Audencia', beforeEmphasis: 'Triple accréditation EQUIS · AACSB · AMBA, détenue par seulement ', emphasis: '1 % des institutions dans le monde', emphasisStyle: 'bold', afterEmphasis: '' },
           ],
           competencyContentTitle: 'Contenu de la formation :',
+          languageNote: 'Cursus 100% en anglais',
           competencyGroups: [
             { title: 'DATA & IA', items: 'Programmation · Statistiques · Analyse de données · Bases de données · Data Mining · Intelligence artificielle · Machine Learning · Deep Learning · NLP · Data Quality · Cloud · Visualisation · Big Data' },
             { title: 'MANAGEMENT & BUSINESS', items: 'Stratégie · Finance · Marketing · Innovation · Business Intelligence · Supply Chain · Négociation internationale · Digital Business · Gestion des opérations' },
@@ -307,13 +308,13 @@ export const t = {
         {
           period: 'Février → mai 2025',
           role: 'Semestre Data & Intelligence Artificielle',
-          org: 'École Centrale Casablanca · Maroc',
+          org: 'École Centrale Casablanca · 🇲🇦 Maroc',
           detail: 'Intelligence artificielle & Data Mining · Machine Learning & Deep Learning · NLP · Visualisation scientifique · Sécurité des systèmes d’information · Data Quality.',
         },
         {
           period: 'Août 2025 → janvier 2026',
           role: 'Semestre FinTech & Technologies émergentes',
-          org: 'Shenzhen University · Chine',
+          org: 'Shenzhen University · 🇨🇳 Chine',
           detail: 'FinTech · Internet des objets (IoT) · Blockchain · Analyse de données · Marché chinois · Technologies émergentes.',
         },
       ],
@@ -665,6 +666,7 @@ export const t = {
             { institution: 'Audencia', beforeEmphasis: 'Triple accreditation EQUIS · AACSB · AMBA, held by only ', emphasis: '1% of institutions worldwide', emphasisStyle: 'bold', afterEmphasis: '' },
           ],
           competencyContentTitle: 'Programme content:',
+          languageNote: '100% English-taught programme',
           competencyGroups: [
             { title: 'DATA & AI', items: 'Programming · Statistics · Data Analysis · Databases · Data Mining · Artificial Intelligence · Machine Learning · Deep Learning · NLP · Data Quality · Cloud · Visualisation · Big Data' },
             { title: 'MANAGEMENT & BUSINESS', items: 'Strategy · Finance · Marketing · Innovation · Business Intelligence · Supply Chain · International Negotiation · Digital Business · Operations Management' },
@@ -677,13 +679,13 @@ export const t = {
         {
           period: 'February → May 2025',
           role: 'Data & Artificial Intelligence semester',
-          org: 'École Centrale Casablanca · Morocco',
+          org: 'École Centrale Casablanca · 🇲🇦 Morocco',
           detail: 'Artificial Intelligence & Data Mining · Machine Learning & Deep Learning · NLP · Scientific Visualisation · Information Systems Security · Data Quality.',
         },
         {
           period: 'August 2025 → January 2026',
           role: 'FinTech & Emerging Technologies semester',
-          org: 'Shenzhen University · China',
+          org: 'Shenzhen University · 🇨🇳 China',
           detail: 'FinTech · Internet of Things (IoT) · Blockchain · Data Analysis · Chinese Market · Emerging Technologies.',
         },
       ],
