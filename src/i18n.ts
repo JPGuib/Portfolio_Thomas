@@ -1,4 +1,13 @@
 export type Lang = 'fr' | 'en'
+type AboutCardDetail = {
+  label: string
+  text: string
+  largeText?: boolean
+  separator?: string
+  ctaLabel?: string
+  ctaTarget?: string
+  ctaAction?: string
+}
 
 export const t = {
   fr: {
@@ -39,26 +48,21 @@ export const t = {
       p1: 'Étudiant en dernière année du',
       p1b: 'BBA Data, IA & Management',
       p1c: 'à Centrale Nantes et Audencia (en France), avec des expériences en data engineering, gouvernance des données et analyse de la performance sportive.',
-      p2: "Chez KINESPORT / MEDINETIC LEARNING, j’ai analysé plus de 2 000 évaluations d’athlètes afin d’identifier les facteurs influençant le retour au sport après une reconstruction du LCA.\n\nChez CAPGEMINI, j’ai travaillé sur la qualité et la gouvernance des données pour Airbus Skywise, au sein de l’environnement Palantir Foundry, en structurant 5 jeux de données et en auditant 5 pipelines.",
       tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         {
           icon: '🎓',
           title: 'BBA Data, IA & Management — AUDENCIA × CENTRALE NANTES',
           desc: '',
-          details: [
-            { label: 'Accréditations & reconnaissances', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: '', text: 'Cursus 100 % dispensé en anglais', largeText: true },
-          ],
+          details: [] as AboutCardDetail[],
         },
         {
           icon: '🧭',
           title: 'EXPÉRIENCES PROFESSIONNELLES',
           desc: '',
           details: [
-            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '', ctaLabel: 'Voir le projet Data Management & Governance', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '', ctaLabel: 'Voir l’étude KINESPORT', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
-            { label: 'SAVEFOLIO', separator: '', text: '', ctaLabel: 'Voir l’étude SAVEFOLIO', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '' },
           ],
         },
         {
@@ -66,14 +70,14 @@ export const t = {
           title: 'PARCOURS SPORTIF',
           desc: '',
           details: [
-            { label: '⚽ FOOTBALL', separator: '', text: '10 ans de pratique en compétition - Régional 1', largeText: true },
+            { label: 'Football', separator: ' : ', text: '10 ans de pratique en compétition - Régional 1' },
           ],
         },
         {
           icon: '🌍',
           title: 'PARCOURS INTERNATIONAL',
           desc: 'Deux semestres académiques au Maroc puis en Chine.',
-          details: [],
+          details: [] as AboutCardDetail[],
         },
       ],
     },
@@ -92,15 +96,15 @@ export const t = {
       groups: [
         { category: 'Data Engineering & Data Management', items: ['Qualité des données', 'Data Engineering', 'ETL', 'Gouvernance des données', 'Gestion des métadonnées', 'Pipelines'] },
         { category: 'Data Analytics & Statistiques', items: ['Statistiques descriptives', 'Tests statistiques', 'Corrélations', 'Régressions', 'Visualisation'] },
-        { category: 'Football & Sport Analytics', items: ['Performance sportive', 'Football Analytics', 'KPIs', 'Reprise après LCA', '...'] },
+        { category: 'Football & Sport Analytics', items: ['Performance sportive', 'Football Analytics', 'KPIs', 'Reprise après LCA'] },
       ],
       toolsLabel: 'OUTILS & TECHNOLOGIES',
       tools: [
         { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
-        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Palantir Foundry'] },
+        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Power BI', 'Palantir Foundry'] },
       ],
       sportLabel: 'EXPERTISE SPORTIVE',
-      sportItems: ['Football compétitif · R1', 'Arbitrage · Encadrement', 'Rugby · Tennis · ...'],
+      sportItems: ['Football en compétition · R1 · Arbitrage · Encadrement', 'Rugby · Tennis ·'],
       certificationsLabel: 'CERTIFICATIONS',
       certifications: 'PSC1 - Formation aux Premiers Secours (UDSP31) - 2023',
     },
@@ -316,7 +320,7 @@ export const t = {
       durationTitle: '10 ANS SUR LE TERRAIN',
       intro: 'Dix ans de football compétitif, principalement au poste d’arrière gauche ou de défenseur central, jusqu’au niveau Régional 1 en Occitanie. Cette expérience de terrain nourrit mon intérêt pour l’analyse des données de performance et du retour au sport.',
       items: [
-        { name: 'Football compétitif', icon: '⚽', detail: '10 ans de pratique · Arrière gauche / défenseur central · Régional 1' },
+        { name: 'Football en compétition', icon: '⚽', detail: '10 ans de pratique · Arrière gauche / défenseur central · Régional 1' },
         { name: 'Palmarès', icon: '🏆', detail: 'Champion de Régional 1 · Occitanie\nMeilleur défenseur U17 de Régional 1 · 2022' },
         { name: 'Encadrement', icon: '👦', detail: 'Football Supervisor chez BLOOMDAYS · Toulouse\nActivités et jeux pour des enfants de 6 à 10 ans' },
         { name: 'Arbitrage', icon: '🟧', detail: 'Arbitre bénévole, en complément de la pratique et de l’encadrement du football.' },
@@ -409,26 +413,21 @@ export const t = {
       p1: 'Final-year student in the',
       p1b: 'BBA Data, AI & Management',
       p1c: 'at Centrale Nantes and Audencia (in France), with experience in data engineering, data governance and sports performance analysis.',
-      p2: 'At KINESPORT / MEDINETIC LEARNING, I analysed more than 2,000 athlete assessments to identify the factors influencing return to sport after ACL reconstruction.\n\nAt CAPGEMINI, I worked on data quality and governance for Airbus Skywise within the Palantir Foundry environment, structuring 5 datasets and auditing 5 pipelines.',
       tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         {
           icon: '🎓',
           title: 'BBA Data, AI & Management — AUDENCIA × CENTRALE NANTES',
           desc: '',
-          details: [
-            { label: 'Accreditations & recognition', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: '', text: 'Programme taught 100% in English', largeText: true },
-          ],
+          details: [],
         },
         {
           icon: '🧭',
           title: 'PROFESSIONAL EXPERIENCE',
           desc: '',
           details: [
-            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '', ctaLabel: 'View Data Management & Governance project', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '', ctaLabel: 'View KINESPORT study', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
-            { label: 'SAVEFOLIO', separator: '', text: '', ctaLabel: 'View SAVEFOLIO study', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '' },
           ],
         },
         {
@@ -436,7 +435,7 @@ export const t = {
           title: 'SPORTS BACKGROUND',
           desc: '',
           details: [
-            { label: '⚽ FOOTBALL', separator: '', text: '10 years of competitive football - Regional 1', largeText: true },
+            { label: 'Football', separator: ': ', text: '10 years of competitive football - Regional 1' },
           ],
         },
         {
@@ -462,15 +461,15 @@ export const t = {
       groups: [
         { category: 'Data Engineering & Data Management', items: ['Data quality', 'Data engineering', 'ETL', 'Data governance', 'Metadata management', 'Pipelines'] },
         { category: 'Data Analytics & Statistics', items: ['Descriptive statistics', 'Statistical tests', 'Correlations', 'Regression', 'Data visualisation'] },
-        { category: 'Football & Sports Analytics', items: ['Sports performance', 'Football analytics', 'KPIs', 'Return to sport after ACL reconstruction', '...'] },
+        { category: 'Football & Sports Analytics', items: ['Sports performance', 'Football analytics', 'KPIs', 'Return to sport after ACL reconstruction'] },
       ],
       toolsLabel: 'TOOLS & TECHNOLOGIES',
       tools: [
         { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
-        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Palantir Foundry'] },
+        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Power BI', 'Palantir Foundry'] },
       ],
       sportLabel: 'SPORTS EXPERTISE',
-      sportItems: ['Competitive football · R1', 'Refereeing · Coaching', 'Rugby · Tennis · ...'],
+      sportItems: ['Competitive football · R1 · Refereeing · Coaching', 'Rugby · Tennis · ...'],
       certificationsLabel: 'CERTIFICATIONS',
       certifications: 'PSC1 - First Aid Training (UDSP31) - 2023',
     },

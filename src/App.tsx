@@ -337,7 +337,7 @@ export default function App() {
       <section id="about" style={{ padding: 'clamp(56px, 10vw, 100px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }} className="about-grid">
-            <div className="about-intro">
+            <div className="about-intro" style={{ padding: 20, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, background: '#0f0f1a' }}>
               <div className="section-label" style={{ marginBottom: 16 }}>{tx.about.sectionLabel}</div>
               <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 24, color: '#f0f0f8' }}>
                 {tx.about.h1}<br /><span style={{ color: '#00ff87' }}>{tx.about.h2}</span>
@@ -346,22 +346,21 @@ export default function App() {
               <p style={{ color: '#a0a0c0', lineHeight: 1.8, marginBottom: 20, fontSize: '0.95rem' }}>
                 {tx.about.p1} <strong style={{ color: '#f0f0f8' }}>{tx.about.p1b}</strong> {tx.about.p1c}
               </p>
-              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 32, whiteSpace: 'pre-line' }}>{tx.about.p2}</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {tx.about.tags.map(tag => (
                   <span key={tag} className="tag">{tag}</span>
                 ))}
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div className="about-cards" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {tx.about.cards.map(card => (
-                <div key={card.title} className="card-hover" style={{ padding: '20px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <div key={card.title} className="card-hover" style={{ padding: '14px 20px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{card.icon}</span>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 6 }}>{card.title}</div>
+                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 4 }}>{card.title}</div>
                     <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', color: card.details.length ? '#c0c0e0' : '#a0a0c0', fontWeight: card.details.length ? 600 : 400, lineHeight: 1.5 }}>{card.desc}</div>
                     {card.details.length > 0 && (
-                      <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>
+                      <div style={{ display: 'grid', gap: 8, marginTop: 10 }}>
                         {card.details.map(detail => {
                           const singleLineCompanyName = detail.label === 'CAPGEMINI TECHNOLOGY SERVICES' || detail.label === 'KINESPORT / MEDINETIC LEARNING'
                           return (
@@ -413,11 +412,11 @@ export default function App() {
             ))}
           </div>
           <div style={{ marginTop: 36, padding: '24px 28px', border: '1px solid rgba(0,255,135,0.1)', borderRadius: 8, background: 'rgba(0,255,135,0.02)', textAlign: 'center' }}>
-            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 10 }}>{tx.skills.toolsLabel}</div>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.1em', marginBottom: 10 }}>{tx.skills.toolsLabel}</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: 20 }}>
               {tx.skills.tools.map(group => (
                 <div key={group.category}>
-                  <div style={{ color: '#00ff87', fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', fontWeight: 600, marginBottom: 6 }}>{group.category}</div>
+                  <div style={{ color: '#f0f0f8', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, marginBottom: 6 }}>{group.category}</div>
                   <div style={{ color: '#c0c0e0', fontFamily: 'Outfit, sans-serif', fontSize: '0.9rem', lineHeight: 1.6 }}>{group.items.join(' · ')}</div>
                 </div>
               ))}
@@ -425,11 +424,11 @@ export default function App() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 16, marginTop: 16 }}>
             <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.sportLabel}</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.sportLabel}</div>
               {tx.skills.sportItems.map(item => <div key={item} style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{item}</div>)}
             </div>
             <div style={{ padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.certificationsLabel}</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#00ff87', letterSpacing: '0.08em', marginBottom: 12 }}>{tx.skills.certificationsLabel}</div>
               <div style={{ color: '#c0c0e0', fontSize: '0.85rem', lineHeight: 1.7 }}>{tx.skills.certifications}</div>
             </div>
           </div>
@@ -803,11 +802,13 @@ export default function App() {
         .strategy-preview-card > span:first-of-type { margin-top: 6px; }
         .strategy-preview-card strong { color: #f0f0f8; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; line-height: 1.05; }
         .strategy-preview-card span:last-child { color: #8080a0; font-size: 0.75rem; line-height: 1.45; }
-        .about-intro { padding-top: 21px; }
+        .about-intro { align-self: center; }
+        .about-cards { align-self: end; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .about-intro { padding-top: 0; }
+          .about-intro { align-self: stretch; }
+          .about-cards { align-self: stretch; }
           .exp-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .contact-card { padding: 24px 20px !important; }
