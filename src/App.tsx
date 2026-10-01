@@ -623,7 +623,7 @@ export default function App() {
                         <div style={{ fontSize: '0.85rem', color: '#7070a0', lineHeight: 1.6 }}>{item.detail}</div>
                         {'highlights' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#c0c0d8', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
                         {'qualification' in item && <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
-                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
+                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#9090b0', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
                       </div>
                     </div>
                   ))}
