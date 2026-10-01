@@ -616,13 +616,21 @@ export default function App() {
                         <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff', marginBottom: 6 }}>{item.period}</div>
                         {'qualification' in item ? <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 8px', marginBottom: 8 }}>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', overflowWrap: 'anywhere' }}>{item.role}</div>
-                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', overflowWrap: 'anywhere' }}>{item.org}</div>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#ffd93d', overflowWrap: 'anywhere' }}>
+                            {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
+                          </div>
                         </div> : <>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
-                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>{item.org}</div>
+                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: group.title === tx.experience.professionalTitle ? '#ffd93d' : '#00ff87', marginBottom: 8, overflowWrap: 'anywhere' }}>
+                            {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
+                          </div>
                         </>}
+                        {'intro' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}>{item.intro}</div>}
+                        {'points' in item && <ul style={{ listStyleType: 'disc', paddingLeft: 18, margin: '8px 0 0', fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6 }}>
+                          {item.points.map(point => <li key={point} style={{ marginBottom: 6 }}>{point}</li>)}
+                        </ul>}
+                        {'closing' in item && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, marginTop: 8 }}>{item.closing}</div>}
                         {'detail' in item && item.detail && <div style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6 }}>{item.detail}</div>}
-                        {'highlights' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.highlights}</div>}
                         {'qualification' in item && <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.qualification}</div>}
                         {'recognitions' in item && <div style={{ marginTop: 14 }}>
                           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 8, marginBottom: 5 }}>
