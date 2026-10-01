@@ -359,7 +359,7 @@ export default function App() {
                   <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{card.icon}</span>
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 6 }}>{card.title}</div>
-                    <div style={{ fontSize: '0.85rem', color: card.details.length ? '#c0c0e0' : '#7070a0', fontWeight: card.details.length ? 600 : 400, lineHeight: 1.5 }}>{card.desc}</div>
+                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', color: card.details.length ? '#c0c0e0' : '#a0a0c0', fontWeight: card.details.length ? 600 : 400, lineHeight: 1.5 }}>{card.desc}</div>
                     {card.details.length > 0 && (
                       <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>
                         {card.details.map(detail => {
@@ -367,9 +367,9 @@ export default function App() {
                           return (
                             <div key={detail.label || detail.text} style={{ fontSize: '0.82rem', color: '#a0a0c0', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
                               {detail.label && <strong style={{ color: '#00ff87', whiteSpace: singleLineCompanyName ? 'nowrap' : 'pre-line', fontSize: singleLineCompanyName ? '0.72rem' : undefined }}>{detail.label}{'separator' in detail ? detail.separator : ': '}</strong>}
-                              {'role' in detail && <strong style={{ display: 'block', color: '#f0f0f8', marginTop: 5 }}>{detail.role}</strong>}
-                              <span style={{ whiteSpace: 'pre-line' }}>{detail.text}</span>
-                              {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#9090b0', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
+                              {'role' in detail && typeof detail.role === 'string' && <strong style={{ display: 'block', color: '#f0f0f8', marginTop: 5 }}>{detail.role}</strong>}
+                              <span style={{ display: 'largeText' in detail && detail.largeText ? 'block' : undefined, whiteSpace: 'pre-line', fontFamily: 'Outfit, sans-serif', fontSize: 'largeText' in detail && detail.largeText ? '0.95rem' : undefined }}>{detail.text}</span>
+                              {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'block', color: '#9090b0', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
                             </div>
                           )
                         })}

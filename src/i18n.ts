@@ -48,7 +48,7 @@ export const t = {
           desc: '',
           details: [
             { label: 'Accréditations & reconnaissances', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: '', text: 'Cursus 100 % dispensé en anglais' },
+            { label: '', text: 'Cursus 100 % dispensé en anglais', largeText: true },
           ],
         },
         {
@@ -56,9 +56,9 @@ export const t = {
           title: 'EXPÉRIENCES PROFESSIONNELLES',
           desc: '',
           details: [
-            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'Voir le projet Data Engineering', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'Voir l’étude KINESPORT', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
-            { label: 'SAVEFOLIO', separator: '', role: 'Junior Digital Strategy Analyst — Projet étudiant', text: '', ctaLabel: 'Voir l’étude SAVEFOLIO', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '', ctaLabel: 'Voir le projet Data Management & Governance', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '', ctaLabel: 'Voir l’étude KINESPORT', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
+            { label: 'SAVEFOLIO', separator: '', text: '', ctaLabel: 'Voir l’étude SAVEFOLIO', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
           ],
         },
         {
@@ -66,7 +66,7 @@ export const t = {
           title: 'PARCOURS SPORTIF',
           desc: '',
           details: [
-            { label: '⚽ FOOTBALL', separator: '', role: '10 ans de pratique en compétition', text: 'Régional 1 · Occitanie' },
+            { label: '⚽ FOOTBALL', separator: '', text: '10 ans de pratique en compétition - Régional 1', largeText: true },
           ],
         },
         {
@@ -416,7 +416,7 @@ export const t = {
           desc: '',
           details: [
             { label: 'Accreditations & recognition', text: 'CTI · EUR-ACE · EQUIS · AACSB · AMBA' },
-            { label: '', text: 'Programme taught 100% in English' },
+            { label: '', text: 'Programme taught 100% in English', largeText: true },
           ],
         },
         {
@@ -424,9 +424,9 @@ export const t = {
           title: 'PROFESSIONAL EXPERIENCE',
           desc: '',
           details: [
-            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', role: 'Data Management & Governance Intern', text: '', ctaLabel: 'View Data Engineering project', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
-            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', role: 'Data Scientist Intern', text: '', ctaLabel: 'View KINESPORT study', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
-            { label: 'SAVEFOLIO', separator: '', role: 'Junior Digital Strategy Analyst — Student project', text: '', ctaLabel: 'View SAVEFOLIO study', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
+            { label: 'CAPGEMINI TECHNOLOGY SERVICES', separator: '', text: '', ctaLabel: 'View Data Management & Governance project', ctaTarget: '#data-engineering-project', ctaAction: 'anchor' },
+            { label: 'KINESPORT / MEDINETIC LEARNING', separator: '', text: '', ctaLabel: 'View KINESPORT study', ctaTarget: '#kstarts-case-study', ctaAction: 'openStudy' },
+            { label: 'SAVEFOLIO', separator: '', text: '', ctaLabel: 'View SAVEFOLIO study', ctaTarget: '#savefolio-project', ctaAction: 'anchor' },
           ],
         },
         {
@@ -434,7 +434,7 @@ export const t = {
           title: 'SPORTS BACKGROUND',
           desc: '',
           details: [
-            { label: '⚽ FOOTBALL', separator: '', role: '10 years of competitive football', text: 'Regional 1 · Occitanie' },
+            { label: '⚽ FOOTBALL', separator: '', text: '10 years of competitive football - Regional 1', largeText: true },
           ],
         },
         {
