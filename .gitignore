@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+
+# Outillage local BMad et agents
+.agents/
+_bmad/
+.claude/
+.github/agents/
