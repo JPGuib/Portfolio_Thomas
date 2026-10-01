@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { t, type Lang } from './i18n'
-import portraitUrl from './Photos identités Thomas V5.jpg'
+const portraitUrl = '/Photo thomas.png'
 
 const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'contact']
 
@@ -231,7 +231,7 @@ export default function App() {
                 {tx.hero.stats.map(s => (
                   <div key={s.l}>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2.2rem', fontWeight: 800, color: '#f0f0f8', lineHeight: 1 }}>
-                      {s.v}<span style={{ color: '#00ff87', fontSize: '1.1rem' }}> {s.u}</span>
+                      {s.v}{s.u && <span style={{ color: '#00ff87', fontSize: '1.1rem' }}> {s.u}</span>}
                     </div>
                     <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: '#6060a0', marginTop: 4 }}>{s.l}</div>
                   </div>
