@@ -30,7 +30,6 @@ export const t = {
         { v: '10', u: 'ans', l: 'Football compétitif' },
       ],
       photoLabel: '// PORTRAIT',
-      dispo: '● EN MISSION',
     },
     about: {
       sectionLabel: '// 01 — profil',
@@ -198,7 +197,6 @@ export const t = {
         { v: '10', u: 'years', l: 'Competitive football' },
       ],
       photoLabel: '// PORTRAIT',
-      dispo: '● ON INTERNSHIP',
     },
     about: {
       sectionLabel: '// 01 — about',

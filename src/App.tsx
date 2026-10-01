@@ -246,9 +246,6 @@ export default function App() {
                 <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#00ff87', marginBottom: 4 }}>{tx.hero.photoLabel}</div>
                 <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.3rem', fontWeight: 700, color: '#f0f0f8' }}>{tx.hero.line1}<br />{tx.hero.line2}</div>
               </div>
-              <div style={{ position: 'absolute', top: 12, right: 12, background: 'rgba(0,255,135,0.15)', border: '1px solid rgba(0,255,135,0.3)', borderRadius: 4, padding: '3px 8px' }}>
-                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#00ff87' }}>{tx.hero.dispo}</span>
-              </div>
             </div>
           </div>
         </div>
