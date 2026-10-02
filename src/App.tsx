@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { t, type Lang } from './i18n'
-const portraitUrl = '/Photo thomas.png'
+const portraitUrl = '/Photo thomas.jpeg'
 
 const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'credentials', 'contact']
 
