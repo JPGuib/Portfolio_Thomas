@@ -105,7 +105,7 @@ export const t = {
       ],
       toolsLabel: 'OUTILS & TECHNOLOGIES',
       tools: [
-        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','...'] },
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','Pyspark','...'] },
         { category: 'BI & VISUALISATION', items: ['SQL', 'Excel', 'Power BI'] },
         { category: 'DATA PLATFORM', items: ['Palantir Foundry', 'RapidMiner'] },
         { category: 'DATA SCIENCE & AI', items: ['Machine Learning', 'Deep Learning', 'Statistical Modelling', 'Natural language processing', 'AI fundamentals'] },
@@ -773,7 +773,7 @@ export const t = {
       ],
       toolsLabel: 'TOOLS & TECHNOLOGIES',
       tools: [
-        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','...'] },
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','PySpark','...'] },
         { category: 'BI & VISUALISATION', items: ['SQL', 'Excel', 'Power BI'] },
         { category: 'DATA PLATFORM', items: ['Palantir Foundry','RapidMiner'] },
         { category: 'DATA SCIENCE & AI', items: ['Machine Learning', 'Deep Learning', 'Statistical Modelling', 'Natural language processing', 'AI fundamentals'] },

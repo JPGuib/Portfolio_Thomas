@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     watch: {
-      ignored: ['**/Photos identités Thomas V5.jpg', '**/*.~tmp'],
+      ignored: ['**/Photos identités Thomas V5.jpg', '**/*.~tmp', '**/*.ipynb'],
     },
   },
 })
