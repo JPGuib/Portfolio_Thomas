@@ -411,6 +411,37 @@ export const t = {
           },
         },
         {
+          type: 'etude',
+          title: 'Prototype RAG — changement climatique',
+          subtitle: 'NLP & IA · Centrale Nantes · 2025',
+          description: 'Dans le cadre d’un TP à Centrale Nantes, j’ai construit un prototype de génération augmentée par récupération (RAG) à partir de trois articles sur les effets du changement climatique. J’ai travaillé sur la collecte des textes, leur indexation vectorielle, la recherche de passages et la génération de réponses.',
+          tags: ['NLP', 'RAG', 'Sentence Transformers', 'FAISS', 'Python'],
+          metric: '10',
+          metricLabel: 'questions de test préparées',
+          color: '#00d4ff',
+          presentation: {
+            expandLabel: 'VOIR L’ÉTUDE DE CAS',
+            sections: [
+              {
+                title: 'Objectif',
+                paragraphs: ['J’ai construit une chaîne RAG pour répondre à des questions à partir de textes sources, puis j’ai comparé cette approche à une génération sans contexte sur dix questions préparées.'],
+              },
+              {
+                title: 'Pipeline',
+                paragraphs: ['J’ai choisi trois sources : NOAA (« Climate Change Impacts »), NRDC (« What Are the Effects of Climate Change? ») et National Geographic (« Global Warming Effects »). Je les ai récupérées avec Requests et Beautiful Soup, puis découpées en segments. J’ai calculé leurs embeddings avec Sentence Transformers (all-MiniLM-L6-v2), les ai indexés avec FAISS et récupéré les trois passages les plus proches de chaque question. J’ai enfin utilisé GPT-2 pour générer une réponse à partir de ces passages.'],
+              },
+              {
+                title: 'Évaluation exploratoire',
+                paragraphs: ['J’ai comparé les réponses générées avec et sans contexte et analysé plusieurs limites de la récupération. Dans mon analyse, j’estime que certaines réponses RAG sont davantage ancrées dans les sources, mais je n’ai calculé aucune métrique de pertinence ou d’exactitude : je ne peux donc pas quantifier un gain de factualité.'],
+              },
+              {
+                title: 'Limites et pistes d’amélioration',
+                paragraphs: ['J’ai utilisé un découpage simple qui ne crée pas le chevauchement annoncé dans mon commentaire de code, et GPT-2 produit parfois des réponses peu cohérentes. Je considère donc ce travail comme une exploration pédagogique, pas comme la validation d’un système fiable. Pour aller plus loin, je pourrais fiabiliser le traitement des textes et évaluer séparément la qualité de récupération et celle des réponses sur un jeu de référence.'],
+              },
+            ],
+          },
+        },
+        {
           type: 'scolaire',
           title: 'Mathématiques & Big Data dans le football',
           subtitle: 'Présentation orale · BBA Data, IA & Management',
@@ -1074,6 +1105,37 @@ export const t = {
               {
                 title: 'Interpretation and limitations',
                 paragraphs: ['I focused on cleaning categories, choosing appropriate charts and adding annotations to guide interpretation. Because the history covers one account, I cannot generalise these habits to Spotify users as a whole. I used aggregated views to limit exposure of personal listening details. For a product or editorial team, aggregated listening patterns could help test when to surface recommendations or featured content. One account cannot reveal audience-wide habits or justify a campaign; I would need to confirm the signal across anonymised user profiles and measure its effect on engagement, distinguishing play counts from listening time.'],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'RAG Prototype — Climate Change',
+          subtitle: 'NLP & AI · Centrale Nantes · 2025',
+          description: 'As part of a lab at Centrale Nantes, I built a retrieval-augmented generation (RAG) prototype using three articles about the effects of climate change. I worked on text collection, vector indexing, passage retrieval and answer generation.',
+          tags: ['NLP', 'RAG', 'Sentence Transformers', 'FAISS', 'Python'],
+          metric: '10',
+          metricLabel: 'test questions prepared',
+          color: '#00d4ff',
+          presentation: {
+            expandLabel: 'VIEW THE CASE STUDY',
+            sections: [
+              {
+                title: 'Objective',
+                paragraphs: ['I built a RAG pipeline to answer questions from source texts, then compared this approach with generation without context across ten prepared questions.'],
+              },
+              {
+                title: 'Pipeline',
+                paragraphs: ['I selected three sources: NOAA (“Climate Change Impacts”), NRDC (“What Are the Effects of Climate Change?”) and National Geographic (“Global Warming Effects”). I collected them with Requests and Beautiful Soup, then split them into chunks. I generated embeddings with Sentence Transformers (all-MiniLM-L6-v2), indexed them with FAISS and retrieved the three passages closest to each question. Finally, I used GPT-2 to generate an answer from those passages.'],
+              },
+              {
+                title: 'Exploratory evaluation',
+                paragraphs: ['I compared answers generated with and without context and examined several retrieval limitations. In my analysis, I consider some RAG answers better grounded in the sources, but I calculated no relevance or accuracy metrics, so I cannot quantify a gain in factuality.'],
+              },
+              {
+                title: 'Limitations and next steps',
+                paragraphs: ['I used basic chunking that does not create the overlap described in my code comments, and GPT-2 sometimes produces incoherent answers. I therefore treat this as a learning exercise, not as validation of a reliable system. To take it further, I could improve text processing and evaluate retrieval quality separately from answer quality against a reference dataset.'],
               },
             ],
           },
