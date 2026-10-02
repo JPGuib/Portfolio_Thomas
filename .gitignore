@@ -3,6 +3,7 @@ dist
 .env
 .env.local
 .DS_Store
+/Projets Centrale/TP Vizualisation/Nicol_Guibert_final_lab.ipynb
 
 # Outillage local BMad et agents
 .agents/

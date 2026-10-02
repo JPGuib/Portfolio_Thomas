@@ -296,6 +296,121 @@ export const t = {
           },
         },
         {
+          type: 'etude',
+          title: 'Sélection de variables — Cancer & Churn',
+          subtitle: 'Data Analysis · Centrale Nantes · 2025',
+          description: 'Dans le cadre d’un TP à Centrale Nantes, j’ai réalisé deux exercices de classification pour étudier si la sélection de variables par régression logistique peut simplifier les modèles tout en conservant leur capacité à distinguer les classes.',
+          tags: ['Python', 'Régression logistique', 'Sélection de variables', 'Classification'],
+          metric: '2',
+          metricLabel: 'contextes de classification',
+          color: '#00d4ff',
+          presentation: {
+            expandLabel: 'VOIR L’ÉTUDE DE CAS',
+            sections: [
+              {
+                title: 'La question',
+                paragraphs: ['Comment repérer les variables les plus influentes dans un problème de classification, puis mesurer ce que l’on conserve en entraînant un modèle réduit ? J’ai exploré cette question sur un jeu de données d’expression génétique et un exercice de churn client.'],
+              },
+              {
+                title: 'Démarche',
+                visual: { src: '/centrale-tp/data-analysis-feature-selection.png', alt: 'Coefficients de régression logistique des dix variables les mieux classées pour le jeu d’expression génétique.', caption: 'Figure source en anglais — sélection de variables, exercice cancer' },
+                paragraphs: ['J’ai séparé les données en ensembles d’entraînement et de test, puis standardisé les variables avant d’ajuster une régression logistique. J’ai classé les coefficients par valeur absolue et réentraîné le modèle avec les trois variables les mieux classées. Pour le churn, j’ai encodé les variables catégorielles avant l’apprentissage. Le codage de la classe positive n’étant pas suffisamment documenté, je n’interprète pas le signe des coefficients.'],
+              },
+              {
+                title: 'Résultats et limites',
+                paragraphs: ['Pour l’exercice cancer, mon modèle réduit aux trois variables retenues atteint 98,8 % d’accuracy sur 161 observations de test. Je ne dispose pas du score du modèle complet, ce qui empêche toute comparaison sur ce jeu de données. Sur le churn, l’accuracy passe de 78,1 % pour le modèle complet à 81,85 % pour le modèle réduit sur 2 000 observations, tandis que le rappel des clients sortants baisse de 22 % à 18 % parmi les 393 départs du jeu de test. Les catégories de nom de famille figurent dans le top 10 du modèle complet, mais pas dans les trois variables du modèle réduit ; je les signale comme éventuels proxies à examiner avant d’interpréter le classement. Ces résultats reposent sur une seule partition aléatoire et ne valident aucun usage clinique ou opérationnel. Pour une démarche de rétention, le modèle réduit pourrait être plus simple à expliquer, mais son rappel plus faible détecte moins de clients susceptibles de partir ; je ne le choisirais donc pas sur sa seule accuracy. Il faudrait mesurer le coût des départs manqués, tester sur une période distincte et examiner les variables pouvant agir comme proxies. Pour l’exercice cancer, l’absence de score du modèle complet empêche de mesurer l’apport de la sélection ; les résultats restent exploratoires et sans portée clinique.'],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Préparation de données — risque de crédit',
+          subtitle: 'Data Cleaning & Quality · Centrale Nantes · 2025',
+          description: 'Dans le cadre d’un TP à Centrale Nantes, j’ai préparé un jeu de 1 000 demandes de crédit et comparé trois modèles pour distinguer les profils de risque, en portant attention aux données manquantes et au déséquilibre des classes.',
+          tags: ['Qualité des données', 'SMOTE', 'Random Forest', 'XGBoost'],
+          metric: '3',
+          metricLabel: 'modèles comparés',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'VOIR L’ÉTUDE DE CAS',
+            sections: [
+              {
+                title: 'Données et objectif',
+                paragraphs: ['J’ai étudié 1 000 demandes de crédit décrites par des variables numériques et catégorielles afin de préparer les données et de prédire la classe de risque associée à chaque demande.'],
+              },
+              {
+                title: 'Préparation et modélisation',
+                paragraphs: ['J’ai imputé les catégories manquantes avec la modalité la plus fréquente, encodé les variables, traité les valeurs extrêmes avec la méthode IQR et standardisé les données. Pour tenir compte du déséquilibre des classes, j’ai également appliqué SMOTE. J’ai comparé trois modèles : régression logistique, Random Forest et XGBoost.'],
+              },
+              {
+                title: 'Résultats rapportés et précautions',
+                paragraphs: ['La régression logistique atteint 68 % d’accuracy (précision/rappel de 70 %/69 % pour la classe 1) et Random Forest 74 % (79 %/71 %, F1 de 75 % pour cette classe). La matrice de confusion XGBoost donne également 74 % d’accuracy, avec 78 % de précision, 70 % de rappel et un F1 de 74 % pour la classe 1. Dans mon implémentation, la classe 1 est nommée « Bad Risk », alors qu’elle est aussi décrite comme « low-risk ». J’ai appliqué SMOTE à l’ensemble des données avant de séparer entraînement et test : les données synthétiques peuvent donc contaminer le test, et ces scores ne constituent pas une estimation fiable de généralisation. Pour fiabiliser l’évaluation, je devrais d’abord séparer les données, appliquer SMOTE uniquement à l’entraînement et évaluer sur les données test originales. Pour un prêteur, ces scores ne permettent pas encore de choisir un modèle : sous-estimer le risque et refuser à tort une demande n’ont pas le même coût. Je ne peux pas recommander une décision de crédit automatisée sur cette évaluation ; après avoir supprimé la fuite, je comparerais les erreurs par classe, la calibration et les écarts selon les profils de demandeurs.'],
+                visual: { src: '/centrale-tp/data-cleaning-credit-risk.png', alt: 'Matrice de confusion Random Forest pour les classes de bon et mauvais risque de crédit.', caption: 'Figure source en anglais — Random Forest, matrice de confusion' },
+                subsections: [
+                  { title: 'XGBoost', text: 'Matrice de confusion et rapport de classification tels que présentés dans le rendu ; les résultats restent soumis à la même réserve sur SMOTE avant le découpage.', visual: { src: '/centrale-tp/data-cleaning-xgboost.png', alt: 'Matrice de confusion et métriques de classification du modèle XGBoost.', caption: 'Figure source en anglais — XGBoost, matrice de confusion' } },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Consommation énergétique des foyers',
+          subtitle: 'Data Mining · Centrale Nantes · 2025',
+          description: 'Dans le cadre d’un TP à Centrale Nantes, j’ai étudié les facteurs associés à la consommation des ménages, segmenté les profils énergétiques et modélisé la consommation quotidienne.',
+          tags: ['Data Mining', 'K-Means', 'ACP', 'Réseaux de neurones'],
+          metric: '3',
+          metricLabel: 'axes d’analyse',
+          color: '#00ff87',
+          presentation: {
+            expandLabel: 'VOIR L’ÉTUDE DE CAS',
+            sections: [
+              {
+                title: 'Données et objectif',
+                paragraphs: ['À partir d’un jeu de données annoncé comme couvrant 10 000 foyers, j’ai exploré les liens entre consommation quotidienne, caractéristiques du logement et habitudes énergétiques.'],
+              },
+              {
+                title: 'Trois angles complémentaires',
+                paragraphs: ['J’ai commencé par explorer les distributions et les corrélations, puis utilisé K-Means pour regrouper les foyers en quatre clusters, visualisés après réduction de dimension par ACP. Je n’ai pas précisé le critère de choix du nombre de clusters. J’ai enfin utilisé des réseaux de neurones pour estimer la consommation quotidienne à partir des caractéristiques disponibles.'],
+                visual: { src: '/centrale-tp/data-mining-household-clusters.png', alt: 'Distribution de la taille des ménages dans chacun des quatre clusters obtenus par K-Means.', caption: 'Figure source en anglais — taille des ménages selon le cluster' },
+              },
+              {
+                title: 'Résultats rapportés et limites',
+                paragraphs: ['Après un découpage entraînement/test de 90/10, mon MLPRegressor atteint un RMSE de 4,08 et un R² de 0,94, mais je n’ai pas précisé l’unité de consommation. J’ai aussi décrit une autre implémentation avec Keras, sans relier clairement ses résultats à ces métriques. Ces chiffres sont rapportés, mais n’ont pas été reproduits indépendamment. Le graphique que je présente compare la taille des ménages selon le cluster ; cette seule variable ne suffit pas à décrire les groupes ni à justifier des recommandations d’économie d’énergie. En pratique, une segmentation fiable pourrait aider un fournisseur d’énergie ou un gestionnaire immobilier à adapter des conseils de sobriété, mais je ne peux pas encore cibler de foyers ni estimer les économies avec ces résultats. Avant d’en tirer une décision, je dois documenter l’unité de consommation, caractériser chaque cluster avec plusieurs variables pertinentes et confirmer le modèle sur un jeu de test indépendant.'],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Raconter des usages avec les données Spotify',
+          subtitle: 'Visualisation · Centrale Nantes · 2025',
+          description: 'Dans le cadre d’un TP à Centrale Nantes, j’ai transformé un historique d’écoute en trois visualisations complémentaires pour explorer quand la musique est écoutée, comment se répartit le temps d’écoute et pourquoi les titres démarrent ou s’arrêtent.',
+          tags: ['Data Storytelling', 'Seaborn', 'Plotly', 'Visualisation'],
+          metric: '149 860',
+          metricLabel: 'écoutes dans le jeu étudié',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'VOIR L’ÉTUDE DE CAS',
+            sections: [
+              {
+                title: 'Une question, trois perspectives',
+                paragraphs: ['À partir d’un historique Spotify de 149 860 écoutes, j’ai conçu des graphiques lisibles par un public non spécialiste. Chacune des trois visualisations répond à une question différente plutôt que de répéter le même résumé sous une autre forme.'],
+              },
+              {
+                title: 'Les visualisations',
+                paragraphs: ['J’ai réalisé trois visualisations : une carte de chaleur, un graphique en violon des durées d’écoute par artiste et un diagramme de Sankey des raisons de démarrage et de fin des titres. Je présente ici la carte de chaleur : la couleur compte les lignes d’écoute par jour et par heure, et non le nombre d’heures écoutées. Les deux autres figures complètent mon analyse.'],
+                visual: { src: '/centrale-tp/data-visualisation-spotify-heatmap.png', alt: 'Carte de chaleur des lignes d’écoute comptées par jour de la semaine et heure de la journée.', caption: 'Figure source en anglais — lignes d’écoute par jour et par heure' },
+              },
+              {
+                title: 'Interprétation et limites',
+                paragraphs: ['J’ai porté une attention particulière au nettoyage des catégories, au choix des graphiques et aux annotations qui facilitent la lecture. Comme l’historique concerne un seul compte, je ne peux pas généraliser les habitudes observées à l’ensemble des utilisateurs Spotify. J’ai privilégié des visualisations agrégées pour limiter l’exposition de détails personnels d’écoute. Pour une équipe produit ou éditoriale, des tendances horaires agrégées pourraient aider à tester le moment de recommandations ou de mises en avant. Un seul compte ne permet toutefois pas de déduire les habitudes d’une audience ni de piloter une campagne ; il faudrait confirmer le signal sur plusieurs profils anonymisés et mesurer son effet sur l’engagement, en distinguant nombre d’écoutes et durée d’écoute.'],
+              },
+            ],
+          },
+        },
+        {
           type: 'scolaire',
           title: 'Mathématiques & Big Data dans le football',
           subtitle: 'Présentation orale · BBA Data, IA & Management',
@@ -846,6 +961,121 @@ export const t = {
             tools: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statsmodels', 'SciPy'],
             caveat: 'Descriptive, non-causal correlations. The source does not report per-measure sample size or uncertainty, and does not define SLL.',
             caseStudyLink: 'OPEN THE FULL STUDY',
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Feature Selection — Cancer & Churn',
+          subtitle: 'Data Analysis · Centrale Nantes · 2025',
+          description: 'As part of a lab at Centrale Nantes, I completed two classification exercises to assess whether logistic-regression feature selection can simplify models while preserving their ability to distinguish between classes.',
+          tags: ['Python', 'Logistic Regression', 'Feature Selection', 'Classification'],
+          metric: '2',
+          metricLabel: 'classification settings',
+          color: '#00d4ff',
+          presentation: {
+            expandLabel: 'VIEW THE CASE STUDY',
+            sections: [
+              {
+                title: 'The question',
+                paragraphs: ['How can the most influential features in a classification problem be identified, and what is retained when training a reduced model? I explored this question using a gene-expression dataset and a customer-churn exercise.'],
+              },
+              {
+                title: 'Approach',
+                visual: { src: '/centrale-tp/data-analysis-feature-selection.png', alt: 'Logistic-regression coefficients for the ten highest-ranked features in the gene-expression dataset.', caption: 'Source figure — feature selection, cancer exercise' },
+                paragraphs: ['I split the data into training and test sets, then standardised the features before fitting logistic regression. I ranked the coefficients by absolute value and retrained the model with the top three features. For churn, I encoded categorical features before training. The positive-class encoding is not sufficiently documented, so I do not interpret the coefficient signs.'],
+              },
+              {
+                title: 'Results and limitations',
+                paragraphs: ['For the cancer exercise, my model reduced to the three selected features reaches 98.8% accuracy on 161 test observations. I do not have a score for the full model, so I cannot compare the two on this dataset. On churn, accuracy rises from 78.1% for the full model to 81.85% for the reduced model on 2,000 observations, while recall for customers who leave falls from 22% to 18% among the 393 departures in the test set. Surname categories appear in the full model’s top ten but not among the reduced model’s three features; I flag them as potential proxies to examine before interpreting the ranking. These results come from a single random split and do not validate clinical or operational use. For customer retention, the reduced model may be easier to explain, but its lower recall means it catches fewer customers at risk of leaving; I would not select it on accuracy alone. I would first weigh the cost of missed departures, test on a separate time period and investigate potential proxy features. For the cancer exercise, the missing full-model score prevents me from assessing the value of feature selection, and the results remain exploratory rather than clinical evidence.'],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Credit Risk Data Preparation',
+          subtitle: 'Data Cleaning & Quality · Centrale Nantes · 2025',
+          description: 'As part of a lab at Centrale Nantes, I prepared a dataset of 1,000 credit applications and compared three models to distinguish risk profiles, paying attention to missing data and class imbalance.',
+          tags: ['Data Quality', 'SMOTE', 'Random Forest', 'XGBoost'],
+          metric: '3',
+          metricLabel: 'models compared',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'VIEW THE CASE STUDY',
+            sections: [
+              {
+                title: 'Data and objective',
+                paragraphs: ['I studied 1,000 credit applications described by numerical and categorical features, preparing the data to predict the risk class associated with each application.'],
+              },
+              {
+                title: 'Preparation and modelling',
+                paragraphs: ['I imputed missing categories with the most frequent value, encoded features, treated outliers with the IQR method and scaled the data. I also used SMOTE to address class imbalance and compared three models: logistic regression, Random Forest and XGBoost.'],
+              },
+              {
+                title: 'Reported results and caveats',
+                paragraphs: ['Logistic regression reaches 68% accuracy (70% precision and 69% recall for class 1), and Random Forest reaches 74% (79% precision, 71% recall and a 75% F1 score for that class). XGBoost’s confusion matrix also yields 74% accuracy, with 78% precision, 70% recall and a 74% F1 score for class 1. In my implementation, class 1 is labelled “Bad Risk”, although it is also described as “low-risk”. I applied SMOTE to the full dataset before the train/test split, so synthetic observations may contaminate the test set and these scores are not a reliable estimate of generalisation. To make the evaluation reliable, I should split the data first, apply SMOTE only to training data, and evaluate on the original test distribution. For a lender, these scores are not enough to select a model: underestimating risk and wrongly rejecting an application have different costs. I cannot recommend automated credit decisions from this evaluation; after removing the leakage, I would compare errors by class, probability calibration and performance gaps across applicant groups.'],
+                visual: { src: '/centrale-tp/data-cleaning-credit-risk.png', alt: 'Random Forest confusion matrix for the good- and bad-credit-risk classes.', caption: 'Source figure — Random Forest confusion matrix' },
+                subsections: [
+                  { title: 'XGBoost', text: 'Confusion matrix and classification metrics as shown in the report; results are subject to the same SMOTE-before-split caveat.', visual: { src: '/centrale-tp/data-cleaning-xgboost.png', alt: 'XGBoost confusion matrix and classification metrics.', caption: 'Source figure — XGBoost confusion matrix' } },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Household Energy Consumption',
+          subtitle: 'Data Mining · Centrale Nantes · 2025',
+          description: 'As part of a lab at Centrale Nantes, I explored factors associated with household consumption, segmented energy profiles and modelled daily energy use.',
+          tags: ['Data Mining', 'K-Means', 'PCA', 'Neural Networks'],
+          metric: '3',
+          metricLabel: 'analytical tracks',
+          color: '#00ff87',
+          presentation: {
+            expandLabel: 'VIEW THE CASE STUDY',
+            sections: [
+              {
+                title: 'Data and objective',
+                paragraphs: ['Using a dataset described as covering 10,000 households, I explored relationships between daily consumption, home characteristics and energy-use habits.'],
+              },
+              {
+                title: 'Three complementary approaches',
+                paragraphs: ['I started by exploring distributions and correlations, then used K-Means to group households into four clusters, visualised after PCA dimensionality reduction. I did not specify how the number of clusters was selected. I also used neural networks to estimate daily energy consumption from the available features.'],
+                visual: { src: '/centrale-tp/data-mining-household-clusters.png', alt: 'Household-size distribution across the four clusters produced by K-Means.', caption: 'Source figure — household size by cluster' },
+              },
+              {
+                title: 'Reported results and limitations',
+                paragraphs: ['After a 90/10 train/test split, my MLPRegressor reached an RMSE of 4.08 and an R² of 0.94, but I did not specify the energy-consumption unit. I also described a separate Keras implementation without clearly linking its results to these metrics. These figures are reported but were not independently reproduced. The chart I present compares household size by cluster; this single feature is not enough to describe the groups or justify energy-saving recommendations. In practice, reliable segmentation could help an energy supplier or property manager tailor energy-saving advice, but these results do not yet support targeting households or estimating savings. Before making such decisions, I need to document the consumption unit, characterise each cluster with several relevant features and confirm the model on an independent test set.'],
+              },
+            ],
+          },
+        },
+        {
+          type: 'etude',
+          title: 'Reading Listening Habits with Spotify Data',
+          subtitle: 'Data Visualisation · Centrale Nantes · 2025',
+          description: 'As part of a lab at Centrale Nantes, I turned a listening history into three complementary visualisations to explore when music is played, how listening time is distributed and why tracks start or stop.',
+          tags: ['Data Storytelling', 'Seaborn', 'Plotly', 'Visualisation'],
+          metric: '149,860',
+          metricLabel: 'listens in the dataset',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'VIEW THE CASE STUDY',
+            sections: [
+              {
+                title: 'One question, three perspectives',
+                paragraphs: ['Using a Spotify listening history with 149,860 records, I created charts for a non-specialist audience. Each of the three visualisations answers a different question instead of repeating the same summary in another form.'],
+              },
+              {
+                title: 'The visualisations',
+                paragraphs: ['I created three visualisations: a heatmap, a violin plot of listening durations by artist, and a Sankey diagram of track start and end reasons. I show the heatmap here: colour counts listening-history records by weekday and hour, rather than hours spent listening. The other two figures complete my analysis.'],
+                visual: { src: '/centrale-tp/data-visualisation-spotify-heatmap.png', alt: 'Heatmap of listening records counted by weekday and hour of the day.', caption: 'Source figure — listening records by day and hour' },
+              },
+              {
+                title: 'Interpretation and limitations',
+                paragraphs: ['I focused on cleaning categories, choosing appropriate charts and adding annotations to guide interpretation. Because the history covers one account, I cannot generalise these habits to Spotify users as a whole. I used aggregated views to limit exposure of personal listening details. For a product or editorial team, aggregated listening patterns could help test when to surface recommendations or featured content. One account cannot reveal audience-wide habits or justify a campaign; I would need to confirm the signal across anonymised user profiles and measure its effect on engagement, distinguishing play counts from listening time.'],
+              },
+            ],
           },
         },
         {
