@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { languageFlags, languageNames, t, type Lang } from './i18n'
 const portraitUrl = '/photo thomas recadrée plus nette.jpg'
 
@@ -188,9 +188,9 @@ function StrategyProjectCard({ strategy }: { strategy: (typeof t)['fr']['strateg
   return (
     <div id="savefolio-project" className="card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
-        <span className="tag" style={{ color: '#ffd93d', borderColor: '#ffd93d33', background: '#ffd93d12' }}>{strategy.typeLabel}</span>
+        <span className="tag" style={{ color: '#00ff87', borderColor: '#00ff8733', background: '#00ff8712' }}>{strategy.typeLabel}</span>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: '#ffd93d', lineHeight: 1 }}>7</div>
+          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: '#00ff87', lineHeight: 1 }}>7</div>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{strategy.previewLabel.toLowerCase()}</div>
         </div>
       </div>
@@ -577,12 +577,11 @@ export default function App() {
             {tx.projects.sub} · {new Date().getFullYear()}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}>
-            {orderedProjects.slice(0, 3).map(p => (
-              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
-            ))}
-            <StrategyProjectCard strategy={tx.strategy} />
-            {orderedProjects.slice(3).map(p => (
-              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
+            {orderedProjects.map(p => (
+              <Fragment key={p.title}>
+                {'oral' in p && <StrategyProjectCard strategy={tx.strategy} />}
+                <ProjectCard project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
+              </Fragment>
             ))}
           </div>
         </div>
