@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { t, type Lang } from './i18n'
+import { languageFlags, languageNames, t, type Lang } from './i18n'
 const portraitUrl = '/photo thomas recadrée plus nette.jpg'
 
 const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'credentials', 'contact']
@@ -237,16 +237,25 @@ function LangToggle({ lang, onChange }: { lang: Lang; onChange: (l: Lang) => voi
             borderRadius: 4,
             border: 'none',
             cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+            minWidth: 68,
             fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '0.7rem',
+            fontSize: '0.65rem',
             fontWeight: 700,
             letterSpacing: '0.06em',
             transition: 'all 0.18s',
-            background: lang === l ? '#00ff87' : 'transparent',
-            color: lang === l ? '#080810' : '#6060a0',
+            background: lang === l ? '#ffffff' : '#080810',
+            color: '#0d6efd',
+            textTransform: 'uppercase',
           }}
+          aria-pressed={lang === l}
+          lang={l}
         >
-          {l.toUpperCase()}
+          <span>{languageNames[l]}</span>
+          <img src={languageFlags[l]} alt="" aria-hidden="true" width={24} height={16} style={{ display: 'block', width: 24, height: 16, objectFit: 'cover', borderRadius: 1 }} />
         </button>
       ))}
     </div>

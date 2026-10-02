@@ -1,4 +1,6 @@
 export type Lang = 'fr' | 'en'
+export const languageNames: Record<Lang, string> = { fr: 'Français', en: 'English' }
+export const languageFlags: Record<Lang, string> = { fr: '/flags/fr.svg', en: '/flags/gb.svg' }
 type AboutCardDetail = {
   label: string
   text: string
