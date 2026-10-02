@@ -51,7 +51,7 @@ function InstitutionLogos({ images }: { images: readonly string[] }) {
   )
 }
 
-function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; overviewLabel?: string; overviewFollowup?: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; oral?: { year: string; questionLabel: string; question: string; concepts: readonly { title: string; text: string }[]; keywords: readonly string[]; conclusion: string }; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string }; presentation?: { expandLabel: string; intro?: string; sections: readonly { title: string; paragraphs: readonly string[]; visual?: { src: string; alt: string; caption: string }; subsections?: readonly { title: string; text: string; visual: { src: string; alt: string; caption: string } }[] }[]; contributionLabel?: string; contribution?: readonly string[]; closing?: string; environmentLabel?: string; environment?: readonly string[] } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
+function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; titleAccent?: string; subtitle: string; description: string; overviewLabel?: string; overviewFollowup?: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; oral?: { year: string; questionLabel: string; question: string; concepts: readonly { title: string; text: string }[]; keywords: readonly string[]; conclusion: string }; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string }; presentation?: { expandLabel: string; intro?: string; sections: readonly { title: string; paragraphs: readonly string[]; visual?: { src: string; alt: string; caption: string }; subsections?: readonly { title: string; text: string; visual: { src: string; alt: string; caption: string } }[] }[]; contributionLabel?: string; contribution?: readonly string[]; closing?: string; environmentLabel?: string; environment?: readonly string[] } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
   if (project.oral) {
     return (
       <article className="oral-card card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', minWidth: 0 }}>
@@ -62,8 +62,8 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
             <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
           </div>
         </div>
-        <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', margin: '0 0 4px', lineHeight: 1.2 }}>{project.title}</h3>
-        <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', margin: '0 0 18px', letterSpacing: '0.04em' }}>{project.oral.year}</p>
+        <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', margin: '0 0 4px', lineHeight: 1.2, textTransform: 'uppercase' }}>{project.title}</h3>
+        <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', lineHeight: 1.5, color: '#ffd93d', margin: '0 0 18px', letterSpacing: '0.04em', overflowWrap: 'anywhere' }}>{project.oral.year}</p>
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', margin: '0 0 18px' }} />
         <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', color: project.color, marginBottom: 8 }}>{project.oral.questionLabel}</div>
         <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', lineHeight: 1.65, color: '#a0a0c0', margin: '0 0 28px', overflowWrap: 'anywhere' }}>{project.oral.question}</p>
@@ -76,7 +76,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
           ))}
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '28px 0 18px' }}>
-          {project.oral.keywords.map(keyword => <span key={keyword} className="tag">{keyword}</span>)}
+          {project.oral.keywords.map(keyword => <span key={keyword} className="tag" style={keyword === 'Football Analytics' ? { color: project.color, borderColor: `${project.color}33`, background: `${project.color}12` } : undefined}>{keyword}</span>)}
         </div>
         <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', lineHeight: 1.65, color: '#ffd93d', margin: 0, overflowWrap: 'anywhere' }}><span aria-hidden="true">→ </span>{project.oral.conclusion}</p>
       </article>
@@ -91,8 +91,10 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
         </div>
       </div>
-      <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2 }}>{project.title}</h3>
-      <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 12, letterSpacing: '0.04em' }}>{project.subtitle}</p>
+      <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2, textTransform: 'uppercase' }}>
+        {project.titleAccent && project.title.startsWith(project.titleAccent) ? <><span style={{ color: project.color }}>{project.titleAccent}</span>{project.title.slice(project.titleAccent.length)}</> : project.title}
+      </h3>
+      <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', lineHeight: 1.5, color: '#ffd93d', marginBottom: 12, letterSpacing: '0.04em', overflowWrap: 'anywhere' }}>{project.subtitle}</p>
       {project.overviewLabel && <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{project.overviewLabel}</h4>}
       <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, marginBottom: 16 }}>{project.description}</p>
       {project.overviewFollowup && <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, margin: '0 0 16px' }}>{project.overviewFollowup}</p>}
@@ -101,7 +103,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
       </div>
       {project.presentation && (
         <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
-          <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.presentation.expandLabel}</summary>
+          <summary style={{ color: '#00d4ff', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem' }}>{project.presentation.expandLabel}</summary>
           <div style={{ marginTop: 20 }}>
             {project.presentation.intro && <p style={{ color: '#a0a0c0', fontSize: '0.85rem', lineHeight: 1.7, margin: '0 0 24px' }}>{project.presentation.intro}</p>}
             {project.presentation.sections.map(section => (
@@ -137,7 +139,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
       {project.details && (
         <>
         <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
-          <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.details.expandLabel}</summary>
+          <summary style={{ color: '#00d4ff', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem' }}>{project.details.expandLabel}</summary>
           <div style={{ marginTop: 20 }}>
             <figure style={{ margin: 0 }}>
               <figcaption style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 12 }}>{project.details.figureTitle}</figcaption>
@@ -184,13 +186,13 @@ function StrategyProjectCard({ strategy }: { strategy: (typeof t)['fr']['strateg
         </div>
       </div>
       <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2 }}>{strategy.title} <span style={{ color: '#00ff87' }}>{strategy.titleAccent}</span></h3>
-      <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 12, letterSpacing: '0.04em' }}>{strategy.subtitle}</p>
+      <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', lineHeight: 1.5, color: '#ffd93d', marginBottom: 12, letterSpacing: '0.04em', overflowWrap: 'anywhere' }}>{strategy.subtitle}</p>
       <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, marginBottom: 16 }}>{strategy.context}</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {strategy.deliverables.slice(0, 4).map(item => <span key={item} className="tag">{item}</span>)}
       </div>
       <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
-        <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{strategy.previewLabel}</summary>
+        <summary style={{ color: '#00d4ff', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem' }}>{strategy.previewActionLabel}</summary>
         <div style={{ marginTop: 20 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
             {strategy.previewItems.map(item => (
@@ -338,6 +340,7 @@ export default function App() {
         'SPORT SCIENCE & RETURN TO PLAY': ['statistics and data analysis', 'performance', 'recovery', 'return to sport'],
       }
   const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.credentials, tx.nav.contact]
+  const orderedProjects = [tx.projects.items[2], tx.projects.items[1], tx.projects.items[0], ...tx.projects.items.slice(3)]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -484,7 +487,7 @@ export default function App() {
                               {detail.label && <strong style={{ color: '#00ff87', whiteSpace: singleLineCompanyName ? 'normal' : 'pre-line' }}>{detail.label}{'separator' in detail ? detail.separator : ': '}</strong>}
                               {'role' in detail && typeof detail.role === 'string' && <strong style={{ display: 'block', color: '#f0f0f8', marginTop: 5 }}>{detail.role}</strong>}
                               <span style={{ display: 'largeText' in detail && detail.largeText ? 'block' : undefined, whiteSpace: 'pre-line', fontFamily: 'Outfit, sans-serif', fontSize: 'largeText' in detail && detail.largeText ? '0.95rem' : undefined }}>{detail.text}</span>
-                              {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'block', color: '#9090b0', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
+                              {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'block', color: '#00d4ff', fontFamily: 'Outfit, sans-serif', fontSize: '1rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
                             </div>
                           )
                         })}
@@ -537,7 +540,7 @@ export default function App() {
               {tx.skills.tools.map(group => (
                 <div key={group.category}>
                   <div style={{ color: '#f0f0f8', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, marginBottom: 6 }}>{group.category}</div>
-                  <div style={{ color: '#c0c0e0', fontFamily: 'Outfit, sans-serif', fontSize: '0.9rem', lineHeight: 1.6 }}>{group.items.join(' · ')}</div>
+                  <div style={{ color: '#c0c0e0', fontFamily: 'Outfit, sans-serif', fontSize: '1.05rem', lineHeight: 1.6 }}>{group.items.join(' · ')}</div>
                 </div>
               ))}
             </div>
@@ -556,10 +559,13 @@ export default function App() {
             {tx.projects.sub} · {new Date().getFullYear()}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}>
-            {tx.projects.items.map(p => (
+            {orderedProjects.slice(0, 3).map(p => (
               <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
             ))}
             <StrategyProjectCard strategy={tx.strategy} />
+            {orderedProjects.slice(3).map(p => (
+              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
+            ))}
           </div>
         </div>
 
@@ -658,7 +664,7 @@ export default function App() {
           </div>
 
           <details style={{ marginBottom: 24, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
-            <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem' }}>{tx.caseStudy.figuresExpand}</summary>
+            <summary style={{ color: '#00d4ff', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.82rem' }}>{tx.caseStudy.figuresExpand}</summary>
             <div style={{ marginTop: 24 }}>
               <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 8 }}>{tx.caseStudy.figuresTitle}</h3>
               <p style={{ color: '#a0a0c0', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: 28 }}>{tx.caseStudy.figuresNote}</p>
@@ -689,7 +695,7 @@ export default function App() {
           </details>
 
           <details style={{ marginBottom: 24, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
-            <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem' }}>{tx.caseStudy.codeExpand}</summary>
+            <summary style={{ color: '#00d4ff', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.82rem' }}>{tx.caseStudy.codeExpand}</summary>
             <div style={{ marginTop: 24 }}>
               <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', color: '#f0f0f8', marginBottom: 8 }}>{tx.caseStudy.codeTitle}</h3>
               <p style={{ color: '#9090b0', fontSize: '0.82rem', lineHeight: 1.6, marginBottom: 16 }}>{tx.caseStudy.codeNote}</p>
@@ -781,7 +787,7 @@ export default function App() {
                             <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.languageNote}</div>
                           </>}
                         </div>}
-                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#a0a0c0', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', lineHeight: 1.6, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
+                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#00d4ff', fontFamily: 'Outfit, sans-serif', fontSize: '1rem', lineHeight: 1.6, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
                       </div>
                     </div>
                   ))}
@@ -837,7 +843,7 @@ export default function App() {
                   <figcaption>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, color: '#f0f0f8' }}>{reference.author}</div>
                     <div style={{ color: '#8080a0', fontSize: '0.76rem', lineHeight: 1.5 }}>{reference.role}</div>
-                    <a href={reference.linkedinHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', textDecoration: 'none' }}>{tx.credentials.linkedinProfileLabel} →</a>
+                    <a href={reference.linkedinHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#00d4ff', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', textDecoration: 'none' }}>{tx.credentials.linkedinProfileLabel} →</a>
                   </figcaption>
                 </figure>
               ))}

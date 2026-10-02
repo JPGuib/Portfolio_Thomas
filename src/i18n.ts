@@ -103,8 +103,10 @@ export const t = {
       ],
       toolsLabel: 'OUTILS & TECHNOLOGIES',
       tools: [
-        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
-        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Power BI', 'Palantir Foundry'] },
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','...'] },
+        { category: 'BI & VISUALISATION', items: ['SQL', 'Excel', 'Power BI'] },
+        { category: 'DATA PLATFORM', items: ['Palantir Foundry', 'RapidMiner'] },
+        { category: 'DATA SCIENCE & AI', items: ['Machine Learning', 'Deep Learning', 'Statistical Modelling', 'Natural language processing', 'AI fundamentals'] },
       ],
     },
     projects: {
@@ -117,6 +119,7 @@ export const t = {
         {
           type: 'etude',
           title: 'Football Player Scouting & Similarity',
+          titleAccent: 'Football Player Scouting',
           subtitle: 'Projet personnel · Football Analytics · saison 2015/16',
           overviewLabel: 'En bref',
           description: "Ce projet personnel explore une question de scouting : quels joueurs présentent un profil statistique proche de celui d'un joueur cible ? Il transforme des données de matchs StatsBomb en profils comparables, puis les restitue dans une page web interactive.",
@@ -126,7 +129,7 @@ export const t = {
           metricLabel: 'joueurs de champ analysés',
           color: '#ffd93d',
           presentation: {
-            expandLabel: 'Présentation du projet',
+            expandLabel: 'VOIR LA PRÉSENTATION DU PROJET',
             sections: [
               {
                 title: 'StatsBomb, en quelques mots',
@@ -207,6 +210,7 @@ export const t = {
         {
           type: 'professionnel',
           title: 'Data Engineering — Airbus Skywise',
+          titleAccent: 'Data Engineering',
           subtitle: 'Capgemini Technology Services · Toulouse · 2026',
           description: 'Structuration de 5 jeux de données et audit de 5 pipelines dans l’écosystème Airbus Skywise / Palantir Foundry.',
           tags: ['Data Management', 'Data Quality', 'Data Governance', 'Airbus Skywise'],
@@ -215,7 +219,7 @@ export const t = {
           color: '#00d4ff',
           anchorId: 'data-engineering-project',
           presentation: {
-            expandLabel: 'Voir une présentation du projet',
+            expandLabel: 'VOIR LA PRÉSENTATION DU PROJET',
             intro: 'Lors de mon stage chez Capgemini, j’ai intégré l’équipe Data Exchange de l’écosystème Airbus Skywise en tant que stagiaire Data Management & Governance. Ma mission principale était de contribuer à l’industrialisation d’un Data Product de métadonnées et à son passage du niveau Iron au niveau Bronze, avec un travail centré sur la modélisation des données, leur qualité et leur gouvernance.',
             sections: [
               {
@@ -262,6 +266,7 @@ export const t = {
         {
           type: 'professionnel',
           title: 'Reprise du sport après reconstruction du LCA',
+          titleAccent: 'Reprise du sport',
           subtitle: 'Stage Data Scientist · Kinesport · 2024',
           description: 'Analyse de données de performance pour étudier les facteurs associés à la reprise après reconstruction du ligament croisé antérieur. Pipeline statistique : statistiques descriptives, tests comparatifs, corrélations, analyses post-hoc et régressions.',
           tags: ['Sports Analytics', 'Analyse statistique', 'Visualisation', 'LCA'],
@@ -298,7 +303,7 @@ export const t = {
           metricLabel: 'note obtenue',
           color: '#00d4ff',
           oral: {
-            year: 'Grand Oral · 2023',
+            year: 'Grand Oral de Baccalauréat · 2023',
             questionLabel: 'QUESTION',
             question: 'En quoi les mathématiques appliquées à la Big Data révolutionnent-elles le football ?',
             concepts: [
@@ -316,7 +321,7 @@ export const t = {
       typeLabel: 'étude',
       title: 'DIGITAL STRATEGY',
       titleAccent: '& MARKET ANALYSIS',
-      subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy',
+      subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy - Savefolio',
       contextLabel: 'CONTEXTE',
       context: 'Dans le cadre d’un projet étudiant, nous avons accompagné Savefolio, une startup nantaise développant une solution de gestion et de centralisation des codes de parrainage. L’objectif était d’analyser son environnement digital et concurrentiel afin d’identifier des opportunités de visibilité, d’acquisition et de croissance.',
       approachLabel: 'NOTRE APPROCHE',
@@ -332,6 +337,7 @@ export const t = {
       contribution: 'Analyse · Recherche · Benchmark · Structuration stratégique · Recommandations',
       note: 'Projet réalisé en équipe — les éléments présentés ici constituent une sélection du travail réalisé et ne reproduisent pas les informations internes ou confidentielles de l’entreprise.',
       previewLabel: 'APERÇU DE LA PRÉSENTATION',
+      previewActionLabel: 'VOIR L’APERÇU DE LA PRÉSENTATION',
       previewIntro: 'Sélection d’extraits de la présentation finale réalisée dans le cadre du projet Savefolio — Digital Strategy & Market Analysis.',
       previewItems: [
         { number: '01', title: 'Digital Audit', detail: 'Key findings et diagnostic de la présence digitale', accent: '#00d4ff', image: '/savefolio/digital-audit-01.png', alt: 'Slide Savefolio présentant les résultats clés de l’audit digital.' },
@@ -642,8 +648,10 @@ export const t = {
       ],
       toolsLabel: 'TOOLS & TECHNOLOGIES',
       tools: [
-        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels'] },
-        { category: 'DATA', items: ['SQL', 'Excel', 'RapidMiner', 'Power BI', 'Palantir Foundry'] },
+        { category: 'PYTHON', items: ['Pandas', 'NumPy', 'Matplotlib', 'Statsmodels','...'] },
+        { category: 'BI & VISUALISATION', items: ['SQL', 'Excel', 'Power BI'] },
+        { category: 'DATA PLATFORM', items: ['Palantir Foundry','RapidMiner'] },
+        { category: 'DATA SCIENCE & AI', items: ['Machine Learning', 'Deep Learning', 'Statistical Modelling', 'Natural language processing', 'AI fundamentals'] },
       ],
     },
     projects: {
@@ -656,6 +664,7 @@ export const t = {
         {
           type: 'etude',
           title: 'Football Player Scouting & Similarity',
+          titleAccent: 'Football Player Scouting',
           subtitle: 'Personal project · Football Analytics · 2015/16 season',
           overviewLabel: 'At a glance',
           description: 'This personal project explores a scouting question: which players have a statistical profile similar to a selected player? It turns StatsBomb match data into comparable player profiles and presents the results in an interactive web page.',
@@ -665,7 +674,7 @@ export const t = {
           metricLabel: 'outfield players analysed',
           color: '#ffd93d',
           presentation: {
-            expandLabel: 'Project overview',
+            expandLabel: 'VIEW THE PROJECT PRESENTATION',
             sections: [
               {
                 title: 'StatsBomb in brief',
@@ -746,6 +755,7 @@ export const t = {
         {
           type: 'professionnel',
           title: 'Data Engineering — Airbus Skywise',
+          titleAccent: 'Data Engineering',
           subtitle: 'Capgemini Technology Services · Toulouse · 2026',
           description: 'Structured 5 datasets and audited 5 pipelines within the Airbus Skywise / Palantir Foundry ecosystem.',
           tags: ['Data Management', 'Data Quality', 'Data Governance', 'Airbus Skywise'],
@@ -754,7 +764,7 @@ export const t = {
           color: '#00d4ff',
           anchorId: 'data-engineering-project',
           presentation: {
-            expandLabel: 'View a presentation of the project',
+            expandLabel: 'VIEW THE PROJECT PRESENTATION',
             intro: 'During my internship at Capgemini, I joined the Data Exchange team in the Airbus Skywise ecosystem as a Data Management & Governance intern. My main assignment was to help industrialise a metadata Data Product and move it from Iron to Bronze level, focusing on data modelling, quality and governance.',
             sections: [
               {
@@ -801,6 +811,7 @@ export const t = {
         {
           type: 'professionnel',
           title: 'Return to sport after ACL reconstruction',
+          titleAccent: 'Return to sport',
           subtitle: 'Data Scientist Intern · Kinesport · 2024',
           description: 'Analysis of performance data to study factors associated with return to sport after ACL reconstruction. Statistical pipeline covering descriptive statistics, comparison tests, correlations, post-hoc analyses and regressions.',
           tags: ['Sports Analytics', 'Statistical Analysis', 'Visualisation', 'ACL'],
@@ -837,7 +848,7 @@ export const t = {
           metricLabel: 'grade awarded',
           color: '#00d4ff',
           oral: {
-            year: 'Oral exam · 2023',
+            year: 'French Baccalaureate oral exam · 2023',
             questionLabel: 'QUESTION',
             question: 'How is mathematics applied to Big Data revolutionising football?',
             concepts: [
@@ -855,7 +866,7 @@ export const t = {
       typeLabel: 'study',
       title: 'DIGITAL STRATEGY',
       titleAccent: '& MARKET ANALYSIS',
-      subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy',
+      subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy - Savefolio',
       contextLabel: 'CONTEXT',
       context: 'As part of a student project, we supported Savefolio, a Nantes-based startup developing a solution to manage and centralise referral codes. The objective was to analyse its digital and competitive environment in order to identify opportunities for visibility, acquisition and growth.',
       approachLabel: 'OUR APPROACH',
@@ -871,6 +882,7 @@ export const t = {
       contribution: 'Analysis · Research · Benchmarking · Strategic structuring · Recommendations',
       note: 'Team project — the material shown here is a selection of the work completed and does not reproduce internal or confidential company information.',
       previewLabel: 'PRESENTATION PREVIEW',
+      previewActionLabel: 'VIEW THE PRESENTATION PREVIEW',
       previewIntro: 'Selected excerpts from the final presentation created for the Savefolio — Digital Strategy & Market Analysis project.',
       previewItems: [
         { number: '01', title: 'Digital Audit', detail: 'Key findings and digital presence diagnosis', accent: '#00d4ff', image: '/savefolio/digital-audit-01.png', alt: 'Savefolio slide presenting the key findings of the digital audit.' },
