@@ -30,7 +30,8 @@ export const t = {
       school: 'Centrale Nantes × Audencia (France)',
       pitch: 'Mon parcours relie la',
       pitchHighlight: 'data engineering et l’analyse de la performance sportive',
-      pitchEnd: '.',
+      pitchEnd: ' et la culture du football pour explorer les enjeux de performance sportive.',
+      pitchEmphasis: ['football', 'performance sportive'],
       cta: 'ME CONTACTER →',
       ctaProjects: 'MES PROJETS',
       stats: [
@@ -45,9 +46,12 @@ export const t = {
       h1: 'DATA & SPORT',
       h2: 'AU CONCRET',
       p1: 'Étudiant en dernière année du',
-      p1b: 'BBA Data, IA & Management',
-      p1c: 'à Centrale Nantes et Audencia (en France), avec des expériences en data engineering, gouvernance des données et analyse de la performance sportive.',
-      tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
+      p1b: 'BBA Data, IA & Management — Audencia × Centrale Nantes',
+      p1c: ', je développe un profil à l’intersection de la ',
+      p1d: 'Data, du sport et de la performance',
+      p1e: '. ',
+      p2: 'Mes expériences en Data Engineering, Data Governance et Sport Analytics me permettent de relier analyse de données et problématiques de performance sportive.',
+      tags: ['Data Quality', 'Data Engineering', 'ETL', 'IA', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         {
           icon: '🎓',
@@ -565,7 +569,8 @@ export const t = {
       school: 'Centrale Nantes × Audencia (France).',
       pitch: 'My experience connects',
       pitchHighlight: 'data engineering and sports performance analysis',
-      pitchEnd: '.',
+      pitchEnd: ' and football culture to explore the challenges of sports performance.',
+      pitchEmphasis: ['football', 'sports performance'],
       cta: 'CONTACT ME →',
       ctaProjects: 'MY PROJECTS',
       stats: [
@@ -580,9 +585,12 @@ export const t = {
       h1: 'DATA & SPORT',
       h2: 'IN PRACTICE',
       p1: 'Final-year student in the',
-      p1b: 'BBA Data, AI & Management',
-      p1c: 'at Centrale Nantes and Audencia (in France), with experience in data engineering, data governance and sports performance analysis.',
-      tags: ['Data Quality', 'Data Engineering', 'ETL', 'Data Governance', 'Sports Analytics', 'Football'],
+      p1b: 'BBA Data, AI & Management — Audencia × Centrale Nantes',
+      p1c: ', developing a profile at the intersection of ',
+      p1d: 'data, sport, and performance',
+      p1e: '. ',
+      p2: 'My experience in Data Engineering, Data Governance, and Sports Analytics helps me connect data analysis with sports performance challenges.',
+      tags: ['Data Quality', 'Data Engineering', 'ETL', 'AI', 'Data Governance', 'Sports Analytics', 'Football'],
       cards: [
         {
           icon: '🎓',

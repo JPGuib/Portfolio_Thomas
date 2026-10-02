@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { t, type Lang } from './i18n'
-const portraitUrl = '/Photo thomas.jpeg'
+const portraitUrl = '/photo thomas recadrée plus nette.jpg'
 
 const NAV_IDS = ['hero', 'about', 'skills', 'projects', 'experience', 'sports', 'credentials', 'contact']
 
@@ -8,14 +8,21 @@ function SkillItem({ name }: { name: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
       <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00ff87', flexShrink: 0 }} />
-      <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.875rem', color: '#c0c0e0' }}>{name}</span>
+      <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.925rem', color: '#c0c0e0' }}>{name}</span>
     </div>
   )
 }
 
-function EmphasizedText({ text, phrases }: { text: string; phrases: readonly string[] }) {
+function EmphasizedText({ text, phrases, color = '#00ff87' }: { text: string; phrases: readonly string[]; color?: string }) {
   const expression = new RegExp(`(${phrases.map(phrase => phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g')
-  return text.split(expression).map((part, index) => phrases.includes(part) ? <strong key={index} style={{ color: '#00ff87' }}>{part}</strong> : part)
+  return text.split(expression).map((part, index) => phrases.includes(part) ? <strong key={index} style={{ color }}>{part}</strong> : part)
+}
+
+function HeroPitchHighlight({ text, phrases }: { text: string; phrases: readonly string[] }) {
+  const expression = new RegExp(`(${phrases.map(phrase => phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi')
+  return text.split(expression).map((part, index) => phrases.some(phrase => phrase.toLowerCase() === part.toLowerCase())
+    ? <strong key={index} style={{ color: '#f0f0f8' }}>{part}</strong>
+    : part)
 }
 
 function PresentationFigure({ visual }: { visual: { src: string; alt: string; caption: string } }) {
@@ -317,6 +324,19 @@ export default function App() {
   const experienceEmphasis = lang === 'fr'
     ? ['Airbus Skywise', 'Palantir Foundry', '5 jeux de données opérationnels', '5 pipelines de données', '2 088 évaluations d’athlètes, 266 variables', '555 674 points de données', '1 491 vs 589 patients', 'scores K-STARTS']
     : ['Airbus Skywise', 'Palantir Foundry', '5 operational datasets', '5 data pipelines', '2,088 athlete assessments, 266 variables', '555,674 data points', '1,491 vs 589 patients', 'K-STARTS scores']
+  const contributionEmphasis = lang === 'fr'
+    ? {
+        'PERFORMANCE DATA': ['données de performance', 'tendances', 'facteurs clés'],
+        'FOOTBALL ANALYTICS': ['données événementielles et de tracking', 'KPI', 'visualisations'],
+        'DATA ENGINEERING & DATA QUALITY': ['fiabiliser les données', 'qualité', 'métadonnées', 'gouvernance'],
+        'SPORT SCIENCE & RETURN TO PLAY': ['statistiques et l’analyse de données', 'performance', 'récupération', 'retour au sport'],
+      }
+    : {
+        'PERFORMANCE DATA': ['performance data', 'trends', 'key factors'],
+        'FOOTBALL ANALYTICS': ['event and tracking data', 'KPIs', 'visualisations'],
+        'DATA ENGINEERING & DATA QUALITY': ['improve the reliability of data', 'quality', 'metadata', 'governance'],
+        'SPORT SCIENCE & RETURN TO PLAY': ['statistics and data analysis', 'performance', 'recovery', 'return to sport'],
+      }
   const navLabels = [tx.nav.home, tx.nav.about, tx.nav.skills, tx.nav.projects, tx.nav.experience, tx.nav.sports, tx.nav.credentials, tx.nav.contact]
 
   useEffect(() => {
@@ -394,20 +414,20 @@ export default function App() {
               </h1>
               <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.75, marginBottom: 32 }}>
                 {tx.hero.intro} <strong style={{ color: '#00d4ff' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
-                <br />{tx.hero.pitch} <strong style={{ color: '#00ff87' }}>{tx.hero.pitchHighlight}</strong>{tx.hero.pitchEnd}
+                <br />{tx.hero.pitch} <strong style={{ color: '#00ff87' }}><HeroPitchHighlight text={`${tx.hero.pitchHighlight}${tx.hero.pitchEnd}`} phrases={tx.hero.pitchEmphasis} /></strong>
               </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 48 }}>
-                <button onClick={() => scrollTo('contact')}
+                <button onClick={() => scrollTo('projects')}
                   style={{ padding: '14px 32px', background: '#00ff87', color: '#080810', border: 'none', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}
                   onMouseOver={e => (e.currentTarget.style.background = '#00e87a')}
                   onMouseOut={e => (e.currentTarget.style.background = '#00ff87')}>
-                  {tx.hero.cta}
+                  {tx.hero.ctaProjects}
                 </button>
-                <button onClick={() => scrollTo('projects')}
+                <button onClick={() => scrollTo('contact')}
                   style={{ padding: '14px 32px', background: 'transparent', color: '#f0f0f8', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}
                   onMouseOver={e => (e.currentTarget.style.borderColor = 'rgba(0,255,135,0.4)')}
                   onMouseOut={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                  {tx.hero.ctaProjects}
+                  {tx.hero.cta}
                 </button>
               </div>
               <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
@@ -440,7 +460,7 @@ export default function App() {
               </h2>
               <div style={{ width: 48, height: 3, background: 'linear-gradient(90deg, #00ff87, transparent)', marginBottom: 32 }} />
               <p style={{ color: '#a0a0c0', lineHeight: 1.8, marginBottom: 20, fontSize: '0.95rem' }}>
-                {tx.about.p1} <strong style={{ color: '#f0f0f8' }}>{tx.about.p1b}</strong> {tx.about.p1c}
+                {tx.about.p1} <strong style={{ color: '#f0f0f8' }}>{tx.about.p1b}</strong>{tx.about.p1c}<strong style={{ color: '#65a9ff' }}>{tx.about.p1d}</strong>{tx.about.p1e}<br />{tx.about.p2}
               </p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {tx.about.tags.map(tag => (
@@ -453,15 +473,15 @@ export default function App() {
                 <div key={card.title} className="card-hover" style={{ padding: '14px 20px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{card.icon}</span>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 4 }}>{card.title}</div>
+                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.2, overflowWrap: 'anywhere', color: '#f0f0f8', marginBottom: 4 }}>{card.title}</div>
                     <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', color: card.details.length ? '#c0c0e0' : '#a0a0c0', fontWeight: card.details.length ? 600 : 400, lineHeight: 1.5 }}>{card.desc}</div>
                     {card.details.length > 0 && (
                       <div style={{ display: 'grid', gap: 8, marginTop: 10 }}>
                         {card.details.map(detail => {
                           const singleLineCompanyName = detail.label === 'CAPGEMINI TECHNOLOGY SERVICES' || detail.label === 'KINESPORT / MEDINETIC LEARNING'
                           return (
-                            <div key={detail.label || detail.text} style={{ fontSize: '0.82rem', color: '#a0a0c0', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
-                              {detail.label && <strong style={{ color: '#00ff87', whiteSpace: singleLineCompanyName ? 'nowrap' : 'pre-line', fontSize: singleLineCompanyName ? '0.72rem' : undefined }}>{detail.label}{'separator' in detail ? detail.separator : ': '}</strong>}
+                            <div key={detail.label || detail.text} style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
+                              {detail.label && <strong style={{ color: '#00ff87', whiteSpace: singleLineCompanyName ? 'normal' : 'pre-line' }}>{detail.label}{'separator' in detail ? detail.separator : ': '}</strong>}
                               {'role' in detail && typeof detail.role === 'string' && <strong style={{ display: 'block', color: '#f0f0f8', marginTop: 5 }}>{detail.role}</strong>}
                               <span style={{ display: 'largeText' in detail && detail.largeText ? 'block' : undefined, whiteSpace: 'pre-line', fontFamily: 'Outfit, sans-serif', fontSize: 'largeText' in detail && detail.largeText ? '0.95rem' : undefined }}>{detail.text}</span>
                               {'ctaTarget' in detail && 'ctaLabel' in detail && <a href={detail.ctaTarget} onClick={'ctaAction' in detail && detail.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'block', color: '#9090b0', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', lineHeight: 1.5, textDecoration: 'none', marginTop: 8 }}>{detail.ctaLabel} →</a>}
@@ -490,7 +510,11 @@ export default function App() {
             {tx.skills.contributionItems.map(item => (
               <article key={item.title} className="card-hover" style={{ padding: '20px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a' }}>
                 <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.2, color: '#f0f0f8', overflowWrap: 'anywhere', margin: '0 0 8px' }}>{item.title}</h3>
-                <p style={{ color: '#a0a0c0', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>{item.text}</p>
+                <p style={{ color: '#a0a0c0', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>
+                  {contributionEmphasis[item.title as keyof typeof contributionEmphasis]
+                    ? <EmphasizedText text={item.text} phrases={contributionEmphasis[item.title as keyof typeof contributionEmphasis]} color="#65a9ff" />
+                    : item.text}
+                </p>
               </article>
             ))}
           </div>
