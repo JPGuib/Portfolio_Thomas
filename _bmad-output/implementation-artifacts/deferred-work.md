@@ -64,3 +64,21 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-data-engineering-airbus-skywise-case-study.md`
   summary: Expliquer la cible et le résultat affichés dans la capture de règle EDQ.
   evidence: La capture indique une valeur attendue de 90 et un résultat de 100,0 sans définir le calcul ni son interprétation.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Ajouter des liens vers la démonstration interactive et le code source StatsBomb si ces ressources sont publiées.
+  evidence: Le Word décrit une page HTML autonome et un pipeline Python sans fournir d’URL ou les fichiers correspondants ; le GIF et la présentation ne constituent pas la démonstration interactive.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Ajouter un lien direct vers la version de StatsBomb Open Data utilisée.
+  evidence: La source est nommée et attribuée, mais le Word ne fournit ni URL ni version précise du jeu de données.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Documenter la justification du seuil de 900 minutes et l’effet du filtrage.
+  evidence: Le Word fournit le seuil et l’effectif final, mais pas la justification du choix ni le nombre de joueurs exclus.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Fournir la liste complète des métriques et les choix de pondération de la comparaison.
+  evidence: Le Word cite des exemples d’indicateurs et les étapes de transformation, sans détailler toutes les variables utilisées dans l’ACP.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Ajouter un exemple de comparaison observée et sa vérification qualitative si les résultats sont disponibles.
+  evidence: Le Word décrit les fonctionnalités de l’interface, sans fournir de classement précis ni de validation de profils voisins.
+- source_spec: `_bmad-output/implementation-artifacts/spec-etude-statsbomb-profils-joueurs.md`
+  summary: Proposer une alternative statique ou un contrôle de pause pour la démonstration animée.
+  evidence: Le GIF de cinq images est animé et ne peut pas être mis en pause par le composant image natif ; une alternative nécessiterait un visuel ou un contrôle supplémentaire.

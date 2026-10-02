@@ -107,9 +107,99 @@ export const t = {
       sectionLabel: '// 03 — réalisations',
       h1: 'PROJETS',
       h2: 'DATA & IA',
-      sub: 'scolaires et professionnels',
-      typeLabels: { scolaire: 'scolaire', professionnel: 'professionnel' },
+      sub: 'études personnelles, projets scolaires et professionnels',
+      typeLabels: { scolaire: 'scolaire', professionnel: 'professionnel', etude: 'étude' },
       items: [
+        {
+          type: 'etude',
+          title: 'Football Player Scouting & Similarity',
+          subtitle: 'Projet personnel · Football Analytics · saison 2015/16',
+          overviewLabel: 'En bref',
+          description: "Ce projet personnel explore une question de scouting : quels joueurs présentent un profil statistique proche de celui d'un joueur cible ? Il transforme des données de matchs StatsBomb en profils comparables, puis les restitue dans une page web interactive.",
+          overviewFollowup: "L'objectif est à la fois d'apprendre à travailler avec les données StatsBomb et d'explorer la place de la data dans l'analyse du football. Le projet est une démonstration méthodologique, pas un outil de recrutement prêt à l'emploi.",
+          tags: ['StatsBomb Open Data', 'Football Analytics', 'PCA', 'Similarité cosinus'],
+          metric: '1 258',
+          metricLabel: 'joueurs de champ analysés',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'Présentation du projet',
+            sections: [
+              {
+                title: 'StatsBomb, en quelques mots',
+                paragraphs: [
+                  "StatsBomb est une entreprise spécialisée dans la collecte et l'analyse de données de football. Ses données événementielles décrivent les actions observées pendant les matchs (passes, tirs, récupérations, entre autres) et leur contexte. StatsBomb Open Data met à disposition une partie de ces données pour un usage ouvert ; c'est cette source publique que ce projet utilise.",
+                ],
+              },
+              {
+                title: 'La question metier',
+                paragraphs: [
+                  "Lorsqu'un club ou un analyste cherche à mieux comprendre un joueur, une comparaison avec des profils similaires peut constituer un point de départ utile. Le projet teste cette idée en comparant les activités observées sur le terrain : progresser avec le ballon, créer des occasions, tirer ou contribuer aux actions défensives.",
+                  "L'outil aide à explorer des ressemblances et des différences entre joueurs. Il ne cherche pas à déterminer qui est « le meilleur », ni à remplacer l'analyse vidéo, la connaissance du contexte tactique ou le jugement d'un recruteur.",
+                ],
+              },
+              {
+                title: 'Donnees et perimetre',
+                paragraphs: [
+                  "L'analyse porte sur la saison 2015/16 et quatre championnats : Premier League, La Liga, Serie A et Ligue 1. Elle s'appuie sur les événements de match et les compositions publiés dans StatsBomb Open Data, couvrant 1 517 rencontres. Après filtrage, les profils comprennent 1 258 joueurs de champ ayant disputé au moins 900 minutes ; les gardiens sont exclus.",
+                ],
+              },
+              {
+                title: 'Demarche suivie',
+                paragraphs: [
+                  'Collecter les données : récupérer les événements et les compositions des matchs depuis StatsBomb Open Data.',
+                  'Construire les statistiques : traiter les actions joueur par joueur et reconstruire les minutes jouées à partir des compositions, y compris les changements de joueurs et les cartons rouges.',
+                  "Rendre les profils comparables : calculer les indicateurs par 90 minutes afin de limiter l'effet du temps de jeu, puis ajuster certaines actions défensives en fonction d'un indicateur de possession estimé à partir des passes des deux équipes.",
+                  "Comparer les joueurs : utiliser une méthode de comparaison non supervisée. Les indicateurs sont transformés (logarithme) puis standardisés, leurs dimensions sont réduites par analyse en composantes principales (ACP/PCA), et la similarité cosinus entre les profils réduits sert à classer les joueurs les plus proches. Le nombre de composantes est choisi pour conserver au moins 90 % de la variance observée. Il ne s'agit pas d'un modèle prédictif entraîné sur des exemples de joueurs « similaires ».",
+                  "Restituer les résultats : générer une page web autonome qui permet de rechercher un joueur et d'explorer ses comparaisons.",
+                ],
+              },
+              {
+                title: 'Comment lire la méthode de comparaison',
+                paragraphs: [
+                  "La comparaison est dite non supervisée car aucun exemple n'est fourni au modèle pour lui apprendre quels joueurs doivent être considérés comme similaires. Il compare les profils construits à partir des statistiques sélectionnées. Les résultats dépendent donc de ces indicateurs et des choix de traitement.",
+                  'Les étapes rendent ces profils plus faciles à comparer :',
+                  "Transformation logarithmique : les métriques sont transformées avec log1p, soit log(1 + x). Comme certaines actions sont beaucoup plus fréquentes chez quelques joueurs que chez les autres, cette transformation réduit l'influence des valeurs très élevées sans supprimer les écarts. Elle est appliquée après le calcul des statistiques par 90 minutes.",
+                  "Standardisation : chaque métrique est recentrée et mise à l'échelle selon sa moyenne et son écart-type (z = (valeur - moyenne) / écart-type). Les passes, les tirs et les pressings peuvent ainsi contribuer à la comparaison sans que leurs unités ou leurs amplitudes dominent simplement les autres.",
+                  "ACP/PCA : l'analyse en composantes principales résume les métriques dans un espace de dimensions réduites. Le projet conserve assez de composantes pour représenter au moins 90 % de la variance observée. Cela simplifie la comparaison, mais les composantes décrivent les principales variations statistiques, pas nécessairement des concepts de jeu directement interprétables.",
+                  'Similarité cosinus : dans cet espace réduit, elle compare la direction des profils. Des directions proches indiquent des combinaisons statistiques similaires ; les joueurs sont ensuite classés du plus proche au moins proche. Cette mesure ne dit pas que deux joueurs ont le même niveau, le même potentiel ou le même rôle tactique.',
+                  "Dans l'interface, l'indice correspond au cosinus multiplié par 100 pour faciliter l'affichage. Ce n'est pas un pourcentage de ressemblance ni une probabilité ; mathématiquement, le cosinus peut aller de -1 à 1.",
+                  "Les indicateurs couvrent cinq dimensions : passes, progression, création, tirs et défense. Ils incluent notamment les passes progressives, les conduites de balle, les passes clés, les buts attendus (xG), les passes menant à un tir (xA), les pressings, les tacles et les interceptions. Les scores par dimension sont des percentiles comparés au groupe de poste large du joueur.",
+                ],
+              },
+              {
+                title: "Ce que l'on peut explorer",
+                paragraphs: [
+                  'Rechercher un joueur et consulter son club, son championnat, son poste et son temps de jeu.',
+                  'Lire son profil par dimension et ses statistiques detaillees par 90 minutes.',
+                  'Afficher les dix joueurs dont le profil statistique est le plus proche.',
+                  'Comparer deux profils avec un radar et un tableau indicateur par indicateur.',
+                  'Restreindre les comparaisons au meme grand groupe de poste : defense, milieu ou attaque.',
+                  "L'indice affiché est une mesure relative de proximité statistique. Ce n'est ni une probabilité de ressemblance ni un score de potentiel.",
+                ],
+                visual: { src: '/statsbomb/scouting-demo.gif', alt: 'Démonstration animée de la recherche et de la comparaison de profils de joueurs dans l’interface StatsBomb.', caption: 'Football Player Scouting & Similarity' },
+              },
+              {
+                title: 'Outils et methodes',
+                paragraphs: [
+                  'Le traitement est réalisé en Python, avec pandas et NumPy pour manipuler les données, et scikit-learn pour la standardisation et la PCA. Les résultats sont intégrés dans une page HTML, CSS et JavaScript autonome. Le projet couvre ainsi une chaîne complète, de la collecte de données ouvertes à leur restitution interactive.',
+                ],
+              },
+              {
+                title: "Utilisation de l'IA",
+                paragraphs: [
+                  "L'IA a été utilisée comme outil d'appui au développement, notamment pour aider à construire et améliorer la couche graphique de la page interactive. Le fil conducteur reste l'apprentissage : comprendre la structure des données StatsBomb, expérimenter les indicateurs disponibles et explorer ce qu'ils permettent d'analyser dans le football. Le projet privilégie donc la compréhension des données et de leurs usages plutôt qu'un exercice consistant à coder chaque élément sans assistance.",
+                ],
+              },
+              {
+                title: 'Limites et suites possibles',
+                paragraphs: [
+                  "Les résultats décrivent une seule saison et reposent sur des données événementielles : ils ne prennent pas en compte le contexte tactique détaillé, la qualité de l'équipe, le niveau de l'adversaire ni les observations vidéo. Le poste est estimé à partir du poste le plus joué dans les compositions, ce qui peut être approximatif. Les actions défensives sont corrigées avec un proxy de possession, et les définitions de progression des passes et conduites sont des choix opérationnels propres au projet. Enfin, les ressemblances n'ont pas été validées comme outil de décision de recrutement.",
+                  "Des prolongements naturels seraient d'ajouter des saisons, de comparer cette approche à du clustering, d'adapter les indicateurs au rôle des joueurs ou d'explorer les cartes de tirs et de passes.",
+                ],
+              },
+            ],
+          },
+        },
         {
           type: 'professionnel',
           title: 'Data Engineering — Airbus Skywise',
@@ -552,9 +642,99 @@ export const t = {
       sectionLabel: '// 03 — projects',
       h1: 'DATA & AI',
       h2: 'PROJECTS',
-      sub: 'academic and professional',
-      typeLabels: { scolaire: 'academic', professionnel: 'professional' },
+      sub: 'personal studies, academic and professional projects',
+      typeLabels: { scolaire: 'academic', professionnel: 'professional', etude: 'study' },
       items: [
+        {
+          type: 'etude',
+          title: 'Football Player Scouting & Similarity',
+          subtitle: 'Personal project · Football Analytics · 2015/16 season',
+          overviewLabel: 'At a glance',
+          description: 'This personal project explores a scouting question: which players have a statistical profile similar to a selected player? It turns StatsBomb match data into comparable player profiles and presents the results in an interactive web page.',
+          overviewFollowup: 'The goals are to learn how to work with StatsBomb data and to explore how data can support football analysis. This is a methodological demonstration, not a ready-to-use recruitment tool.',
+          tags: ['StatsBomb Open Data', 'Football Analytics', 'PCA', 'Cosine similarity'],
+          metric: '1,258',
+          metricLabel: 'outfield players analysed',
+          color: '#ffd93d',
+          presentation: {
+            expandLabel: 'Project overview',
+            sections: [
+              {
+                title: 'StatsBomb in brief',
+                paragraphs: [
+                  'StatsBomb is a company specialising in football data collection and analysis. Its event data describes actions observed during matches (such as passes, shots, and ball recoveries) along with their context. StatsBomb Open Data makes a portion of this data publicly available; this project uses that open dataset.',
+                ],
+              },
+              {
+                title: 'The scouting question',
+                paragraphs: [
+                  'When a club or analyst wants to understand a player in more depth, comparing that player with similar profiles can provide a useful starting point. This project tests that idea by comparing observed on-pitch activities: progressing the ball, creating chances, shooting, and contributing defensively.',
+                  "The tool helps users explore similarities and differences. It does not identify the “best” player and is not a substitute for video analysis, tactical context, or a scout's judgment.",
+                ],
+              },
+              {
+                title: 'Data and scope',
+                paragraphs: [
+                  'The analysis covers the 2015/16 season across four leagues: the Premier League, La Liga, Serie A, and Ligue 1. It uses match events and lineups from StatsBomb Open Data across 1,517 matches. After filtering, the profiles cover 1,258 outfield players with at least 900 minutes played; goalkeepers are excluded.',
+                ],
+              },
+              {
+                title: 'Approach',
+                paragraphs: [
+                  'Collect the data: retrieve match events and lineups from StatsBomb Open Data.',
+                  'Build player statistics: process actions by player and reconstruct playing time from lineups, including substitutions and red cards.',
+                  "Make profiles comparable: calculate metrics per 90 minutes to reduce the effect of playing time, then adjust selected defensive actions using a possession proxy estimated from each team's share of passes.",
+                  'Compare players: use an unsupervised comparison method. Metrics are log-transformed and standardised, their dimensions are reduced with principal component analysis (PCA), and cosine similarity between the reduced profiles is used to rank the closest players. The number of components is selected to retain at least 90% of the observed variance. This is not a predictive model trained on examples of players labelled as “similar”.',
+                  'Present the results: generate a standalone web page for finding a player and exploring comparisons.',
+                ],
+              },
+              {
+                title: 'How to read the comparison method',
+                paragraphs: [
+                  'The comparison is unsupervised because the model is not given examples that teach it which players should count as similar. It compares profiles built from the selected statistics, so the results depend on those metrics and on the processing choices.',
+                  'The steps make the profiles easier to compare:',
+                  'Log transformation: metrics are transformed with log1p, or log(1 + x). Some actions are much more frequent for a few players than for others; this transformation reduces the influence of very high values without removing the differences. It is applied after calculating per-90 statistics.',
+                  'Standardisation: each metric is centred and scaled using its mean and standard deviation (z = (value - mean) / standard deviation). This lets passes, shots, and pressures contribute to the comparison without their units or scales alone dominating the others.',
+                  'PCA: principal component analysis summarises the metrics in a lower-dimensional space. The project retains enough components to represent at least 90% of the observed variance. This simplifies comparison, but the components capture the main statistical variations, not necessarily directly interpretable football concepts.',
+                  'Cosine similarity: in this reduced space, it compares the direction of the profiles. Similar directions indicate similar statistical combinations; players are then ranked from closest to least close. This measure does not mean that two players have the same level, potential, or tactical role.',
+                  'In the interface, the index is the cosine multiplied by 100 for display. It is not a percentage of similarity or a probability; mathematically, cosine similarity can range from -1 to 1.',
+                  "Metrics cover five dimensions: passing, progression, creation, shooting, and defending. They include progressive passes, ball carries, key passes, expected goals (xG), expected assists (xA), pressures, tackles, and interceptions. Dimension scores are percentiles compared with the player's broad positional group.",
+                ],
+              },
+              {
+                title: 'What users can explore',
+                paragraphs: [
+                  'Search for a player and view their club, league, position, and playing time.',
+                  'Review their profile by dimension and detailed per-90 statistics.',
+                  'See the ten players with the closest statistical profiles.',
+                  'Compare two players using a radar chart and a metric-by-metric table.',
+                  'Restrict comparisons to the same broad positional group: defence, midfield, or attack.',
+                  'The displayed index is a relative measure of statistical proximity. It is neither a probability of similarity nor a measure of potential.',
+                ],
+                visual: { src: '/statsbomb/scouting-demo.gif', alt: 'Animated demonstration of player search and profile comparison in the StatsBomb interface.', caption: 'Football Player Scouting & Similarity' },
+              },
+              {
+                title: 'Tools and methods',
+                paragraphs: [
+                  'Data processing uses Python, with pandas and NumPy for data handling and scikit-learn for standardisation and PCA. Results are embedded in a standalone HTML, CSS, and JavaScript page. The project therefore covers an end-to-end workflow, from open-data collection to interactive presentation.',
+                ],
+              },
+              {
+                title: 'Use of AI',
+                paragraphs: [
+                  "AI was used as a development aid, particularly to help build and refine the interactive page's visual layer. The project's main purpose is learning: understanding the structure of StatsBomb data, experimenting with the available metrics, and exploring what they can reveal about football. The emphasis is therefore on understanding the data and its possible uses, rather than on coding every element without assistance.",
+                ],
+              },
+              {
+                title: 'Limitations and next steps',
+                paragraphs: [
+                  'The results describe one season and rely on event data. They do not account for detailed tactical context, team quality, opponent strength, or video observations. Position is inferred from the position played most often in the lineups and can be approximate. Defensive actions are adjusted using a possession proxy, while the definitions of progressive passes and carries are operational choices made for this project. Finally, the similarities have not been validated as a recruitment decision tool.',
+                  'Natural next steps include adding seasons, comparing this approach with clustering, adapting metrics to player roles, and exploring shot or passing maps.',
+                ],
+              },
+            ],
+          },
+        },
         {
           type: 'professionnel',
           title: 'Data Engineering — Airbus Skywise',

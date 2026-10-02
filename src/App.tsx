@@ -44,7 +44,7 @@ function InstitutionLogos({ images }: { images: readonly string[] }) {
   )
 }
 
-function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; oral?: { year: string; questionLabel: string; question: string; concepts: readonly { title: string; text: string }[]; keywords: readonly string[]; conclusion: string }; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string }; presentation?: { expandLabel: string; intro: string; sections: readonly { title: string; paragraphs: readonly string[]; visual?: { src: string; alt: string; caption: string }; subsections?: readonly { title: string; text: string; visual: { src: string; alt: string; caption: string } }[] }[]; contributionLabel: string; contribution: readonly string[]; closing: string; environmentLabel: string; environment: readonly string[] } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
+function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type: string; title: string; subtitle: string; description: string; overviewLabel?: string; overviewFollowup?: string; tags: readonly string[]; metric: string; metricLabel: string; color: string; anchorId?: string; oral?: { year: string; questionLabel: string; question: string; concepts: readonly { title: string; text: string }[]; keywords: readonly string[]; conclusion: string }; details?: { expandLabel: string; figureTitle: string; correlations: readonly { label: string; value: number }[]; methodLabel: string; method: string; toolsLabel: string; tools: readonly string[]; caveat: string; caseStudyLink: string }; presentation?: { expandLabel: string; intro?: string; sections: readonly { title: string; paragraphs: readonly string[]; visual?: { src: string; alt: string; caption: string }; subsections?: readonly { title: string; text: string; visual: { src: string; alt: string; caption: string } }[] }[]; contributionLabel?: string; contribution?: readonly string[]; closing?: string; environmentLabel?: string; environment?: readonly string[] } }; typeLabel: string; onOpenCaseStudy?: () => void }) {
   if (project.oral) {
     return (
       <article className="oral-card card-hover" style={{ borderRadius: 10, padding: '24px', border: '1px solid rgba(255,255,255,0.06)', background: '#0f0f1a', minWidth: 0 }}>
@@ -86,7 +86,9 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
       </div>
       <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2 }}>{project.title}</h3>
       <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#6060a0', marginBottom: 12, letterSpacing: '0.04em' }}>{project.subtitle}</p>
+      {project.overviewLabel && <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{project.overviewLabel}</h4>}
       <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, marginBottom: 16 }}>{project.description}</p>
+      {project.overviewFollowup && <p style={{ fontSize: '0.875rem', color: '#a0a0c0', lineHeight: 1.65, margin: '0 0 16px' }}>{project.overviewFollowup}</p>}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {project.tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
       </div>
@@ -94,7 +96,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
         <details style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 16 }}>
           <summary style={{ color: '#00ff87', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem' }}>{project.presentation.expandLabel}</summary>
           <div style={{ marginTop: 20 }}>
-            <p style={{ color: '#a0a0c0', fontSize: '0.85rem', lineHeight: 1.7, margin: '0 0 24px' }}>{project.presentation.intro}</p>
+            {project.presentation.intro && <p style={{ color: '#a0a0c0', fontSize: '0.85rem', lineHeight: 1.7, margin: '0 0 24px' }}>{project.presentation.intro}</p>}
             {project.presentation.sections.map(section => (
               <section key={section.title} style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 18, marginTop: 18 }}>
                 <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{section.title}</h4>
@@ -109,17 +111,19 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
                 ))}
               </section>
             ))}
-            <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 18, marginTop: 18 }}>
+            {project.presentation.contribution && <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 18, marginTop: 18 }}>
               <h4 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', color: '#f0f0f8', margin: '0 0 10px' }}>{project.presentation.contributionLabel}</h4>
               <ul style={{ margin: '0 0 16px', paddingLeft: 20, color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.7 }}>
                 {project.presentation.contribution.map(item => <li key={item}>{item}</li>)}
               </ul>
-              <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65, margin: '0 0 18px' }}>{project.presentation.closing}</p>
+              {project.presentation.closing && <p style={{ color: '#a0a0c0', fontSize: '0.82rem', lineHeight: 1.65, margin: '0 0 18px' }}>{project.presentation.closing}</p>}
+              {project.presentation.environment && <>
               <div style={{ color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.68rem', marginBottom: 8 }}>{project.presentation.environmentLabel}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {project.presentation.environment.map(item => <span key={item} className="tag">{item}</span>)}
               </div>
-            </section>
+              </>}
+            </section>}
           </div>
         </details>
       )}
@@ -529,7 +533,7 @@ export default function App() {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}>
             {tx.projects.items.map(p => (
-              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
+              <ProjectCard key={p.title} project={p} typeLabel={tx.projects.typeLabels[p.type as 'scolaire' | 'professionnel' | 'etude']} onOpenCaseStudy={p.metric === '27' ? () => setShowKstartsStudy(value => !value) : undefined} />
             ))}
             <StrategyProjectCard strategy={tx.strategy} />
           </div>
