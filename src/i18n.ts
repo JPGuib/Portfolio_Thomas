@@ -113,7 +113,7 @@ export const t = {
       sectionLabel: '// 03 — réalisations',
       h1: 'PROJETS',
       h2: 'DATA & IA',
-      sub: 'études personnelles, projets scolaires et professionnels',
+      sub: 'Études personnelles, projets scolaires et professionnels',
       typeLabels: { scolaire: 'scolaire', professionnel: 'professionnel', etude: 'étude' },
       items: [
         {
@@ -138,20 +138,20 @@ export const t = {
                 ],
               },
               {
-                title: 'La question metier',
+                title: 'La question métier',
                 paragraphs: [
                   "Lorsqu'un club ou un analyste cherche à mieux comprendre un joueur, une comparaison avec des profils similaires peut constituer un point de départ utile. Le projet teste cette idée en comparant les activités observées sur le terrain : progresser avec le ballon, créer des occasions, tirer ou contribuer aux actions défensives.",
                   "L'outil aide à explorer des ressemblances et des différences entre joueurs. Il ne cherche pas à déterminer qui est « le meilleur », ni à remplacer l'analyse vidéo, la connaissance du contexte tactique ou le jugement d'un recruteur.",
                 ],
               },
               {
-                title: 'Donnees et perimetre',
+                title: 'Données et périmètre',
                 paragraphs: [
                   "L'analyse porte sur la saison 2015/16 et quatre championnats : Premier League, La Liga, Serie A et Ligue 1. Elle s'appuie sur les événements de match et les compositions publiés dans StatsBomb Open Data, couvrant 1 517 rencontres. Après filtrage, les profils comprennent 1 258 joueurs de champ ayant disputé au moins 900 minutes ; les gardiens sont exclus.",
                 ],
               },
               {
-                title: 'Demarche suivie',
+                title: 'Démarche suivie',
                 paragraphs: [
                   'Collecter les données : récupérer les événements et les compositions des matchs depuis StatsBomb Open Data.',
                   'Construire les statistiques : traiter les actions joueur par joueur et reconstruire les minutes jouées à partir des compositions, y compris les changements de joueurs et les cartons rouges.',
@@ -186,7 +186,7 @@ export const t = {
                 visual: { src: '/statsbomb/scouting-demo.gif', alt: 'Démonstration animée de la recherche et de la comparaison de profils de joueurs dans l’interface StatsBomb.', caption: 'Football Player Scouting & Similarity' },
               },
               {
-                title: 'Outils et methodes',
+                title: 'Outils et méthodes',
                 paragraphs: [
                   'Le traitement est réalisé en Python, avec pandas et NumPy pour manipuler les données, et scikit-learn pour la standardisation et la PCA. Les résultats sont intégrés dans une page HTML, CSS et JavaScript autonome. Le projet couvre ainsi une chaîne complète, de la collecte de données ouvertes à leur restitution interactive.',
                 ],
@@ -323,7 +323,7 @@ export const t = {
       titleAccent: '& MARKET ANALYSIS',
       subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy - Savefolio',
       contextLabel: 'CONTEXTE',
-      context: 'Dans le cadre d’un projet étudiant, nous avons accompagné Savefolio, une startup nantaise développant une solution de gestion et de centralisation des codes de parrainage. L’objectif était d’analyser son environnement digital et concurrentiel afin d’identifier des opportunités de visibilité, d’acquisition et de croissance.',
+      context: 'Dans le cadre d’un projet étudiant, j’ai accompagné Savefolio avec cinq autres étudiants. Cette startup nantaise développe une solution de gestion et de centralisation des codes de parrainage. L’objectif était d’analyser son environnement digital et concurrentiel afin d’identifier des opportunités de visibilité, d’acquisition et de croissance.',
       approachLabel: 'NOTRE APPROCHE',
       approach: [
         { number: '01', title: 'Digital Audit', text: 'Analyse de la présence digitale, du site/webapp, du référencement et de la visibilité de la marque.' },
@@ -519,6 +519,14 @@ export const t = {
       h1: "LET'S WORK",
       h2: 'TOGETHER',
       pitch: "À la recherche d'un stage de fin d'études de 6 mois à partir de février 2027, dans les domaines suivants:\nFOOTBALL DATA\nPERFORMANCE ANALYTICS\nDATA ENGINEERING\n\nBasé entre Nantes & Toulouse (France)\nMobilité : France & international\n\nPermis B",
+      pitchHighlights: [
+        { phrase: '6 mois', emphasis: 'white' },
+        { phrase: 'à partir de février 2027', emphasis: 'white' },
+        { phrase: 'FOOTBALL DATA', emphasis: 'bold' },
+        { phrase: 'PERFORMANCE ANALYTICS', emphasis: 'bold' },
+        { phrase: 'DATA ENGINEERING', emphasis: 'bold' },
+        { phrase: 'France & international', emphasis: 'blue' },
+      ],
       links: [
         { icon: '✉️', label: 'Email', value: 'thomasguibert.etudes@gmail.com', href: 'mailto:thomasguibert.etudes@gmail.com' },
         { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/thomas-guibert-big-data', href: 'https://www.linkedin.com/in/thomas-guibert-big-data/' },
@@ -540,10 +548,10 @@ export const t = {
       linkedinProfileLabel: 'Voir le profil LinkedIn',
       cvQuickLink: 'Accéder au CV',
       references: [
-        { quote: 'Thomas s’est distingué par son sérieux, sa rigueur et son implication. Son écoute, la qualité de ses livrables et sa capacité à présenter clairement son travail ont été particulièrement appréciées au sein de l’équipe.', author: 'Henri Mersch', role: 'Architecte Solutions GenAI / Cloud · Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
-        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D · VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
-        { quote: 'Je recommande fortement la candidature de Thomas Guibert. Son cursus à Centrale Nantes et Audencia, ainsi que son expérience en analyse de données en physiologie du sport, sont particulièrement cohérents avec son projet. C’est un étudiant sérieux, ouvert et très agréable dans les relations.', author: 'Pierre Guiheneuc', role: 'Professeur de physiologie et médecine du sport · Faculté de Médecine de Nantes', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
-        { quote: 'Thomas est toujours respectueux, ponctuel et à l’écoute des recommandations, avec un esprit ouvert et une réelle volonté de progresser. Au-delà de ses qualités footballistiques, il possède également une analyse juste de ses performances et de celles de ses adversaires.', author: 'Christophe Molina', role: 'Encadrement sportif · Football', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
+        { quote: 'Thomas s’est distingué par son sérieux, sa rigueur et son implication. Son écoute, la qualité de ses livrables et sa capacité à présenter clairement son travail ont été particulièrement appréciées au sein de l’équipe.', author: 'Henri Mersch', role: 'Architecte Solutions GenAI / Cloud', organization: 'Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
+        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D', organization: 'VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
+        { quote: 'Je recommande fortement la candidature de Thomas Guibert. Son cursus à Centrale Nantes et Audencia, ainsi que son expérience en analyse de données en physiologie du sport, sont particulièrement cohérents avec son projet. C’est un étudiant sérieux, ouvert et très agréable dans les relations.', author: 'Pierre Guiheneuc', role: 'Professeur de physiologie et médecine du sport', organization: 'Faculté de Médecine de Nantes', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
+        { quote: 'Thomas est toujours respectueux, ponctuel et à l’écoute des recommandations, avec un esprit ouvert et une réelle volonté de progresser. Au-delà de ses qualités footballistiques, il possède également une analyse juste de ses performances et de celles de ses adversaires.', author: 'Christophe Molina', role: 'Encadrement sportif · Football', organization: 'US Castanet', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
       ],
       cvLabel: '// curriculum vitae',
       cvTitle: 'MON CV',
@@ -868,7 +876,7 @@ export const t = {
       titleAccent: '& MARKET ANALYSIS',
       subtitle: 'Digital Audit · Competitive Analysis · Market Research · Strategy - Savefolio',
       contextLabel: 'CONTEXT',
-      context: 'As part of a student project, we supported Savefolio, a Nantes-based startup developing a solution to manage and centralise referral codes. The objective was to analyse its digital and competitive environment in order to identify opportunities for visibility, acquisition and growth.',
+      context: 'As part of a student project, I supported Savefolio alongside five other students. The Nantes-based startup develops a solution to manage and centralise referral codes. The objective was to analyse its digital and competitive environment in order to identify opportunities for visibility, acquisition and growth.',
       approachLabel: 'OUR APPROACH',
       approach: [
         { number: '01', title: 'Digital Audit', text: 'Analysis of the digital presence, website/webapp, search visibility and brand visibility.' },
@@ -1064,6 +1072,14 @@ export const t = {
       h1: "LET'S WORK",
       h2: 'TOGETHER',
       pitch: "Looking for a 6-month end-of-studies internship starting February 2027 in:\nFOOTBALL DATA\nPERFORMANCE ANALYTICS\nDATA ENGINEERING\n\nBased between Nantes & Toulouse (France)\nMobility: France & internationally\n\nDriving licence: Category B",
+      pitchHighlights: [
+        { phrase: '6-month', emphasis: 'white' },
+        { phrase: 'starting February 2027', emphasis: 'white' },
+        { phrase: 'FOOTBALL DATA', emphasis: 'bold' },
+        { phrase: 'PERFORMANCE ANALYTICS', emphasis: 'bold' },
+        { phrase: 'DATA ENGINEERING', emphasis: 'bold' },
+        { phrase: 'France & internationally', emphasis: 'blue' },
+      ],
       links: [
         { icon: '✉️', label: 'Email', value: 'thomasguibert.etudes@gmail.com', href: 'mailto:thomasguibert.etudes@gmail.com' },
         { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/thomas-guibert-big-data', href: 'https://www.linkedin.com/in/thomas-guibert-big-data/' },
@@ -1085,10 +1101,10 @@ export const t = {
       linkedinProfileLabel: 'View LinkedIn profile',
       cvQuickLink: 'Go to CV',
       references: [
-        { quote: 'Thomas stood out for his professionalism, rigor and commitment. His attentiveness, the quality of his deliverables and his ability to present his work clearly were particularly appreciated by the team.', author: 'Henri Mersch', role: 'GenAI / Cloud Solutions Architect · Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
-        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D · VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
-        { quote: 'I strongly recommend Thomas Guibert. His studies at Centrale Nantes and Audencia, together with his experience analysing data in sports physiology, are particularly well aligned with his career plans. He is a serious, open-minded student who is a real pleasure to work with.', author: 'Pierre Guiheneuc', role: 'Professor of Sports Physiology and Sports Medicine · Nantes Faculty of Medicine', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
-        { quote: 'Thomas is always respectful, punctual and attentive to recommendations, with an open mind and a genuine desire to improve. Beyond his footballing ability, he also has a sound understanding of his own performances and those of his opponents.', author: 'Christophe Molina', role: 'Sports Coaching · Football', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
+        { quote: 'Thomas stood out for his professionalism, rigor and commitment. His attentiveness, the quality of his deliverables and his ability to present his work clearly were particularly appreciated by the team.', author: 'Henri Mersch', role: 'GenAI / Cloud Solutions Architect', organization: 'Capgemini', linkedinHref: 'https://www.linkedin.com/in/henri-mersch/' },
+        { quote: 'It was a pleasure to work with Thomas. During his internship, he worked as a Data Scientist and demonstrated professionalism, proactivity and rigor in the analysis of databases.', author: 'David Laplaud, PhD', role: 'Regulatory Manager & R&D', organization: 'VIVARDIS', linkedinHref: 'https://www.linkedin.com/in/david-laplaud-phd-11749529/' },
+        { quote: 'I strongly recommend Thomas Guibert. His studies at Centrale Nantes and Audencia, together with his experience analysing data in sports physiology, are particularly well aligned with his career plans. He is a serious, open-minded student who is a real pleasure to work with.', author: 'Pierre Guiheneuc', role: 'Professor of Sports Physiology and Sports Medicine', organization: 'Nantes Faculty of Medicine', linkedinHref: 'https://www.linkedin.com/in/pierre-guiheneuc-0250b5162/' },
+        { quote: 'Thomas is always respectful, punctual and attentive to recommendations, with an open mind and a genuine desire to improve. Beyond his footballing ability, he also has a sound understanding of his own performances and those of his opponents.', author: 'Christophe Molina', role: 'Sports Coaching · Football', organization: 'US Castanet', linkedinHref: 'https://www.linkedin.com/in/christophe-molina-079b70122/' },
       ],
       cvLabel: '// curriculum vitae',
       cvTitle: 'MY CV',

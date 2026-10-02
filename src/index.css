@@ -123,11 +123,11 @@ h1, h2, h3, h4, h5 {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   letter-spacing: 0.05em;
-  color: #6060a0;
+  color: #f0f0f8;
   transition: color 0.2s;
 }
 .nav-link-prefix {
-  color: #6060a0;
+  color: #f0f0f8;
   font-size: 0.7rem;
   line-height: 1;
 }

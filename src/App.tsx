@@ -8,7 +8,7 @@ function SkillItem({ name }: { name: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
       <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00ff87', flexShrink: 0 }} />
-      <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.925rem', color: '#c0c0e0' }}>{name}</span>
+      <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.05rem', color: '#c0c0e0' }}>{name}</span>
     </div>
   )
 }
@@ -23,6 +23,15 @@ function HeroPitchHighlight({ text, phrases }: { text: string; phrases: readonly
   return text.split(expression).map((part, index) => phrases.some(phrase => phrase.toLowerCase() === part.toLowerCase())
     ? <strong key={index} style={{ color: '#f0f0f8' }}>{part}</strong>
     : part)
+}
+
+function ContactPitch({ text, highlights }: { text: string; highlights: readonly { phrase: string; emphasis: 'bold' | 'white' | 'blue' }[] }) {
+  const expression = new RegExp(`(${highlights.map(({ phrase }) => phrase.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')).join('|')})`, 'g')
+  return text.split(expression).map((part, index) => {
+    const highlight = highlights.find(item => item.phrase === part)
+    if (!highlight) return part
+    return <strong key={index} style={{ color: highlight.emphasis === 'white' ? '#f0f0f8' : highlight.emphasis === 'blue' ? '#65a9ff' : 'inherit', fontWeight: 700, textTransform: highlight.emphasis === 'blue' ? 'uppercase' : undefined }}>{part}</strong>
+  })
 }
 
 function PresentationFigure({ visual }: { visual: { src: string; alt: string; caption: string } }) {
@@ -59,7 +68,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
           <span className="tag" style={{ color: project.color, borderColor: `${project.color}33`, background: `${project.color}12` }}>{typeLabel}</span>
           <div style={{ textAlign: 'right', flexShrink: 0 }}>
             <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: project.color, lineHeight: 1 }}>{project.metric}</div>
-            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
+            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#a0a0c0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
           </div>
         </div>
         <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', margin: '0 0 4px', lineHeight: 1.2, textTransform: 'uppercase' }}>{project.title}</h3>
@@ -88,7 +97,7 @@ function ProjectCard({ project, typeLabel, onOpenCaseStudy }: { project: { type:
         <span className="tag" style={{ color: project.color, borderColor: `${project.color}33`, background: `${project.color}12` }}>{typeLabel}</span>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2rem', fontWeight: 800, color: project.color, lineHeight: 1 }}>{project.metric}</div>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#6060a0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
+          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: '#a0a0c0', letterSpacing: '0.04em' }}>{project.metricLabel}</div>
         </div>
       </div>
       <h3 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 4, lineHeight: 1.2, textTransform: 'uppercase' }}>
@@ -375,7 +384,7 @@ export default function App() {
           <div className="hidden xl:flex" style={{ alignItems: 'center', gap: 20 }}>
             {NAV_IDS.map((id, i) => (
               <button key={id} onClick={() => scrollTo(id)}
-                className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: activeSection === id ? '#00ff87' : '#6060a0' }}>
+                className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: activeSection === id ? '#00ff87' : '#f0f0f8' }}>
                 <span className="nav-link-prefix">//</span>
                 <span>{navLabels[i].slice(3)}</span>
               </button>
@@ -393,7 +402,7 @@ export default function App() {
           <div style={{ padding: '16px 24px', borderTop: '1px solid rgba(255,255,255,0.04)', background: 'rgba(8,8,16,0.98)' }}>
             {NAV_IDS.map((id, i) => (
               <button key={id} onClick={() => scrollTo(id)}
-                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '10px 0', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: activeSection === id ? '#00ff87' : '#6060a0' }}>
+                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '10px 0', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: activeSection === id ? '#00ff87' : '#f0f0f8' }}>
                 {navLabels[i]}
               </button>
             ))}
@@ -437,9 +446,9 @@ export default function App() {
                 {tx.hero.stats.map(s => (
                   <div key={s.l}>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2.2rem', fontWeight: 800, color: '#f0f0f8', lineHeight: 1 }}>
-                      {s.v}{s.u && <span style={{ color: '#00ff87', fontSize: '1.1rem' }}> {s.u}</span>}
+                      {s.v}{s.u && <span style={{ color: '#f0f0f8', fontSize: '1.1rem' }}> {s.u}</span>}
                     </div>
-                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: '#6060a0', marginTop: 4 }}>{s.l}</div>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: '#c0c0e0', marginTop: 4 }}>{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -555,7 +564,7 @@ export default function App() {
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 12, color: '#f0f0f8' }}>
             {tx.projects.h1} <span style={{ color: '#00ff87' }}>{tx.projects.h2}</span>
           </h2>
-          <p style={{ color: '#6060a0', fontSize: '0.875rem', marginBottom: 52, fontFamily: 'JetBrains Mono, monospace' }}>
+          <p style={{ color: '#c0c0e0', fontSize: '0.875rem', marginBottom: 52, fontFamily: 'JetBrains Mono, monospace' }}>
             {tx.projects.sub} · {new Date().getFullYear()}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 24 }}>
@@ -728,8 +737,8 @@ export default function App() {
               { title: tx.experience.internationalTitle, intro: tx.experience.internationalIntro, items: tx.experience.internationalItems },
               { title: tx.experience.professionalTitle, items: tx.experience.professionalItems },
             ].map(group => (
-              <div key={group.title} className={group.title === tx.experience.professionalTitle ? 'exp-professional' : undefined} style={{ minWidth: 0 }}>
-                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'clamp(1.5rem, 1.9vw, 1.75rem)' : 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8', overflowWrap: 'anywhere', whiteSpace: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'nowrap' : undefined }}>
+              <div key={group.title} className={group.title === tx.experience.professionalTitle ? 'exp-column exp-column-professional exp-professional' : group.title === tx.experience.educationTitle ? 'exp-column exp-column-education' : 'exp-column exp-column-international'} style={{ minWidth: 0 }}>
+                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'clamp(1.5rem, 1.9vw, 1.75rem)' : 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: group.title === tx.experience.professionalTitle ? '#00ff87' : group.title === tx.experience.internationalTitle ? '#00d4ff' : '#f0f0f8', overflowWrap: 'anywhere', whiteSpace: group.title === tx.experience.professionalTitle || group.title === tx.experience.educationTitle || group.title === tx.experience.internationalTitle ? 'nowrap' : undefined }}>
                   {group.title}
                 </h2>
                 {'intro' in group && <p style={{ fontSize: '0.95rem', color: '#a0a0c0', lineHeight: 1.6, margin: '0 0 28px' }}>{group.intro}</p>}
@@ -739,7 +748,18 @@ export default function App() {
                     <div key={`${item.period}-${index}`} style={{ display: 'flex', gap: 24, marginBottom: 40, position: 'relative' }}>
                       <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#00d4ff', flexShrink: 0, marginTop: 4, border: '3px solid #0a0a14', position: 'relative', zIndex: 1 }} />
                       <div style={{ minWidth: 0 }}>
-                        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff', marginBottom: 6 }}>{item.period}</div>
+                        {'image' in item && item.image.includes('capgemini') ? <div className="capgemini-entry-heading">
+                          <div className="capgemini-entry-period" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff' }}>{item.period}</div>
+                          <div className="capgemini-entry-role" style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', overflowWrap: 'anywhere' }}>{item.role}</div>
+                          <div className="capgemini-entry-logos">
+                            <img className="capgemini-entry-logo" src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                            <img className="airbus-entry-logo" src="/logo%20Airbus.jpeg" alt="Airbus" loading="lazy" decoding="async" />
+                          </div>
+                        </div> : 'image' in item && item.image.includes('kinesport') ? <div className="kinesport-entry-heading">
+                          <div className="kinesport-entry-period" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff' }}>{item.period}</div>
+                          <div className="kinesport-entry-role" style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', overflowWrap: 'anywhere' }}>{item.role}</div>
+                          <img className="kinesport-entry-logo" src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                        </div> : <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700, color: '#00d4ff', marginBottom: 6 }}>{item.period}</div>}
                         {'qualification' in item ? <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 8px', marginBottom: 8 }}>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', overflowWrap: 'anywhere' }}>{item.role}</div>
                           <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: '#ffd93d', overflowWrap: 'anywhere' }}>
@@ -747,9 +767,9 @@ export default function App() {
                           </div>
                           {'images' in item && <InstitutionLogos images={item.images} />}
                         </div> : <>
-                          <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>
+                          {'image' in item && (item.image.includes('capgemini') || item.image.includes('kinesport')) ? null : <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#f0f0f8', marginBottom: 2, overflowWrap: 'anywhere' }}>{item.role}</div>}
                           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                            {'image' in item && <img src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" width={item.image.includes('capgemini') ? 176 : 160} height={item.image.includes('capgemini') ? 64 : 56} style={{ display: 'block', width: item.image.includes('capgemini') ? 176 : 160, height: item.image.includes('capgemini') ? 64 : 56, objectFit: 'contain', background: '#000', borderRadius: 4, flexShrink: 0 }} />}
+                            {'image' in item && !item.image.includes('capgemini') && !item.image.includes('kinesport') && <img src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" width={160} height={56} style={{ display: 'block', width: 160, height: 56, objectFit: 'contain', background: '#000', borderRadius: 4, flexShrink: 0 }} />}
                             <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1rem', color: group.title === tx.experience.professionalTitle ? '#ffd93d' : '#00ff87', overflowWrap: 'anywhere' }}>
                               {item.org}{'countryCode' in item && <>{' · '}<span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><img src={`/flags/${item.countryCode}.svg`} alt="" aria-hidden="true" style={{ width: 30, height: 20, objectFit: 'cover', borderRadius: 2 }} />{item.country}</span></>}
                             </div>
@@ -787,7 +807,7 @@ export default function App() {
                             <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#00ff87', lineHeight: 1.6, marginTop: 8 }}>{item.languageNote}</div>
                           </>}
                         </div>}
-                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#00d4ff', fontFamily: 'Outfit, sans-serif', fontSize: '1rem', lineHeight: 1.6, textDecoration: 'none', marginTop: 10 }}>{item.ctaLabel} →</a>}
+                        {'ctaLabel' in item && <a href={item.ctaTarget} onClick={item.ctaAction === 'openStudy' ? event => { event.preventDefault(); setShowKstartsStudy(true) } : undefined} style={{ display: 'inline-block', color: '#65a9ff', fontFamily: 'Outfit, sans-serif', fontSize: '1rem', lineHeight: 1.6, textDecoration: 'none', marginTop: 10, textTransform: 'uppercase' }}>{item.ctaLabel} →</a>}
                       </div>
                     </div>
                   ))}
@@ -842,8 +862,9 @@ export default function App() {
                   <blockquote style={{ margin: '0 0 18px', color: '#d0d0e0', fontSize: '0.95rem', lineHeight: 1.7 }}>“{reference.quote}”</blockquote>
                   <figcaption>
                     <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, color: '#f0f0f8' }}>{reference.author}</div>
-                    <div style={{ color: '#8080a0', fontSize: '0.76rem', lineHeight: 1.5 }}>{reference.role}</div>
-                    <a href={reference.linkedinHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#00d4ff', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', textDecoration: 'none' }}>{tx.credentials.linkedinProfileLabel} →</a>
+                    <div style={{ color: '#a0a0c0', fontSize: '0.9rem', lineHeight: 1.5 }}>{reference.role}</div>
+                    {'organization' in reference && reference.organization && <div style={{ marginTop: 2, color: '#ffd93d', fontSize: '0.78rem', fontWeight: 600, lineHeight: 1.5, textTransform: 'uppercase' }}>{reference.organization}</div>}
+                    <a href={reference.linkedinHref} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#00d4ff', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem', textDecoration: 'none', textTransform: 'uppercase' }}>{tx.credentials.linkedinProfileLabel} →</a>
                   </figcaption>
                 </figure>
               ))}
@@ -874,7 +895,7 @@ export default function App() {
               <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 24, color: '#f0f0f8' }}>
                 {tx.contact.h1}<br /><span style={{ color: '#00ff87' }}>{tx.contact.h2}</span>
               </h2>
-              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 36, whiteSpace: 'pre-line' }}>{tx.contact.pitch}</p>
+              <p style={{ color: '#a0a0c0', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 36, whiteSpace: 'pre-line' }}><ContactPitch text={tx.contact.pitch} highlights={tx.contact.pitchHighlights} /></p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {tx.contact.links.map(item => (
                   <a key={item.label} href={item.href}
@@ -885,7 +906,7 @@ export default function App() {
                     onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.background = '#0f0f1a' }}>
                     <span style={{ fontSize: '1.2rem' }}>{item.icon}</span>
                     <div>
-                      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: '#6060a0', marginBottom: 2 }}>{item.label}</div>
+                      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#6060a0', marginBottom: 2 }}>{item.label}</div>
                       <div style={{ fontSize: '0.9rem', color: '#00ff87', overflowWrap: 'anywhere' }}>{item.value}</div>
                     </div>
                   </a>
@@ -938,7 +959,7 @@ export default function App() {
           overflow-wrap: anywhere;
         }
         .case-study-finding-result { color: #00d4ff; }
-        .case-study-finding-note { color: #a0a0c0; }
+        .case-study-finding-note { color: #d0d0d8; }
         .case-study-mobile-label { display: none; }
         .strategy-intro-grid, .strategy-lower-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: start; }
         .strategy-approach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -956,7 +977,29 @@ export default function App() {
         .strategy-preview-card span:last-child { color: #8080a0; font-size: 0.75rem; line-height: 1.45; }
         .about-intro { align-self: center; }
         .about-cards { align-self: end; }
+        .exp-column { padding: 20px; border: 1px solid rgba(255,255,255,0.08); border-top: 2px solid; border-radius: 4px; background: rgba(255,255,255,0.015); }
+        .exp-column-education { border-top-color: rgba(255,255,255,0.7); }
+        .exp-column-international { border-top-color: rgba(0,212,255,0.7); }
+        .exp-column-professional { border-top-color: rgba(0,255,135,0.7); }
         .exp-professional { grid-column: 1 / -1; }
+        .capgemini-entry-heading { display: grid; grid-template-columns: minmax(0, 1fr) 484px; grid-template-areas: 'period logos' 'role logos'; gap: 3px 16px; align-items: center; margin-bottom: 8px; }
+        .capgemini-entry-period { grid-area: period; }
+        .capgemini-entry-role { grid-area: role; }
+        .capgemini-entry-logos { grid-area: logos; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+        .capgemini-entry-logo { width: 200px; height: 70px; object-fit: cover; object-position: center; background: #000; border-radius: 4px; }
+        .airbus-entry-logo { width: 260px; height: 90px; object-fit: cover; object-position: center; border-radius: 4px; }
+        .kinesport-entry-heading { display: grid; grid-template-columns: minmax(0, 1fr) 208px; grid-template-areas: 'period logo' 'role logo'; gap: 3px 16px; align-items: center; margin-bottom: 8px; }
+        .kinesport-entry-period { grid-area: period; }
+        .kinesport-entry-role { grid-area: role; }
+        .kinesport-entry-logo { grid-area: logo; justify-self: end; width: 200px; height: 70px; object-fit: contain; background: #000; border-radius: 4px; }
+        @media (max-width: 640px) {
+          .capgemini-entry-heading { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'period' 'role' 'logos'; gap: 5px; }
+          .capgemini-entry-logos { gap: 8px; }
+          .capgemini-entry-logo { width: 128px; height: 48px; }
+          .airbus-entry-logo { width: 108px; height: 46px; }
+          .kinesport-entry-heading { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'period' 'role' 'logo'; gap: 5px; }
+          .kinesport-entry-logo { width: 180px; height: 64px; }
+        }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
