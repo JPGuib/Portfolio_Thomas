@@ -440,7 +440,7 @@ export const t = {
           image: '/kinesport%20fond%20noir.png',
           points: [
             'Analyse d’une base de données de performance de 2 088 évaluations d’athlètes, 266 variables et 555 674 points de données afin d’identifier les facteurs prédictifs de la reprise du sport après reconstruction du LCA.',
-            'Nettoyage, fusion et standardisation de deux jeux de données historiques, avec création d’une structure unifiée et d’une segmentation temporelle (« B » vs « P » : 1 491 vs 589 patients).',
+            'Nettoyage, fusion et standardisation de deux jeux de données historiques, avec création d’une structure unifiée et d’une segmentation temporelle (« B » vs « P » :  1 491 vs 589 patients).',
             'Réalisation d’un pipeline statistique complet : 104 statistiques descriptives, 103 vérifications de normalité, 134 tests comparatifs, 47 visualisations de corrélations, 18 analyses post-hoc et 28 études fondées sur des régressions.',
             'Création de 27 visualisations descriptives pour faciliter l’interprétation.',
             'Identification des facteurs fonctionnels et psychologiques influençant les scores K-STARTS (7 tests physiques + ACL-RSI).',

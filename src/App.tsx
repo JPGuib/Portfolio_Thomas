@@ -738,7 +738,9 @@ export default function App() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div className="section-label" style={{ marginBottom: 16 }}>{tx.experience.sectionLabel}</div>
           <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, lineHeight: 1, marginBottom: 36, color: '#f0f0f8' }}>
-            {tx.experience.h1} <span style={{ color: '#00ff87' }}>{tx.experience.h2}</span>
+            {tx.experience.h1}{' '}{tx.experience.h2.split(/(INTERNATIONAL|&)/g).map((part, index) => (
+              <span key={index} style={{ color: part === 'INTERNATIONAL' ? '#00d4ff' : part === '&' ? '#a0a0c0' : '#00ff87', fontWeight: part === '&' ? 400 : 800 }}>{part}</span>
+            ))}
           </h2>
           <div className="exp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 48 }}>
             {[
