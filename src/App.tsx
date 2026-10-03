@@ -463,7 +463,7 @@ export default function App() {
               </div>
             </div>
             {/* Photo card */}
-            <div style={{ width: 340, height: 445, borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0 }} className="hidden lg:block">
+            <div style={{ width: 340, maxWidth: '100%', aspectRatio: '340 / 445', borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0, justifySelf: 'center' }}>
               <img src={portraitUrl} alt="Thomas Guibert" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
             </div>
           </div>
