@@ -420,58 +420,112 @@ export default function App() {
       </nav>
 
       {/* ─── HERO ─── */}
-      <section id="hero" style={{ minHeight: '100svh', display: 'flex', alignItems: 'center', paddingTop: 80, paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
+      <section id="hero" style={{ display: 'flex', alignItems: 'center', paddingTop: 96, paddingBottom: 8, position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
           <div style={{ position: 'absolute', top: '20%', right: '8%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,255,135,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
           <div style={{ position: 'absolute', bottom: '15%', left: '5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)', filter: 'blur(40px)' }} />
         </div>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', width: '100%' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }} className="hero-grid">
-            <div>
-              <div className="section-label" style={{ marginBottom: 24 }}>{tx.hero.available}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gridTemplateAreas: '"copy portrait"', gap: 48, columnGap: 24, rowGap: 0, alignItems: 'center' }} className="hero-grid">
+            <div style={{ gridArea: 'copy' }}>
               <h1 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: 'clamp(3.5rem, 10vw, 8rem)', fontWeight: 900, lineHeight: 0.92, marginBottom: 24, letterSpacing: '-0.01em' }}>
                 <span style={{ color: '#f0f0f8' }}>{tx.hero.line1}<br /></span>
                 <span style={{ color: '#00ff87' }} className="glow">{tx.hero.line2}</span>
               </h1>
-              <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.75, marginBottom: 32 }}>
-                {tx.hero.intro} <strong style={{ color: '#00d4ff' }}>{tx.hero.program}</strong> — {tx.hero.school}{' '}
-                <br />{tx.hero.pitch} <strong style={{ color: '#00ff87' }}><HeroPitchHighlight text={`${tx.hero.pitchHighlight}${tx.hero.pitchEnd}`} phrases={tx.hero.pitchEmphasis} /></strong>
+              <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: '#00ff87', marginBottom: 14 }}>{tx.hero.roleTitle}</div>
+              <p style={{ fontSize: '1rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.6, marginBottom: 16 }}>
+                {tx.hero.intro} <strong style={{ color: '#00d4ff' }}>{tx.hero.program}</strong><br />{tx.hero.school}
               </p>
-              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 48 }}>
-                <button onClick={() => scrollTo('projects')}
-                  style={{ padding: '14px 32px', background: '#00ff87', color: '#080810', border: 'none', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}
-                  onMouseOver={e => (e.currentTarget.style.background = '#00e87a')}
-                  onMouseOut={e => (e.currentTarget.style.background = '#00ff87')}>
-                  {tx.hero.ctaProjects}
-                </button>
-                <button onClick={() => scrollTo('contact')}
-                  style={{ padding: '14px 32px', background: 'transparent', color: '#f0f0f8', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}
-                  onMouseOver={e => (e.currentTarget.style.borderColor = 'rgba(0,255,135,0.4)')}
-                  onMouseOut={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}>
-                  {tx.hero.cta}
-                </button>
-              </div>
-              <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
-                {tx.hero.stats.map(s => (
-                  <div key={s.l}>
-                    <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '2.2rem', fontWeight: 800, color: '#f0f0f8', lineHeight: 1 }}>
-                      {s.v}{s.u && <span style={{ color: '#f0f0f8', fontSize: '1.1rem' }}> {s.u}</span>}
-                    </div>
-                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: '#c0c0e0', marginTop: 4 }}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
+              <p style={{ fontSize: '1.05rem', color: '#a0a0c0', maxWidth: 520, lineHeight: 1.6, marginBottom: 32 }}>
+                {tx.hero.pitch} <strong style={{ color: '#00ff87' }}><HeroPitchHighlight text={`${tx.hero.pitchHighlight}${tx.hero.pitchEnd}`} phrases={tx.hero.pitchEmphasis} /></strong>
+              </p>
             </div>
             {/* Photo card */}
-            <div style={{ width: 340, maxWidth: '100%', aspectRatio: '340 / 445', borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0, justifySelf: 'center' }}>
+            <div className="hero-portrait" style={{ gridArea: 'portrait', width: 280, maxWidth: '100%', aspectRatio: '340 / 445', borderRadius: 12, background: '#12121f', border: '1px solid rgba(0,255,135,0.1)', position: 'relative', overflow: 'hidden', flexShrink: 0, justifySelf: 'center' }}>
               <img src={portraitUrl} alt="Thomas Guibert" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
             </div>
           </div>
         </div>
       </section>
 
+      <section id="profile-at-a-glance" style={{ padding: '12px 0 20px', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div className="section-label" style={{ marginBottom: 18 }}>{tx.hero.glanceLabel}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: 20 }}>
+            {tx.hero.glance.map(group => (
+              <article key={group.title} style={{ minWidth: 0, paddingLeft: 14, borderLeft: '2px solid rgba(0,255,135,0.55)' }}>
+                <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: '#f0f0f8', margin: '0 0 10px' }}>{group.title}</h2>
+                <ul style={{ display: 'grid', gap: 8, listStyle: 'none', padding: 0, margin: 0, color: '#c0c0d8', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                  {group.facts.map(fact => <li key={fact} style={{ overflowWrap: 'anywhere' }}>{fact}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 10px', marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <strong style={{ color: '#00ff87', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', lineHeight: 1 }}>{tx.hero.footballYears}</strong>
+            <span style={{ color: '#c0c0d8', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.82rem', lineHeight: 1.5 }}>{tx.hero.footballNote}</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured-projects" style={{ padding: '32px 0 24px', borderTop: '1px solid rgba(255,255,255,0.04)', scrollMarginTop: 72 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div className="section-label" style={{ marginBottom: 18 }}>{tx.hero.featuredLabel}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: 20 }}>
+            {tx.hero.featuredProjects.map(project => (
+              <article key={project.title} className="card-hover" style={{ minWidth: 0, border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4, background: '#0f0f1a', overflow: 'hidden' }}>
+                <div style={{ padding: 20 }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#00d4ff', marginBottom: 8, overflowWrap: 'anywhere' }}>{project.subtitle}</div>
+                  <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.5rem', fontWeight: 700, lineHeight: 1.15, color: '#f0f0f8', margin: '0 0 10px', overflowWrap: 'anywhere' }}>{project.title}</h2>
+                  <p style={{ color: '#a0a0c0', fontSize: '1rem', lineHeight: 1.55, margin: '0 0 14px' }}>{project.description}</p>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', lineHeight: 1.5, color: '#00ff87', marginBottom: 16, overflowWrap: 'anywhere' }}>
+                    <strong style={{ fontSize: '1.15rem', color: '#f0f0f8' }}>{project.metric}</strong> · {project.metricLabel}
+                  </div>
+                  <p style={{ color: '#c0c0d8', fontSize: '0.9rem', lineHeight: 1.5, margin: '0 0 12px' }}>
+                    <strong style={{ color: '#00ff87' }}>{tx.hero.featuredContributionLabel}</strong> {project.contribution}
+                  </p>
+                  <a href={project.href}
+                    style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, color: '#00ff87', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', textDecoration: 'none' }}>
+                    {project.action} →
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="internship-cta" style={{ padding: '16px 0', background: '#0a0a14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 24 }}>
+          <div style={{ minWidth: 0 }}>
+            <div className="section-label" style={{ marginBottom: 8 }}>{tx.hero.internshipCta.label}</div>
+            <h2 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.8rem', lineHeight: 1.1, color: '#f0f0f8', margin: '0 0 8px' }}>{tx.hero.internshipCta.title}</h2>
+            <div style={{ color: '#00ff87', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.3rem', fontWeight: 700, lineHeight: 1.1, marginBottom: 12 }}>{tx.hero.internshipCta.timing}</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {tx.hero.internshipCta.fields.map(field => <span key={field} className="tag">{field}</span>)}
+            </div>
+          </div>
+          <div className="hero-action-buttons" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <button onClick={() => scrollTo('projects')}
+              style={{ padding: '12px 24px', background: '#00ff87', color: '#080810', border: 'none', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}
+              onMouseOver={e => (e.currentTarget.style.background = '#00e87a')}
+              onMouseOut={e => (e.currentTarget.style.background = '#00ff87')}>
+              {tx.hero.ctaProjects}
+            </button>
+            <a href={tx.credentials.cvHref} download
+              style={{ display: 'inline-flex', alignItems: 'center', minHeight: 46, padding: '12px 24px', background: 'transparent', color: '#f0f0f8', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, letterSpacing: '0.05em', textDecoration: 'none' }}>
+              {tx.hero.ctaCv}
+            </a>
+            <a href="#contact" onClick={event => { event.preventDefault(); scrollTo('contact') }}
+              style={{ display: 'inline-flex', alignItems: 'center', minHeight: 46, padding: '12px 24px', background: 'transparent', color: '#f0f0f8', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, fontFamily: 'Barlow Condensed, sans-serif', fontSize: '1.05rem', fontWeight: 700, letterSpacing: '0.05em', textDecoration: 'none' }}>
+              {tx.hero.internshipCta.action}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ─── ABOUT ─── */}
-      <section id="about" style={{ padding: 'clamp(56px, 10vw, 100px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <section id="about" style={{ padding: 'clamp(40px, 7vw, 64px) 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }} className="about-grid">
             <div className="about-intro" style={{ padding: 20, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, background: '#0f0f1a' }}>
@@ -1002,6 +1056,10 @@ export default function App() {
         .kinesport-entry-period { grid-area: period; }
         .kinesport-entry-role { grid-area: role; }
         .kinesport-entry-logo { grid-area: logo; justify-self: end; width: 200px; height: 70px; object-fit: contain; background: #000; border-radius: 4px; }
+        .hero-portrait { transform: translateY(-48px); }
+        @media (min-width: 1280px) {
+          .hero-portrait { transform: translate(-111px, -48px); }
+        }
         @media (max-width: 640px) {
           .capgemini-entry-heading { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'period' 'role' 'logos'; gap: 5px; }
           .capgemini-entry-logos { gap: 8px; }
@@ -1011,7 +1069,9 @@ export default function App() {
           .kinesport-entry-logo { width: 180px; height: 64px; }
         }
         @media (max-width: 900px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-grid { grid-template-columns: 1fr !important; grid-template-areas: 'copy' 'portrait' !important; gap: 24px !important; }
+          .hero-action-buttons { width: 100%; }
+          .hero-portrait { transform: translateY(-16px); }
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .about-intro { align-self: stretch; }
           .about-cards { align-self: stretch; }
